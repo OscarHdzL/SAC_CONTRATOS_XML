@@ -1,0 +1,303 @@
+﻿
+@{
+
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+}
+
+@section ViewScripts{
+    <script src="~/Resources/Instancia/Jquery.Instancia.js"></script>
+
+}
+
+<section class="content">   
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Instancia</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="Add_Ins" data-toggle="tooltip" onclick="muestraModalAgregarInstancia();"
+                        title="Agregar un nuevo registro">
+                    Agregar un nuevo registro
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div calss="row">
+                <div class="form-group col-lg-4">
+                    Instancia:
+                    <select name="Instancia" id="Instancia" class="form-control Instancia"></select>
+                </div>
+                <div class="form-group col-lg-2 exist">
+                    <div class="card">
+                        <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
+                            <p>Color header</p>
+                            <div id="color-picker-1" class="color-picker"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2 exist">
+                    <div class="card">
+                        <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
+                            <p>Color sidebar</p>
+                            <div id="color-picker-2" class="color-picker"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2 exist">
+                    <div class="card">
+                        <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
+                            <p>Background</p>
+                            <div id="color-picker-3" class="color-picker"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2 exist">
+                    <div class="card">
+                        <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
+                            <p>Color textos</p>
+                            <div id="color-picker-4" class="color-picker"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row exist">
+                <div class="form-group col-lg-3" style="text-align:center">
+                    Logo miniatura:
+                    <br />
+                    <br />
+                    <img id="logo_min" style="background-color: rgb(73, 73, 75)" title="Si desea cambiar el logotipo seleccione otro archivo de imagen:" width="200" height="200"/>
+                    <input id="input_b1" name="input-b1" type="file" class="file" data-browse-on-zone-click="true" data-show-upload="false" data-slide="false" accept="image/*">
+                    @*<img id="logo_min" src="/Logos/200 isotipo pmsoluciones blanco.png" style="background-color: rgb(73, 73, 75)" title="Si desea cambiar el logotipo seleccione otro archivo de imagen:" />*@
+                </div>
+                <div class="form-group col-lg-3" style="text-align:center">
+                    Logo de inicio:
+                    <br />
+                    <br />
+                    <img id="logo_ini" src="" style="background-color: rgb(73, 73, 75)" title="Si desea cambiar el logotipo seleccione otro archivo de imagen:" width="200" height="200"/>
+                    <input id="input_b2" name="input-b2" type="file" class="file" data-browse-on-zone-click="true" data-show-upload="false" data-slide="false" accept="image/*">
+                    @*<img id="logo_ini" src="/Logos/200 isotipo pmsoluciones blanco.png" style="background-color: rgb(73, 73, 75)" title="Si desea cambiar el logotipo seleccione otro archivo de imagen:" />*@
+                </div>
+                <div class="form-group col-lg-1">
+                </div>
+                <div class="form-group col-lg-2" style="vertical-align:middle">
+                    Copyright:
+                    <br />
+                    <br />
+                    <input type="text" name="Copyright" id="Copyright" class="form-control Copyright" />
+                </div>
+                <div class="form-group col-lg-2">
+                </div>
+                <div class="form-group col-lg-1">
+                </div>
+            </div>
+            <div class="row exist">
+
+                <div class="form-group col-lg-3" style="text-align:center">
+                    @*<input type="file" id="file_min" name="file_min" class="form-control-file col-md-10" accept="image/*" />*@
+                    <div class="msgLogo" title="Utilice un archivo JPEG ó PNG con dimensiones 32 X 32 pixeles para una óptima presentación"><i class="fa fa-question-circle"></i></div>
+                </div>
+                <div class="form-group col-lg-3" style="text-align:center">
+                    @*<input type="file" id="file_ini" name="file_ini" class="form-control-file col-md-10" accept="image/*" />*@
+                    <div class="msgLogo" title="Utilice un archivo JPEG ó PNG para una óptima presentación"><i class="fa fa-question-circle"></i></div>
+                </div>
+                <div class="form-group col-lg-6">
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div align="center">
+                <button type="button" class="btn btn-primary" id="GuardaInstancia_cambios">Guardar</button>
+                @*<button type="button" id="Close" class="btn btn-danger" onclick=" ">Cancelar</button>*@
+            </div>
+        </div>
+
+    </div>
+</section>
+@await Html.PartialAsync("ModalAgregarInstancia")
+<script>
+
+    $('#input_b1').fileinput({
+        language: 'es',
+        showPreview: false,
+        upload: false
+    });
+    $('#input_b2').fileinput({
+        language: 'es',
+        showPreview: false,
+        upload: false
+    });   
+    const pickr = Pickr.create({
+        el: '#color-picker-1',
+        theme: 'classic', // or 'monolith', or 'nano'
+
+        swatches: [
+            'rgba(244, 67, 54, 1)',
+            'rgba(233, 30, 99, 0.95)',
+            'rgba(156, 39, 176, 0.9)',
+            'rgba(103, 58, 183, 0.85)',
+            'rgba(63, 81, 181, 0.8)',
+            'rgba(33, 150, 243, 0.75)',
+            'rgba(3, 169, 244, 0.7)',
+            'rgba(0, 188, 212, 0.7)',
+            'rgba(0, 150, 136, 0.75)',
+            'rgba(76, 175, 80, 0.8)',
+            'rgba(139, 195, 74, 0.85)',
+            'rgba(205, 220, 57, 0.9)',
+            'rgba(255, 235, 59, 0.95)',
+            'rgba(255, 193, 7, 1)'
+        ],
+
+        components: {
+
+            // Main components
+            preview: true,
+            opacity: true,
+            hue: true,
+
+            // Input / output Options
+            interaction: {
+                hex: false,
+                rgba: false,
+                hsla: false,
+                hsva: false,
+                cmyk: false,
+                input: true,
+                clear: true,
+                save: true
+            }
+        }
+    });
+    const pickr2 = Pickr.create({
+        el: '#color-picker-2',
+        theme: 'classic', // or 'monolith', or 'nano'
+
+        swatches: [
+            'rgba(244, 67, 54, 1)',
+            'rgba(233, 30, 99, 0.95)',
+            'rgba(156, 39, 176, 0.9)',
+            'rgba(103, 58, 183, 0.85)',
+            'rgba(63, 81, 181, 0.8)',
+            'rgba(33, 150, 243, 0.75)',
+            'rgba(3, 169, 244, 0.7)',
+            'rgba(0, 188, 212, 0.7)',
+            'rgba(0, 150, 136, 0.75)',
+            'rgba(76, 175, 80, 0.8)',
+            'rgba(139, 195, 74, 0.85)',
+            'rgba(205, 220, 57, 0.9)',
+            'rgba(255, 235, 59, 0.95)',
+            'rgba(255, 193, 7, 1)'
+        ],
+
+        components: {
+
+            // Main components
+            preview: true,
+            opacity: true,
+            hue: true,
+
+            // Input / output Options
+            interaction: {
+                hex: false,
+                rgba: false,
+                hsla: false,
+                hsva: false,
+                cmyk: false,
+                input: true,
+                clear: true,
+                save: true
+            }
+        }
+    });
+    const pickr3 = Pickr.create({
+        el: '#color-picker-3',
+        theme: 'classic', // or 'monolith', or 'nano'
+
+        swatches: [
+            'rgba(244, 67, 54, 1)',
+            'rgba(233, 30, 99, 0.95)',
+            'rgba(156, 39, 176, 0.9)',
+            'rgba(103, 58, 183, 0.85)',
+            'rgba(63, 81, 181, 0.8)',
+            'rgba(33, 150, 243, 0.75)',
+            'rgba(3, 169, 244, 0.7)',
+            'rgba(0, 188, 212, 0.7)',
+            'rgba(0, 150, 136, 0.75)',
+            'rgba(76, 175, 80, 0.8)',
+            'rgba(139, 195, 74, 0.85)',
+            'rgba(205, 220, 57, 0.9)',
+            'rgba(255, 235, 59, 0.95)',
+            'rgba(255, 193, 7, 1)'
+        ],
+
+        components: {
+
+            // Main components
+            preview: true,
+            opacity: true,
+            hue: true,
+
+            // Input / output Options
+            interaction: {
+                hex: false,
+                rgba: false,
+                hsla: false,
+                hsva: false,
+                cmyk: false,
+                input: true,
+                clear: true,
+                save: true
+            }
+        }
+    });
+    const pickr4 = Pickr.create({
+        el: '#color-picker-4',
+        theme: 'classic', // or 'monolith', or 'nano'
+
+        swatches: [
+            'rgba(244, 67, 54, 1)',
+            'rgba(233, 30, 99, 0.95)',
+            'rgba(156, 39, 176, 0.9)',
+            'rgba(103, 58, 183, 0.85)',
+            'rgba(63, 81, 181, 0.8)',
+            'rgba(33, 150, 243, 0.75)',
+            'rgba(3, 169, 244, 0.7)',
+            'rgba(0, 188, 212, 0.7)',
+            'rgba(0, 150, 136, 0.75)',
+            'rgba(76, 175, 80, 0.8)',
+            'rgba(139, 195, 74, 0.85)',
+            'rgba(205, 220, 57, 0.9)',
+            'rgba(255, 235, 59, 0.95)',
+            'rgba(255, 193, 7, 1)'
+        ],
+
+        components: {
+
+            // Main components
+            preview: true,
+            opacity: true,
+            hue: true,
+
+            // Input / output Options
+            interaction: {
+                hex: false,
+                rgba: false,
+                hsla: false,
+                hsva: false,
+                cmyk: false,
+                input: true,
+                clear: true,
+                save: true
+            }
+        }
+    });
+</script>

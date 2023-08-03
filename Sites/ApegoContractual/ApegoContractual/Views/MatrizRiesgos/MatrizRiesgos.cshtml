@@ -1,0 +1,42 @@
+﻿
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    <!--breadcrumb Dictionary-->
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Contrato\Index", "Lista de Contratos");
+    ruta.Add("-", "Matriz de riesgos");
+}
+
+@section ViewScripts{
+    <script src="~/Resources/MatrizRiesgos/Jquery.MatrizRiesgos.js"></script>
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+
+@*<input type="hidden" id="IdDependencia" value="@Dep" />
+    <input type="hidden" id="IdContrato" value="@Model" />*@
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+<section class="content">
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Matriz de Riesgos</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="VistaPMtz" data-toggle="tooltip"
+                        title="Agregar Obligación">
+                    Vista Parcial
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+@await Html.PartialAsync("~/Views/MatrizRiesgos/VistaPMtzRiesgosListado.cshtml", Model)
+@await Html.PartialAsync("~/Views/MatrizRiesgos/AddNuevoRiesgo.cshtml")
+

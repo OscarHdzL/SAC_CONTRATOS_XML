@@ -1,0 +1,75 @@
+﻿@*Sin servicios*@
+
+@model Guid
+@{
+    Layout = null;
+}
+
+<input type="hidden" id="iddetalle" />
+
+<input type="hidden" id="tbl_PlanEntregaDetalle_ac_id" value="@Model" />
+<input type="hidden" id="tbl_PlanEntrega_ac_id" />
+<input type="hidden" id="tbl_ubicaciones_ac_id" />
+<input type="hidden" id="tbl_Obligaciones_ac_id" />
+<input type="hidden" id="tbl_ProdServ_ac_id" />
+
+
+
+
+<div id="ModalProductos" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 80%; padding-top: 5%; background-color: transparent;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title tituloModal"><label style='color: white;font-weight: 900;'>Producto: &nbsp;&nbsp;</label> </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-group listboos">
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+
+
+                        <ul class="list-group listobligacion">
+                        </ul>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer AreaReporte">
+                <button class="btn btn-default" title="Cancelar"  data-dismiss="modal">Cancelar</button>
+                <button id="btnGuardar" class="btn btn-info hidden" title="Guardar" onclick="execute_btn_save();">Guardar</button>
+                @*<div class="row" align="center">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Seleccione reporte</label>
+                                <input type="file" class="form-control filestyle" id="FileReporte" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="invisible">Adjuntar</label><br />
+                                <button class="btn btn-primary" id="GuardarReporteUbicacion">Guardar reporte</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>*@
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

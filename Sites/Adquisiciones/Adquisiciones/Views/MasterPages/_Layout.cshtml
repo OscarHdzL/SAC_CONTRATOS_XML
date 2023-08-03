@@ -1,0 +1,166 @@
+﻿@*@using System.Web.Optimization
+@using WebHelpers.Mvc5.Enum
+@{
+    Dictionary<String, String> Info = new Dictionary<String, String>();
+    Info = PMS.Adquisiciones.Controllers.HomeController.IntanciaInfo();
+
+    String EndPointJavaScript = System.Configuration.ConfigurationManager.AppSettings["EndPointJavaScript"].ToString();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        PMS
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Title))
+        {
+            @ViewBag.Title
+        }
+    </title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="~/Content/Recursos/Layout/layout.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    @Styles.Render("~/Bundles/css")
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+
+
+
+    @RenderSection("ViewStyles", required: false)
+    [if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]
+    <style>
+		.skin-blue .main-header .navbar {
+				background-color: @Info["Header"].ToString() !important;
+			}
+		.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+				background-color: @Info["Sidebar"].ToString() !important;
+			}
+		.content-wrapper {
+			min-height: 100%;
+			background-color: @Info["Background"].ToString();
+			z-index: 800;
+		}
+
+		.backHeader{
+			background-color: @Info["Header"].ToString() !important;
+		}
+		.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+			border-top-color: @Info["Header"].ToString();
+		}
+
+		.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+			color: #fff;
+			background-color: @Info["Header"].ToString();
+		}
+
+		.skin-blue .main-header .logo:hover {
+    background-color: @Info["Header"].ToString()!important;
+}
+		.modal-header {
+
+    background-color: @Info["Header"].ToString()!important;
+}
+		.skin-blue .main-header .logo {
+    background-color:  @Info["Header"].ToString()!important;
+    color: #ffffff;
+    border-bottom: 0 solid transparent;
+}
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <input id="EndPointJavaScript" type="hidden" value="@EndPointJavaScript" />
+
+    <div class="wrapper">
+         Informacion importante  
+
+        @Html.Hidden("HiddenInstancia", PMS.Adquisiciones.SessionInstancia.GetIntancia().ID_INSTANCIA_PK)
+
+
+        @Html.Partial("_Header")
+
+        @Html.Partial("_SidebarSolicitante")
+
+        @if (Session["fase"] != null)
+        {
+            <input id="fase" type="hidden" value="@Session["fase"]" />
+        }
+        else
+        {
+            <input id="fase" type="hidden" />
+        }
+
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.Description</small>
+                </h1>
+            </section>
+
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.4.18
+                </div>
+                <strong>PMS - 2019 <a>Sistema de Administración de Contratos</a>.</strong> Apego Contractual
+                reserved.
+            <div align="center">
+                &copy; 2020 Copyright:
+                <a href="https://pmsoluciones.mx/"> PM Soluciones </a>
+                <strong><a href="https://pmsoluciones.mx/">PM Soluciones</a></strong>
+            </div>
+        </footer>
+
+        @Html.Partial("_ControlSidebar")
+    </div>
+
+    @Html.Partial("~/Views/Programacion/Index.cshtml")
+
+
+
+
+
+
+    <script src="@RouteJs.RouteJsHandler.HandlerUrl"></script>
+    <script src="@EnumHandler.HandlerUrl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+
+
+    @Scripts.Render("~/Bundles/js")
+
+
+
+
+    @RenderSection("ViewScripts", required: false)
+
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+
+    <script src="~/Content/Recursos/Programacion/Jquery.Programacion.js"></script>
+
+</body>
+</html>
+<script>
+$(document).ready(function () {
+    $("option").each(function () { $(this).html($(this).html().toUpperCase()); });
+});
+</script>*@

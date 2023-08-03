@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/MasterPages/Master_SinContrato.cshtml";
+    var IdRol = httpContextAccessor.HttpContext.Session.GetString("IdRol");
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add("-", "Lista de contratos");
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @if (IdRol == "8202fc4d-37e8-11ea-82d7-00155d1b3502") // Responsable de Apego Contractual
+    {
+        <script src="~/Resources/Contrato/Resp_AC/Jquery.Contrato_RAC.js"></script>
+    }
+    @if (IdRol == "820538fc-37e8-11ea-82d7-00155d1b3502") // Responsable de contrato
+    {
+        <script src="~/Resources/Contrato/Resp_C/Jquery.Contrato_RC.js"></script>
+    }
+    @if (IdRol == "820aa780-37e8-11ea-82d7-00155d1b3502") // Responsable ejecutor del PE
+        {
+            <script src="~/Resources/Contrato/Resp_PE/Jquery.Contrato_RPE.js"></script>
+        }
+    @*@if (IdRol == "a82039db-4161-11ea-9fcf-00155d1b3502") // Responsable de Ubicaciones
+    {
+        <script src="~/Resources/Contrato/Resp_PE/Jquery.Contrato_RPE.js"></script>
+    }*@
+    @if (IdRol == "82079cf0-37e8-11ea-82d7-00155d1b3502") // Responsable ejecutor PM
+    {
+        <script src="~/Resources/Contrato/Resp_PM/Jquery.Contrato_RPM.js"></script>
+    }
+
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+<section class="content">
+    @if (IdRol == "8202fc4d-37e8-11ea-82d7-00155d1b3502") // Responsable de Apego Contractual
+    {
+        @await Html.PartialAsync("~/Views/Contrato/Resp_AC/VistaPContratosL_RAC.cshtml")
+    }
+    @if (IdRol == "820538fc-37e8-11ea-82d7-00155d1b3502") // Responsable de contrato
+    {
+        @await Html.PartialAsync("~/Views/Contrato/Resp_C/VistaPContratosL_RC.cshtml")
+    }
+    @if (IdRol == "820aa780-37e8-11ea-82d7-00155d1b3502") // Responsable ejecutor del PE
+        {
+            @await Html.PartialAsync("~/Views/Contrato/Resp_PE/VistaPContratosL_RPE.cshtml")
+        }
+    @*@if (IdRol == "a82039db-4161-11ea-9fcf-00155d1b3502") // Responsable de Ubicaciones
+    {
+        @await Html.PartialAsync("~/Views/Contrato/Resp_PE/VistaPContratosL_RPE.cshtml")
+    }*@
+    @if (IdRol == "82079cf0-37e8-11ea-82d7-00155d1b3502") // Responsable ejecutor PM
+    {
+        @await Html.PartialAsync("~/Views/Contrato/Resp_PM/VistaPContratosL_RPM.cshtml")
+    }
+</section>
+<input type="hidden" id="idContrato" value="" />
+<input type="hidden" id="idDependencia" value="" />
+
+<input type="hidden" id="idRolUsuario" value="@httpContextAccessor.HttpContext.Session.GetString("IdRol")" />

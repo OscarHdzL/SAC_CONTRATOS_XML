@@ -1,0 +1,326 @@
+﻿@model Guid
+@{
+    ViewBag.Title = "Validar entrega y reporte de monitoreo";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    //Guid idContrato = PMS.ApegoContractual.Negocio.EjPlanMonitoreo.ObtenerContratobyPE(Model);
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script src="~/Resources/PlanMonitoreo/fileStyle.js"></script>
+    <script src="~/Resources/PlanMonitoreo/Jquery.ReporteMonitoreo.js"></script>
+
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+<input type="hidden" id="idPlanEntrega" value="@Model" />
+<input type="hidden" id="idContrato" value="" />
+<input type="hidden" id="idPlanMonitoreo" value="" />
+
+<div class="box box-default">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Validar entrega y reporte de monitoreo</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" disabled id="txt_ID_PE" class="form-control" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Periodo</label>
+                    <input type="text" disabled id="txt_Periodo_PE" class="form-control" />
+                </div>
+            </div>
+            <div class="col-lg-2 ">
+                <div class="form-group">
+                    <label>Fecha de ejecución</label>
+                    <input type="text" disabled id="txt_Ejecucion_PE" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 ">
+                <div class="form-group">
+                    <label>Vigencia</label>
+                    <input type="text" disabled id="txt_Vigencia_PE" class="form-control txt_finicio" />
+                </div>
+            </div>
+
+            <div class="col-lg-2 ">
+                <div class="form-group">
+                    <label>Estado</label>
+                    <input type="text" disabled id="txt_Estado_PE" class="form-control txt_ffin" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box box-default">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Plan de monitoreo</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label class="control-label">Plan de monitoreo</label>
+                    <br />
+                    <select id="DropPlanMonitoreo" class="form-control">
+                        @*<option value="0">Seleccione...</option>
+                            <option value="Plan1">Plan monitoreo 1</option>
+                            <option value="Plan2">Plan monitoreo 2</option>
+                            <option value="Plan3">Plan monitoreo 3</option>*@
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            @*<div class="col-lg-4 ">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" disabled id="txt_Id_PM" class="form-control" />
+                    </div>
+                </div>*@
+
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label>Fecha de ejecución</label>
+                    <input type="text" disabled id="txt_Ejecucion_PM" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label>Periodo</label>
+                    <input type="text" disabled id="txt_Periodo_PM" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 ">
+                <div class="form-group">
+                    <label>Nombre de responsable</label>
+                    <input type="text" disabled id="txt_Responsable_PM" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-lg-3 ">
+                <div class="form-group">
+                    <label>Estado</label>
+                    <input type="text" disabled id="txt_Estado_PM" class="form-control txt_ffin" />
+                </div>
+            </div>
+
+            <div class="col-lg-3 ">
+                <div class="form-group">
+                    <label>Vigencia</label>
+                    <input type="text" disabled id="txt_Vigencia_PM" class="form-control txt_finicio" />
+                </div>
+            </div>
+
+            <div class="col-lg-3 ">
+                <div class="form-group">
+                    <label>Cumplimiento</label>
+                    <input type="text" disabled id="txt_Cumplimiento_PM" class="form-control txt_finicio" />
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+        <div class="box-header with-border">
+            <h3 class="box-title">Ubicaciones</h3>
+        </div>
+
+        <div class="row air" style="margin-top: 1%;">
+            <div class="col-lg-12">
+
+                <table id="tbl_ubicacion_PM" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>IdUbicacion</th>
+                            <th>Clave de la unidad</th>
+                            <th>Nombre de la unidad</th>
+                            <th>Responsable administrativo</th>
+                            <th>Total de productos por ubicacion</th>
+                            <th>Validación de responsable de cumplimiento</th>
+                            <th>Adjuntar reporte de cumplimiento</th>
+                            <th>Ver productos</th>
+
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+<input type="hidden" id="IdUbicacion_Seleccionada" />
+<div class="modal" id="ModalProductosUbicacion" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModalProductosUbicacion();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalProductosUbicacion"></h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Listado de productos por ubicación</h3>
+                </div>
+
+                <br />
+                <div class="row air" style="margin-top: 2%;">
+                    <div class="col-lg-12">
+
+                        <table id="tbl_productosUbicacion" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>idPlanEntrega_ac</th>
+                                    <th>Clave</th>
+                                    <th>Unidad de medida</th>
+                                    <th>Cantidad</th>
+                                    <th>Validacion del responsable ejecutor</th>
+                                    <th>Validacion del responsable supervisor</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="right">
+                    <button class="btn btn-primary" id="GuardarValidacionProductos">Guardar</button>
+                    <button class="btn btn-danger" onclick="CerrarModalProductosUbicacion();">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ModalObligacionesProducto" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModalObligacionesProducto();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalObligacionesProducto"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Listado de obligaciones por producto</h3>
+                </div>
+
+                <br />
+                <div class="row air" style="margin-top: 2%;">
+
+
+                    <div class="col-lg-12">
+
+                        <table id="tbl_obligacionesProducto" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+
+                                    <th>Clave</th>
+                                    <th>Unidad de medida</th>
+                                    <th>Cantidad</th>
+                                    <th>Validacion del responsable ejecutor</th>
+                                    <th>Validacion del responsable supervisor</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="right">
+                    <button class="btn btn-primary" id="GuardarValidacionObligaciones">Guardar</button>
+                    <button class="btn btn-danger" onclick="CerrarModalObligacionesProducto();">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="idUbicacionReporte" value="" />
+<div class="modal" id="ModalCargarReporteUbicacion" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModalCargarReporteUbicacion();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalCargarReporteUbicacion"></h3>
+            </div>
+            <div class="modal-body">
+
+
+                <br />
+
+                <div class="row" align="center">
+                    <div class="col-lg-12" align="center">
+                        <div class="form-group">
+                            <label>Seleccione reporte</label>
+                            <input type="file" class="form-control filestyle" id="FileReporte" multiple />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="right">
+                    <button class="btn btn-primary" id="GuardarReporteUbicacion">Guardar</button>
+                    <button class="btn btn-danger" onclick="CerrarModalCargarReporteUbicacion();">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

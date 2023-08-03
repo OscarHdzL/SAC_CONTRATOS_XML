@@ -1,0 +1,94 @@
+﻿
+
+@*<input type="hidden" id="IdMR" class="Clean" value="" />*@
+
+<div id="ModalVerPresupuesto" class="modal bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="WIDTH: 70%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="cerrarMMR" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="tituloM">Presupuestos</h3>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    @*<input type="hidden" id="resapego_con_id" value="" class="Clean" />
+                <input type="hidden" id="idarearesp" value="" class="Clean" />*@
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label>Dependencia</label>
+                            <input type="text" id="m_dep" class="form-control" disabled />
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Área solicitante</label>
+                            <input type="text" name="m_area" id="m_area" class="form-control Clean" disabled />
+                        </div>
+                        <div class="col-lg-2">
+                            <label>Monto solicitado</label>
+                            <input type="number" id="m_monto_solic" class="form-control Clean" disabled />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <h4 style="font-weight:bold">Partidas de la solicitud</h4>
+                <table class="table text-center table-bordered" id="tbl_m_partidas" width="100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">Capitulo gasto</th>
+                            <th scope="col">No. partida</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Monto</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer" aling="center">
+                <div align="center">
+                    <button class="btn btn-success" id="editar_presup">Guardar</button>
+                    <button class="btn btn-danger" id="cerrarMMR" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal_monto" class="modal">
+    <div class="modal-dialog" style="WIDTH: 25%; padding-top: 7%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="tituloM">Editar monto</h3>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <input type="hidden" id="index_monto" value="" class="Clean" />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Area: <span id="area" class="combosauto-span"></span></label>
+                            <hr />
+                        </div>  
+                        
+                    </div>                    
+                    <div class="row text-center">
+                        <div class="col-lg-6">
+                            <label>Monto disponible</label>
+                            <input type="number" id="m_monto_disp" class="form-control Clean" disabled />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Monto nuevo</label>
+                            <input type="number" id="m_monto_edit" class="form-control Clean" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" aling="center">
+                    <div align="center">
+                        <button class="btn btn-success" id="m_monto_ed" data-dismiss="modal">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

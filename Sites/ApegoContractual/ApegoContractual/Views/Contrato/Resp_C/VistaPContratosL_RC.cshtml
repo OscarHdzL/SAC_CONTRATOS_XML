@@ -1,0 +1,302 @@
+﻿<input type="hidden" id="dependenciaContrato" />
+
+<div class="box">
+    <div class="box-header with-border">
+        <div class="row">
+            <div class="col-lg-4">
+                <h3 class="box-title">Contratos</h3>
+            </div>
+            <div class="col-lg-1">
+                &nbsp;
+            </div>
+            <div class="col-lg-2">
+                <select class="form-control" id="txt_estatus_contrato" onchange="filtrar_contrato(this.value);">
+                    <option value="1" selected>Filtrar contrato</option>
+                    <option value="1">Contratos activos</option>
+                    <option value="0">Contratos cerrados</option>
+                    <option value="2">Todos los contratos</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                &nbsp;
+            </div>
+            <div class="col-lg-4">
+                <div class="box-tools pull-right">
+
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <table id="tbl_contrato_RC" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nombre</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Tipo</th>
+                    <th>Estatus</th>
+                    <th width="30%">Acciones</th>
+                    <th>Ir...</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<div id="modalCargaMasiva" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Carga masiva de contratos</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Archivo</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <label style="color:gray">Solo deben cargar archivos en formato csv</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input type="file" id="archivo" name="archivo" accept=".csv" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnRealizarCargaMasiva" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalRespApegoContrato" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="CancelarAsignarRespApego();">&times;</button>
+                <h3 class="modal-title">Responsable de contrato</h3>
+                <input type="hidden" value="" id="Responsable_Apego" />
+                <input type="hidden" value="" id="Contrato_id" />
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="form-group">
+                            <label class="control-label">Responsable de apego de contrato</label>
+                            <select id="DropResponsableApego" class="form-control DropResponsableApego clean">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" onclick="guardarResponsableApego();">Guardar</button>
+                    <button type="button" class="btn btn-danger" onclick="CancelarAsignarRespApego();">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<input type="hidden" id="idAcuerdosRC" value="" />
+<div class="modal" id="ModalVerAcuerdosRC" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 90%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="CerrarModalAcuerdosRC();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalCargarReportePlan">Acuerdos</h3>
+            </div>
+            <div class="modal-body">
+                <br />
+
+                <div class="box-body">
+                    <table id="tbl_Acuerdos_RC" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tipo Acuerdo
+                                </th>
+                                <th>
+                                    Responsable
+                                </th>
+                                <th>
+                                    Acuerdo
+                                </th>
+                                <th>
+                                    Fecha de registro
+                                </th>
+                                <th>
+                                    Fecha de compromiso
+                                </th>
+                                <th>
+                                    Fecha de cierre
+                                </th>
+                                <th>
+                                    Estatus
+                                </th>
+                                <th>
+                                    Comentarios
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="right">
+                    <button class="btn btn-danger" onclick="CerrarModalAcuerdosRC();">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="idAcuerdoRC" value="" calss="Clean" />
+<div class="modal" id="Modal_EditarAcuerdo" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel2">Editar Acuerdo</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Tipo de acuerdo</label>
+                        <select name="TipoA_update" id="TipoA_update" class="form-control TipoA_update">
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Responsable</label>
+                        <select name="ResponsableA_update" id="ResponsableA_update" class="form-control ResponsableA_update">
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Acuerdo</label>
+                        <textarea placeholder="Ingrese acuerdo" id="txt_Acuerdo_update" class="form-control txt_Acuerdo_update"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Fecha registro</label>
+                        <input type="text" id="txt_FechaRegistro_update" value="" class="form-control fechas txt_FechaRegistro_update" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha compromiso</label>
+                        <input type="text" id="txt_FechaCompromiso_update" value="" class="form-control fechas txt_FechaCompromiso_update" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha cierre</label>
+                        <input type="text" id="txt_FechaCierre_update" value="" class="form-control fechas txt_FechaCierre_update" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Estatus</label>
+                        <select id="cmbEstatusAcuerdo_update" class="form-control ">
+                            <option value="">Seleccione...</option>
+                            <option value="Cerrado">Cerrado</option>
+                            <option value="En proceso">En proceso</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Comentario</label>
+                        <textarea placeholder="Ingrese comentario" id="txt_ComentarioAcuerdo_update" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="UpdateAcuerdoRC();" id="EditarAcuerdo">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ModalCerrarContrato" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Cerrar contrato</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10" id="txtPregunta">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary success-call hidden">Cerrar contrato</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="modalVerificacionContrato" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="padding-top: 5%; background-color: transparent; width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Verificación de contenido</h3>                
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="box-body">
+                        <table id="tbl_verificacion_modal" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Pregunta</th>
+                                    <th>Pregunta Personalizada</th>
+                                    <th>Fecha verificación</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-danger" onclick="CancelarVerObligaciones();">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

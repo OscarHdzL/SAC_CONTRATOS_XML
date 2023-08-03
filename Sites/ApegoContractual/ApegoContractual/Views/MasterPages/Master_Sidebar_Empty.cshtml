@@ -1,0 +1,118 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using ApegoContractual = ApegoContractual;
+@inject IOptions<ApegoContractual.EndPoint> OptionsApplicationConfiguration
+@inject IHttpContextAccessor HttpContextAccessor;
+@using ApegoContractual.Helpers;
+<style>
+    .AccesoDirecto {
+        color: red;
+        font-size: 150%;
+    }
+
+    .AccesoDirectoHome {
+        color: green;
+        font-size: 150%;
+    }
+</style>
+<script>
+    function logOut() {
+    localStorage.clear();
+    window.location.href = '/Login/logOut';
+    }
+</script>
+
+@{
+    Layout = null;
+    string ruta = string.Empty;
+    var rol = HttpContextAccessor.HttpContext.Session.GetString("IdRol");
+    HttpClient clienteHttp = new HttpClient();
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+    HttpResponseMessage request = await clienteHttp.GetAsync("Sidebar/Get/" + rol);
+
+    if (request.IsSuccessStatusCode)
+    {
+        JArray sidebar = JArray.Parse(await request.Content.ReadAsStringAsync());
+
+        foreach (JObject row in sidebar.Children<JObject>())
+        {
+            if (row["orden"].ToString() == "0")
+            {
+                <li class="treeview menu_padre">
+                    <a href="#">
+                        <i class="fa @row["clase"].ToString()"></i> <span>@row["valor"].ToString()</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu disabled">
+
+                        @foreach (JObject sub in sidebar)
+                        {
+                            if (sub["tiene_contrato"].ToString().ToLower() == "false"&&row["tbl_elemento_siderbar_id"].ToString()== sub["subordinado"].ToString())
+                            {
+                                ruta = "~/index.html";
+
+                                if (sub["tag"].ToString().ToLower() == "list")
+                                {
+                                    <li class="treeview hijo-padding">
+                                        <a href="#">
+                                            <i class="fa @sub["clase"].ToString()"></i> <span style="w">@sub["valor"].ToString()</span>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @{
+                                                if (sub["controlador"].ToString().ToLower() != "-" || sub["accion"].ToString().ToLower() != "-")
+                                                {
+                                                    ruta = "~/index.html";
+
+                                                    if (sub["tag"].ToString() == "-")
+                                                    {
+                                                        ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString();
+                                                    }
+
+                                                    <li><a href="@ruta"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+
+                                                }
+                                            }
+
+                                        </ul>
+                                    </li>
+                                }
+                                else if (sub["tag"].ToString().ToLower() == "item" || sub["tag"].ToString().ToLower() == "-")
+                                {
+                                    if (sub["controlador"].ToString() != "-" || sub["accion"].ToString() != "-")
+                                    {
+                                        ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString();
+                                    }
+                                    var cont_ = sub["controlador"].ToString();
+                                    var act_ = sub["accion"].ToString();
+                                    <li class="@Html.IsSelected(actions: @act_, controllers: cont_) hijo-padding"><a href="@ruta" onclick="return validarDependencia();"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+                                }
+                            }
+                        }
+                    </ul>
+
+                </li>
+            }
+
+        }
+    }
+}
+
+
+<li class="text-center">
+
+    <br />
+    <i id="LogOut" onclick="logOut();"
+       class="fa fa-power-off AccesoDirecto"></i>
+
+    @*<button class="btn btn-danger fa fa-power-off AccesoDirecto"></button>*@
+</li>
+

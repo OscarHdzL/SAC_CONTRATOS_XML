@@ -1,0 +1,153 @@
+﻿@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Plan de monitoreo");
+}
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/PlanMonitoreo/PlanMonitoreo.js"></script>
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+<input type="hidden" id="hdnIdContrato" name="hdnIdContrato" value="@Model" />
+<input type="hidden" id="lstUbicaciones" name="lstUbicaciones" value="" />
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+<section class="content">
+
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Plan de monitoreo</h3>
+            <div class="box-tools pull-right">
+                @*<button type="button" id="btnCargaMasiva" class="btn btn-box-tool" title="Carga masiva">
+                        Carga masiva
+                        <i class="fa fa-fw fa-plus-circle"></i>
+                    </button>*@
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div>
+                <div class="panel panel-success setup-content" id="panelEncabezado">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Detalle</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label" id="lblFechaEjecucion">Fecha de ejecución</label>
+                                    <input maxlength="100" id="txtFechaEjecucion" type="text" required="required" class="form-control fechas campo-formulario" placeholder="Fecha de ejecución" />
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label class="control-label" id="lblPeriodo">Periodo</label>
+                                    <input maxlength="100" id="txtPeriodo" type="text" required="required" class="form-control campo-formulario" placeholder="Periodo de plan de entrega" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" id="lblResponsable">Nombre del responsable</label>
+                                    <select id="responsable" class="form-control campo-formulario clean"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label" id="lblEstado">Estado</label>
+                                    <select id="estado" class="form-control campo-formulario clean"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class="control-label">Vigencia</label>
+                                    <input id="txtVigencia" type="text" class="form-control" readonly="readonly" disabled value="Vigente" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Porcentaje de ubicaciones</label>
+                                    <input id="txtUbicaciones" type="number" class="form-control campo-formulario" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" id="lblPlanEntrega">Plan de entrega</label>
+                                    <select id="planentrega" class="form-control campo-formulario clean"></select>
+                                    @*<select id="planentrega" class="form-control campo-formulario clean">
+                                        <option value="0" selected>Seleccione</option>
+                                        <option value="cbd0df51-4ad4-11ea-9fcf-00155d1b3502">id oscar hdz </option>
+                                    </select>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-success setup-content" id="panelUbicaciones" style="display:none">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ubicaciones</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" id="btnSeleccionar" name="btnSeleccionar" class="btn btn-box-tool" data-toggle="tooltip"
+                                            title="Agregar ubicación">
+                                        Seleccionar aleatoriamente
+                                        <i class="fa fa-fw fa-plus-circle"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="row air" style="margin-top: 1%;">
+                                    <div class="col-lg-12">
+                                        <table id="tbl_ubicaciones" class="display" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Clave de la unidad</th>
+                                                    <th>Nombre de la unidad</th>
+                                                    <th>Responsable administrativo</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div class="form-group" style="margin-right:15px" align="center">
+                        <button id="btnGuardar" name="btnGuardar" class="btn btn-success">Guardar</button>
+                        <button id="btnCancelar" name="btnCancelar" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

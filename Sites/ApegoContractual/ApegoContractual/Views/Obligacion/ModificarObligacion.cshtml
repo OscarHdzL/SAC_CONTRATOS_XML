@@ -1,0 +1,126 @@
+﻿@model Guid
+
+@{
+
+    Layout = null;
+}
+
+<input type="hidden" id="idLinkObl" value="" />
+<input type="hidden" id="idObl" value="" />
+
+<div id="ModificarObligacion" class="modal" role="dialog">
+    <div class="modal-dialog" style="    width: 80%;padding-top: 5%; background-color: transparent;">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close cerrarModal" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modificación de obligación </h4>
+            </div>
+            <!------------------------------------------------>
+            <!------------------------------------------------>
+            <!------------------------------------------------>
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <p>Cláusula:</p>
+                        <input type="text" class="form-control txt_clausulaM clean" placeholder="Cláusula" />
+                    </div>
+                    <div class="col-lg-3">
+                        <p>Nombre de la obligación:</p>
+                        <input type="text" class="form-control txt_oblNombreM clean" placeholder="Nombre de obligación" />
+                    </div>
+                    @*<div class="col-lg-3">
+                        <p>Nivel de servicio:</p>
+                        <input type="number" class="form-control txt_LvServicioM clean" placeholder="Nivel de Servicio" />
+                    </div>*@
+                    
+                    <div class="col-lg-3">
+                        <p>Tipo de prioridad:</p>
+                        <select class="form-control cmb_prioridad_indexM clean">
+                            <option value="">Seleccione...</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <p>Sanción:</p>
+                        <select class="form-control cmb_sancion_indexM clean">
+                            <option>Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    @*<div class="col-lg-3">
+                        <p class="TipoAplicacionM">Tipo aplicacion:</p>
+                        <select class="TipoAplicacionM form-control txt_aplicacionM clean">
+                            <option value="">Seleccione...</option>
+                            @foreach (PMS.ApegoContractual.Datos.ContextoApegoContractual.tbl_tipoAplicacion_ac item in tipoapiicaM)
+                            {
+                                <option value="@item.id">@item.TipoAplicacion</option>
+                            }
+                        </select>
+                    </div>*@
+                    <div class="col-lg-3">
+                        <p id="tipoSanM"></p>
+                        <div class="input-group DivTipoSanM">
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+
+                        <p>Comentarios:</p>
+                        <textarea class="form-control txt_comentariosM clean"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        @*<p class=" air_p">Periodo:</p>*@
+                        <p>Período:</p>
+                        <select class="form-control cmb_periodo_indexM clean">
+                            <option>Seleccione...</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        @*<p class=" air_p">Dependencia:</p>*@
+                        <p>Dependencia:</p>
+                        <select class="form-control cmb_lstdep_indexM clean">
+                            <option>Seleccione...</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        @*<p class=" ">Producto Servicio:</p>*@
+                        <p>Producto servicio:</p>
+                        <select class="form-control cmb_ProdServ_indexM clean">
+                            <option>Seleccione...</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <p>Tipo obligación:</p>
+                        <select class="form-control cmb_TipoObligacionM clean">
+                            <option value="">Seleccione...</option>
+                           
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <!------------------------------------------------>
+            <!------------------------------------------------>
+            <!------------------------------------------------>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary Update">Guardar</button>
+                    <button type="button" class="btn btn-danger cerrarModal" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

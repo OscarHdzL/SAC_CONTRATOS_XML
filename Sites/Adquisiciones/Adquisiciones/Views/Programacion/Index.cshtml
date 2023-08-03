@@ -1,0 +1,111 @@
+﻿
+<!-- Modal -->
+<div id="ProgramacionEventos" data-backdrop="static" data-keyboard="false" class="modal" role="dialog">
+
+	<input type="hidden" id="HDSOL_Agenda" />
+	<input type="hidden" id="HD_fecha" />
+
+	<div class="modal-dialog" style="width: 80%;">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				 
+				<h4 class="modal-title">Agenda de eventos</h4>
+			</div>
+			<div class="modal-body">
+
+
+				<div class="row R1_body">
+					<div class="col-lg-4">
+						<label>Tipo de programación:</label>
+						<select onchange="GetHistorialActas('#tbl_Progra');" class="form-control cmb_programacion" id="cmb_programacion">
+							<option value="">Seleccione...</option>
+						</select>
+					</div>
+					<div class="col-lg-4">
+						<label>Fecha:</label>
+						<input type="datetime" class="form-control txt_fecha_pro" />
+					</div>
+					<div class="col-lg-4">
+						<label>Hora:</label>
+						<input type="time" class="form-control txt_hora_pro" />
+					</div>
+
+
+				</div>
+				<div class="row R2_body">
+					<div class="col-lg-4">
+						<label>Dirección:</label>
+						<textarea class="form-control textarea_direccion" style=" resize: none"></textarea>
+					</div>
+					<div class="col-lg-4">
+						<label>Estado:</label>
+						<select class="form-control cmb_estado" id="cmb_estado">
+							<option value="">Seleccione...</option>
+						</select>
+					</div>
+					<div class="col-lg-4">
+						<label>Municipio:</label>
+						<select class="form-control cmb_municipio">
+							<option value="">Seleccione...</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="row R1_file" style="display:none">
+					<div class="col-lg-12">
+						<label>Cargar archivo</label>
+					</div>
+				</div>
+				<div class="row R2_file" style="display:none">
+					<div class="col-lg-8">
+						<input type="file" class="form-control" id="file_programacion" />
+					</div>
+					<div class="col-lg-4">
+						<input type="hidden" id="hide_file_programacion" />
+						<button class="btn btn-success btn_file_programacion">Subir</button>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="modal-footer">
+		 
+				<button type="button" onclick="AddProgramacion_()" class="btn btn-success">Guardar</button>
+
+				<button type="button" class="btn btn-default closeaction" id="CerrarP" data-dismiss="modal">Cerrar</button>
+                <button style="display:none" type="button" class="btn btn-success btn-add-event">Guardar</button>
+                <button style="display:none" type="button" class="btn btn-success btn-add-event2">Guardar</button>
+
+
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<table id="tbl_Progra" class="display" style="width:100%">
+							<thead>
+								<tr>
+									<th>Tipo</th>
+									<th>Estado</th>
+									<th>Municipio</th>
+									<th>Estatus</th>
+
+									<th>Fecha</th>
+									<th>Fecha</th>
+
+
+
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

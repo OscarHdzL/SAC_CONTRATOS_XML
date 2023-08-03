@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "ModalAsignacionResponsables_Sol";
+}
+
+@{
+////SelectList Drop_Solicitante = PMS.Adquisiciones.Negocio.Controls.DropDownList_Usuarios.Fill(SessionInstancia.GetIntancia().ID_INSTANCIA_PK, 9);
+//SelectList Drop_AdminUnidadLicitadora = PMS.Adquisiciones.Negocio.Controls.DropDownList_Usuarios.Fill(SessionInstancia.GetIntancia().ID_INSTANCIA_PK, 15);
+//SelectList Drop_TécnicoUnidadLicitante = PMS.Adquisiciones.Negocio.Controls.DropDownList_Usuarios.Fill(SessionInstancia.GetIntancia().ID_INSTANCIA_PK, 10);
+//SelectList Drop_EncargadoLegal = PMS.Adquisiciones.Negocio.Controls.DropDownList_Usuarios.Fill(SessionInstancia.GetIntancia().ID_INSTANCIA_PK, 12);
+//SelectList Drop_Coordinador = PMS.Adquisiciones.Negocio.Controls.DropDownList_Usuarios.Fill(SessionInstancia.GetIntancia().ID_INSTANCIA_PK, 13);
+//SelectList Drop_Costos = PMS.Adquisiciones.Negocio.Controls.DropDownList_Usuarios.Fill(SessionInstancia.GetIntancia().ID_INSTANCIA_PK, 11);
+}
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel">Asignación de responsables</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="TblResponsables">
+                    <thead id="Tthead">
+                        <tr>
+                            <th scope="rowgroup" id="th">Usuario</th>
+                            <th scope="rowgroup" id="th">Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="TBody">
+                        @*<tr>
+            <td id="td">
+                @Html.DropDownList("drop_Solicitante", new SelectList(Drop_Solicitante, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal",  required = "Campo requerido" })
+                <select name="drop_Solicitante" id="drop_Solicitante" class="form-control drop_Solicitante"></select>
+            </td>
+            <td id="td" align="center">Solicitante</td>
+        </tr>*@
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_AdminU", new SelectList(Drop_AdminUnidadLicitadora, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_TecnicoU" id="drop_TecnicoU" class="form-control drop_TecnicoU DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Técnico de unidad licitante</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_TecnicoU", new SelectList(Drop_TécnicoUnidadLicitante, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_AdminU" id="drop_AdminU" class="form-control drop_AdminU DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Administrador de unidad licitadora</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_EncargadoLegal", new SelectList(Drop_EncargadoLegal, "Value", "Text"), "Seleccione...", new { @class = "form-control  DropVal", required = "Campo requerido" })*@
+                                <select name="drop_EncargadoLegal" id="drop_EncargadoLegal" class="form-control drop_EncargadoLegal DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Encargado legal</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_Coordinador", new SelectList(Drop_Coordinador, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_Coordinador" id="drop_Coordinador" class="form-control drop_Coordinador DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Coordinador</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_Costos", new SelectList(Drop_Costos, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_Costos" id="drop_Costos" class="form-control drop_Costos DropVal DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Costos</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_Costos", new SelectList(Drop_Costos, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_dir_admin" id="drop_dir_admin" class="form-control drop_dir_admin DropVal DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Dirección de administración</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_Costos", new SelectList(Drop_Costos, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_autorizador" id="drop_autorizador" class="form-control drop_autorizador DropVal DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Autorizador</td>
+                        </tr>
+                        <tr>
+                            <td id="td">
+                                @*@Html.DropDownList("drop_Costos", new SelectList(Drop_Costos, "Value", "Text"), "Seleccione...", new { @class = "form-control DropVal", required = "Campo requerido" })*@
+                                <select name="drop_integ_prec" id="drop_integ_prec" class="form-control drop_integ_prec DropVal DropVal">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </td>
+                            <td id="td" align="center">Integración a precios</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Agregar a solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>

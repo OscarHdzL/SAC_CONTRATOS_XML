@@ -1,0 +1,64 @@
+﻿@model Guid
+
+@{
+    ViewBag.Title = "Evaluación Técnica";
+    ViewBag.Description = "Evaluación Técnica";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    //Guid Sol = PMS.Adquisiciones.Negocio.ConvocatoriaNeg.getSol(Model);
+}
+
+@section ViewScripts{
+    
+    <script src="~/Resources/Proposiciones/Jquery.EvaluacionProposiciones.js"></script>    
+    <script src="~/Resources/Proposiciones/Jquery.ProposicionesEvaluadas.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+}
+@section ViewStyles{
+    @*<link href="~/Content/Recursos/Proposiciones/ModalTBL_LicitantesEv.css" rel="stylesheet" />*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+}
+
+
+
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+<input id="TipoP" type="hidden" value="tec" />
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+<div class="row">
+    <div class="box box-default">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-12" align="center">
+                    <br />
+                    @await Html.PartialAsync("TablaEvaluados")
+                    @*@Html.Partial("TablaEvaluados")*@
+                    <button class="btn btn-success" onclick="ListarPT()" id="ListaLicEva">Licitantes ya evaluados</button>
+                </div>
+            </div>
+            <hr style="color: #0056b2; " />
+            <div class="row">
+                @await Html.PartialAsync("TablaProposiciones")
+                @*@Html.Partial("TablaProposiciones")*@
+            </div>
+            <div class="row">
+                <div class="col-lg-12" align="center">
+                    <br />
+                    @*<button class="btn btn-primary" id="ComentariosEvP">Generar un comentario General</button>*@
+                    <button class="btn btn-danger" id="CancelarE">Cancelar</button>
+                </div>
+            </div>
+            <hr style="color: #0056b2; " />
+        </div>
+    </div>
+</div>
+
+

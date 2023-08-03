@@ -1,0 +1,131 @@
+﻿@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master_SinContrato.cshtml";
+
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Responsables apego");
+
+    @using Microsoft.AspNetCore.Http
+    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+
+}
+@section ViewScripts{
+    <script src="~/Resources/AsignacionResponsabilidades/Jquery.Responsables.js"></script>
+    @*<script src="~/Resources/AsignacionResponsabilidades/Jquery.ResponsabilidadesModificar.js"></script>*@
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+
+<input type="hidden" id="IdContrato" value="@Model" />
+<input type="hidden" id="SerP" value="" />
+<input type="hidden" id="puesto" value="" />
+<input type="hidden" id="IdResponsabilidad" value="" />
+<input type="hidden" id="IdDependencia" value="@HttpContextAccessor.HttpContext.Session.GetString("IdDependencia")" />
+<input type="hidden" id="dependenciaContrato" />
+
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+
+<section class="content">
+
+
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Auditoria de plan de entrega</h3>
+            <div class="box-tools pull-right">
+                @*<button type="button" class="btn btn-box-tool" id="RegistroResponsabilidades" data-toggle="tooltip"
+                            title="Registrar Responsabilidades">
+                        Registrar Responsabilidades
+                        <i class="fa fa-fw fa-plus-circle"></i>
+                    </button>*@
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row" id="divOpciones1">
+                <div class="col-lg-4">
+                    <label>Responsabilidades del plan</label>
+                    <br />
+                    <select name="Funciones" id="Funciones" class="form-control Funciones">
+                        <option value="" selected disabled>Seleccione una opción...</option>
+                        <option value="EPE">Responsable ejecutor del PE</option>
+                        <option value="EPM">Responsable ejecutor PM</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label>Funcionario público</label>
+                    <br />
+                    <select name="Funcionario" id="Funcionario" class="form-control Funcionario">
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <label>Correo electrónico</label>
+                    <br />
+                    <input type="text" id="txtEmail" class="form-control" placeholder="Ingrese un correo electrónico" disabled />
+                </div>
+            </div>
+            <br />
+            <div class="row" id="divOpciones2">
+                <div class="col-lg-12" align="center">
+                    <button class="btn btn-primary" id="AddResponsable">Guardar</button>
+                    <button class="btn btn-danger" id="Cerrar">Cancelar</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="ResponsablesAC" class="display nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>No.</th>
+                                <th>Funcionario</th>
+                                @*<th>Puesto</th>*@
+                                <th>Funciones</th>
+                                <th>Correo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal" id="ModalEditarResponsabilidades" role="dialog">
+    <div class="modal-dialog" style="padding-top: 5%; background-color: transparent;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="CerrarM" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modificación de responsabilidad</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Correo electrónico</label>
+                        <br />
+                        <input type="text" id="txtEmailM" class="form-control" placeholder="Ingrese un correo electrónico" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="EditRAC">Modificar</button>
+                    <button type="button" class="btn btn-default" id="CerrarM" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

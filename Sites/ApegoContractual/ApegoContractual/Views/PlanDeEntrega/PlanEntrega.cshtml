@@ -1,0 +1,196 @@
+﻿@*Sin servicios*@
+
+@model Guid
+@{
+    ViewBag.Title = "Registro de plan de entrega";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    Layout = "~/Views/MasterPages/Master_SinContrato.cshtml";
+
+    <!--breadcrumb Dictionary-->
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Contrato\Index", "Lista de Contratos");
+    ruta.Add("-", "Plan de entrega");
+}
+
+
+@section ViewScripts{
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+
+<input type="hidden" id="idcontrato" value="@Model" />
+
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+@*<section class="content">*@
+
+<div class="box">
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+    <div class="box-body">
+        <div id="Div_VistaContrato_" class="col-xs-12">
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <label>ID</label>
+                    <input type="text" id="idplnentr" class="form-control" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label>Periodo de plan de entrega</label>
+                    <input type="text" id="perplnentr" class="form-control" />
+                </div>
+                <div class="col-lg-6 text-center">
+                    <label>Descripción de plan de entrega</label>
+                    <input type="text" id="descplnentr" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-center">
+                    <label>Fecha de ejecución de entrega</label>
+                    <input type="text" id="Fejecu" class="form-control" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label>Nombre de responsable</label>
+                    <input type="text" id="nomresp" class="form-control" />
+                </div>
+                <div class="col-lg-2 text-center">
+                    <label>Tipo de plan de entrega</label>
+                    <input type="text" id="tipoplan" class="form-control" />
+                </div>
+                <div class="col-lg-2 text-center">
+                    <label>Estatus de plan de entrega</label>
+                    <input type="text" id="estatusplan" class="form-control" />
+                </div>
+                <div class="col-lg-2 text-center">
+                    <label>Estado de plan de entrega</label>
+                    <input type="text" id="estadoplan" class="form-control" />
+                </div>
+                <div class="col-lg-1 text-center">
+                    <label>Clasificacón</label>
+                    <input type="text" id="clasifplan" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Plan de Entrega</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div id="Div_VistaContrato" class="col-xs-6">
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <label>Producto</label>
+                    <select name="producto" id="producto" class="form-control Clean"></select>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label>Cantidad</label>
+                    <input type="text" id="txt_cantidadprod" class="form-control" />
+                </div>
+
+            </div>
+        </div>
+
+        <div id="Div_VistaContrato" class="col-xs-12">
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <label>Ubicación</label>
+                    <select name="ubicacionddl" id="ubicacionddl" class="form-control Clean"></select>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label>Cantidad</label>
+                    <input type="text" id="txt_cantidadubic" class="form-control" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label>Nombre del responsable</label>
+                    <select name="nomresp" id="nomresp" class="form-control Clean"></select>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label>Detalle de actividades de entregables</label>
+                    <input type="text" id="detallentregable" class="form-control" />
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-lg-12" align="right">
+                <button class="btn btn-default" id="AgregarF">Agregar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <table id="tbl_Ubicaciones" class="display nowrap " cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ubicación</th>
+                            <th>Cantidad</th>
+                            <th>Nombre del responsable</th>
+                            <th>Detalle de actividades de entregables</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+<div class="box">
+    <div class="box-body">
+        <div class="box-header with-border">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <table id="tbl_Planes" class="display nowrap " cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Producto / Servicio</th>
+                            <th>Unidad de medida</th>
+                            <th>Ubicación</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12" align="right">
+                <br />
+                <button class="btn btn-default" id="EnviarF">Envíar plan por correo</button>
+                <button class="btn btn-default" id="GuardarF">Guardar</button>
+                <button class="btn btn-default" id="CancelarF">Cancelar</button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

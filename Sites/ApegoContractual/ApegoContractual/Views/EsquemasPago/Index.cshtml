@@ -1,0 +1,74 @@
+﻿@model Guid
+@{
+    ViewBag.Title = "EsquemaPagos";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    <!--breadcrumb Dictionary-->
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Esquema de pago");
+}
+@section ViewScripts{
+    <script src="~/Resources/EsquemaPago/Jquery.EsquemaPago.js"></script>
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+@await Html.PartialAsync("AddEsquemaPago")
+
+<input type="hidden" id="IdInstancia" value="@HttpContextAccessor.HttpContext.Session.GetString("IdInstancia")" />
+<input type="hidden" id="IVA" value="" />
+<input type="hidden" id="IdContrato" value="@Model" />
+@*<input type="hidden" id="IdContrato" value="ee97d9d4-37e6-11ea-82d7-00155d1b3502" />*@
+<input type="hidden" id="IdEsquemaPago" value="" />
+<input type="hidden" id="hdnIdResponsableAutoriza" value="" />
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+<section class="content">
+
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Esquema de pago</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="AddPago" data-toggle="tooltip"
+                        title="Agregar Obligación">
+                    Agregar un nuevo esquema de pagos
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="EsquemaPagos" class="display nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Autoriza</th>
+                                <th>Fecha de pago</th>
+                                <th>Monto de pago</th>
+                                <th>Monto del IVA</th>
+                                <th>Total</th>
+                                <th>Estado de plan de entrega</th>
+                                <th>Razón social</th>
+                                <th>Firma digital</th>
+                                <th>Observaciones</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

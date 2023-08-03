@@ -1,0 +1,78 @@
+﻿<input type="hidden" id="json_hd" />
+
+<div class="tab-pane" id="4a">
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label>Tipo de evaluación:</label>
+            <select class="form-control clr" id="cmb_criterioseval"></select>
+        </div>
+        <div class="col-lg-4">
+            <label>Criterio de evaluación:</label>
+            <input type="text" class="form-control clr" id="input_criterioseval" placeholder="Criterio de evaluación" />
+        </div>
+        <div class="col-lg-4">
+            <label>Evaluación:</label>
+            <input type="text" class="form-control clr" id="input_Evaluacion" placeholder="Evaluación" />
+        </div>
+    </div>
+    <div class="row" style="padding:5px;">
+        <div align="center">
+            <button class="btn btn-success btn_add_criterio_btn"> Agregar </button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="tbl_Criterio" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Folio conv.</th>
+                        <th>Tipo criterio.</th>
+                        <th>Criterio eval.</th>
+                        <th>Evaluacion.</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="id_conv_criterio" value="" />
+<div id="Modal_Criterio_Upd" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar criterio de evaluación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Tipo de evaluación:</label>
+                        <select class="form-control clr" id="cmb_criterioseval_upd"></select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Criterio de evaluación:</label>
+                        <input type="text" class="form-control clr" id="input_criterioseval_upd" placeholder="Criterio de evaluación" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Evaluación:</label>
+                        <input type="text" class="form-control clr" id="input_Evaluacion_upd" placeholder="Evaluación" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_criterio">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

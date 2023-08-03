@@ -1,0 +1,107 @@
+﻿<input type="hidden" id="json_hd" />
+
+<div class="tab-pane" id="6a">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label>Condición de pago:</label>
+            <input type="text" class="form-control clr" id="input_Cpago" placeholder="Condición de pago" />
+        </div>
+        <div class="col-lg-3">
+            <label>Tipo de pago:</label>
+            <select class="form-control clr" id="cmb_tipopagoCpago">
+                <option value="">Seleccione...</option>
+                <option value="demanda">Demanda</option>
+                <option value="entregable">Entregable</option>
+                <option value="fijo">Fijo</option>
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <label>Esquema de pago:</label>
+            <select class="form-control clr" id="cmb_esquemaCpago">
+                <option value="">Seleccione...</option>
+                <option value="porcentaje">Porcentaje</option>
+                <option value="cantidad fija">Cantidad fija</option>
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <label>Método de pago:</label>
+            <input type="text" class="form-control clr" id="input_MetodoCpago" placeholder="Método de pago" />
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <button class="btn btn-success btp_Cpago_save">Guardar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="tbl_conv_pago" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Folio conv.</th>
+                        <th>Condición pago.</th>
+                        <th>Metodo pago.</th>
+                        <th>Tipo pago.</th>
+                        <th>Esquema pago.</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<input type="hidden" id="id_conv_pago" value="" />
+<div id="Modal_Pago_Upd" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 60%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar condición de pago</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Condición de pago:</label>
+                        <input type="text" class="form-control clr" id="input_Cpago_upd" placeholder="Condición de pago" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Tipo de pago:</label>
+                        <select class="form-control clr" id="cmb_tipopagoCpago_upd">
+                            <option value="">Seleccione...</option>
+                            <option value="demanda">Demanda</option>
+                            <option value="entregable">Entregable</option>
+                            <option value="fijo">Fijo</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Esquema de pago:</label>
+                        <select class="form-control clr" id="cmb_esquemaCpago_upd">
+                            <option value="">Seleccione...</option>
+                            <option value="porcentaje">Porcentaje</option>
+                            <option value="cantidad fija">Cantidad fija</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Método de pago:</label>
+                        <input type="text" class="form-control clr" id="input_MetodoCpago_upd" placeholder="Método de pago" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_pago">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

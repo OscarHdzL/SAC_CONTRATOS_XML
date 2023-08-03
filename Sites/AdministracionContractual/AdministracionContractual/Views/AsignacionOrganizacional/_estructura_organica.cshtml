@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AdministracionContractual.estructura_organica_core>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <ul id="lista2">
+        @foreach (var item_d in Model)
+        {
+            <li>
+                <a style="cursor: pointer;" onclick="obtener_cap_gastos('@item_d._dependencia.id','','@item_d._dependencia.dependencia',1)">
+                    <i class="fa fa-folder-open"></i>
+                    @item_d._dependencia.dependencia
+                </a>
+                @if (item_d._dependencia.hijos > 0)
+                {
+                    <ul>
+                        @foreach (var item_a in item_d._areas)
+                        {
+                            <li>
+                                <a style="cursor: pointer;" onclick="obtener_cap_gastos('@item_a._area.id','@item_a._area.tbl_dependencia_id','@item_a._area.area',2)">
+                                    <i class="fa fa-folder-open"></i>
+                                    @item_a._area.area
+                                </a>
+                                @if (item_a._area.hijos > 0)
+                                {
+                                    <ul>
+                                        @foreach (var item_s in item_a._subareas)
+                                        {
+                                            <li>
+                                                <a style="cursor: pointer;" onclick="obtener_cap_gastos('@item_s._subarea.id','@item_s._subarea.tbl_dependencia_id','@item_s._subarea.subarea', 3)">
+                                                    <i class="fa fa-folder-open"></i>
+                                                    @item_s._subarea.subarea
+                                                </a>
+                                                @if (item_s._subarea.hijos > 0)
+                                                {
+                                                    <ul>
+                                                        @foreach (var item_as in item_s._oficinas)
+                                                        {
+                                                            <li>
+                                                                <a style="cursor: pointer;" onclick="obtener_cap_gastos('@item_as.id','@item_as.tbl_dependencia_id','@item_as.area_subordinada', 4)">
+                                                                    <i class="fa fa-folder-open"></i>
+                                                                    @item_as.area_subordinada
+                                                                </a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+
+            </li>
+        }
+    </ul>
+}

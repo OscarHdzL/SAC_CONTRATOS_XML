@@ -1,0 +1,96 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@using Modeloremitidas = SistemaDeAdquisiciones.Models.remitidas;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+@{
+    ViewBag.Title = "Remitidos económicas";
+    ViewBag.Description = "Remitidas económicas";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+@section ViewScripts{
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/Resources/BandejaRemitida/Jquery.BandejaRemitida.js"></script>
+
+}
+
+@{
+    Guid rol_usuario = Guid.Parse(HttpContextAccessor.HttpContext.Session.GetString("IdRolUsuario"));
+    HttpClient clienteHttp = new HttpClient();
+
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+    List<Modeloremitidas> obj_remitidas = new List<Modeloremitidas>();
+
+    //se
+    HttpResponseMessage request = await clienteHttp.GetAsync("Remitidas/Get/Eco/" + rol_usuario.ToString());
+
+    if (request.IsSuccessStatusCode)
+    {
+        String obj = await request.Content.ReadAsStringAsync();
+        obj_remitidas = JsonConvert.DeserializeObject<List<Modeloremitidas>>(obj);
+
+
+    }
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+<div class="box">
+
+    @*<div class="box-header with-border">
+            <h3 class="box-title">Remitidos economicos</h3>
+        </div>*@
+    <br />
+    <div class="box-body">
+        <table id="tbl_PanelProposicionesEco" class="display eachTbl" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Número convocatoria</th>
+                    <th>Número solicitud</th>
+                    <th>Fecha solicitud</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Modeloremitidas item in obj_remitidas)
+                {
+                <tr>
+                    @if (item.FolioConvocatoria == null || item.FolioConvocatoria == "")
+                    {
+                        <td> - </td>
+                    }
+                    else
+                    {
+                        <td> @item.FolioConvocatoria </td>
+                    }
+                    <td>@item.num_solicitud</td>
+                    <td>@item.fecha_solicitud.ToShortDateString()</td>
+                    <td>@Html.ActionLink("Ir", "EvaluacionEconomica", "Proposiciones", new { id = item.tbl_solicitud_id }, new { @class = "btn btn-info" })</td>
+
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

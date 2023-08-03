@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    ViewBag.Title = "Modalidad";
+    ViewBag.Description = "Modalidad";
+    var Value = "";
+}
+
+
+@section ViewStyles{
+    <link href="~/Resources/Modalidad/Modalidad.css" rel="stylesheet" />
+}
+@section ViewScripts{
+    <script src="~/Resources/Modalidad/Entidad.js"></script>
+    <script src="~/Resources/Modalidad/Jquery.Modalidad.js"></script>
+
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-default">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label>Modalidad</label>
+                        <select class="form-control" id="drop_modalidad">
+                        </select>
+                        <br />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Tipo de procedimiento:</label>
+                        <select class="form-control" id="drop_tipolicitacion">
+                        </select>
+                        <br />
+                    </div>
+                    <div class="col-lg-3">
+                        <br />
+                        <input type="checkbox" id="cbx_justifica" onclick="ShowFiles()" /> <label for="cbx_justifica">Solicitar justificación</label>
+                        <br />
+                        <input type="checkbox" id="cbx_documentacion" /> <label for="cbx_documentacion">Falta documentación</label>
+                        <br />
+                        <input type="checkbox" id="cbx_visitaS" @*class="editor-active"*@ /> <label for="cbx_visitaS">Requiere visita sitio</label>
+                        <br />
+                        <input type="checkbox" id="cbx_aclaraciones" @*class="editor-active"*@ /><label for="cbx_aclaraciones">Requiere junta de aclaraciones</label>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <label style="display:none;" class="file_HD">Adjuntar documento:</label>
+                        <input style="display:none;" type="file" class="form-control file_HD" id="file_adjuntardoc" accept=".pdf, .jpg, jpeg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center airbutton">
+                        <button class="btn btn-info AgenEven" onclick="openDialog();">Agendar eventos</button>
+                        <button class="btn btn-success" onclick="validar_eventos();">Guardar</button>
+                        <button class="btn btn-danger btnCancel" id="Cerra15">Cancelar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="Solicitud_hd" value="@Value" />
+
+<input type="hidden" id="_SOLICITUD" value="@ViewBag.Solicitud" />
+
+<h3>Información de la solicitud</h3>
+
+@await Html.PartialAsync("~/Views/Solicitud/ConsultaParcialSolicitud.cshtml")
+
+@*@Html.Action("ConsultaParcialSolicitud", "Solicitud", Value)*@
+
+
+

@@ -1,0 +1,46 @@
+﻿
+<div class="modal" id="ModalPartida" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <input class="Clean" type="hidden" id="id_dep_part" value="" />
+    <div class="modal-dialog" role="document" style="WIDTH: 60%;  padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel">Configuración de capítulos de gasto</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-3" style="text-align:center">
+                        <label>Ejercicio</label>
+                        <select name="Ejercicio" id="Ejercicio" class="form-control Ejercicio Clean"></select>
+                    </div>
+                    <div class="col-lg-5">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="tbl_partidas" class="display" style="WIDTH: 100%;" >
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Capitulos</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    @*<button type="button" class="btn btn-primary" id="GuardarPartidas">Guardar</button>*@
+                    <button type="button" id="Close_part" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

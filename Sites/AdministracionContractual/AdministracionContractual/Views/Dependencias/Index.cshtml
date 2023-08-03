@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor;
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Contrato\Index", "Lista");
+    ruta.Add("-", "Dependencias");
+
+}
+@section ViewScripts{
+    <script src="~/Resources/Dependencias/Jquery.Dependencias.js"></script>
+    <script src="~/Resources/Dependencias/Jquery.Usuarios.js"></script>
+    <script src="~/Resources/Dependencias/Jquery.Areas.js"></script>
+}
+
+<section class="content">
+
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Dependencias</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" onclick="muestraModalAgregarDependencia();" data-toggle="tooltip"
+                        title="Agregar dependencia">
+                    Agregar dependencia
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+                <label>Instancia</label>
+                <select name="instancia_dep_filtro" id="instancia_dep_filtro" class="form-control instancia_dep_filtro"></select>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+        <div class="temporal">
+            <br />
+            <br />
+        </div>
+        <div class="box-body" hidden>
+
+            <div class="row air" style="margin-top: 1%;">
+
+                <div class="col-lg-12">
+
+                    <table id="tbl_Dependencias" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Dependencia</th>
+                                <th>Áreas</th>
+                                <th>Capítulos de gasto</th>
+                                <th>Administrador de dependencias</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("ModalAgregarDependencia")
+@await Html.PartialAsync("ModalEditarDependencia")
+@await Html.PartialAsync("ModalAreas")
+@await Html.PartialAsync("ModalPartida")
+@await Html.PartialAsync("ModalListaAdministradores")
+@await Html.PartialAsync("ModalAgregarArea")

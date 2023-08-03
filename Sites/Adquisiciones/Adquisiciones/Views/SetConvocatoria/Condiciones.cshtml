@@ -1,0 +1,85 @@
+﻿<input type="hidden" id="json_hd" />
+
+<div class="tab-pane" id="3a">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <label>Condición:</label>
+            <input type="text" class="form-control clr" id="input_condicion" placeholder="Condición" />
+        </div>
+        <div class="col-lg-3">
+            <label>Tipo de Condición:</label>
+            <select class="form-control clr" id="cmb_condicion">
+                <option value="">Seleccione...</option>
+                <option value="Mensual">Mensual</option>
+                <option value="Bimestral">Bimestral</option>
+                <option value="Trimestral">Trimestral</option>
+                <option value="Anual">Anual</option>
+
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <br />
+            <button class="btn btn-success btn_Add_Condiciones"> Agregar </button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="tbl_condiciones" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Folio conv.</th>
+                        <th>Periodo</th>
+                        <th>Condición</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="id_conv_cond" value="" />
+<div id="Modal_Condicion_Upd" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 60%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar condición</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <label>Condición:</label>
+                        <input type="text" class="form-control clr" id="input_condicion_upd" placeholder="Condición" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Tipo de Condición:</label>
+                        <select class="form-control clr" id="cmb_condicion_upd">
+                            <option value="">Seleccione...</option>
+                            <option value="Mensual">Mensual</option>
+                            <option value="Bimestral">Bimestral</option>
+                            <option value="Trimestral">Trimestral</option>
+                            <option value="Anual">Anual</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_cond">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

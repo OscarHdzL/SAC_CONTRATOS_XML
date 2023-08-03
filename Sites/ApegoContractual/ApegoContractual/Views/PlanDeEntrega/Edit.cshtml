@@ -1,0 +1,348 @@
+﻿@model Guid
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    <!--breadcrumb Dictionary-->
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Registro plan de entrega");
+
+}
+
+
+@section ViewScripts{
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/PlanEntrega/jquery.planentrega.Edicion.js"></script>
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+
+
+
+}
+@section ViewStyles{
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/Styles/PlanEntrega/planentrega.css" rel="stylesheet" />
+
+    <style>
+        .panel-success > .panel-heading {
+            color: #852a00;
+            background-color: #fd7102;
+            border-color: #e97532;
+        }
+    </style>
+}
+
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+
+<input type="hidden" id="IdInstancia" value="@HttpContextAccessor.HttpContext.Session.GetString("IdInstancia")" />
+<input type="hidden" id="IVA" value="" />
+
+<input type="hidden" id="idContrato" value="@Model" />
+<input type="hidden" id="idPlan" value="@ViewBag.Plan" />
+
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+<section class="content">
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar plan de entrega</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="stepwizard">
+                <div class="stepwizard-row setup-panel">
+                    <div class="stepwizard-step col-xs-4">
+                        <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                        <p><small>Detalles</small></p>
+                    </div>
+                    @*<div class="stepwizard-step col-xs-3">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                            <p><small>Producto</small></p>
+                        </div>*@
+                    <div class="stepwizard-step col-xs-4">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" onclick="llenarVistaPrevia();">2</a>
+                        <p><small>Ubicaciones</small></p>
+                    </div>
+                    <div class="stepwizard-step col-xs-4">
+                        <a href="#step-4" type="button" class="btn btn-default btn-circle" onclick="llenarVistaPrevia();">3</a>
+                        <p><small>Vista previa</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="panel setup-content" id="step-1">
+                    <div class="panel-heading HeaderContent">
+                        <h3 class="panel-title">Detalle</h3>
+                    </div>
+                    <div class="panel-body">
+
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Identificador</label>
+                                    <input maxlength="100" id="txtIdentificador" type="text" required="required" class="form-control" placeholder="Identificador" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Periodo</label>
+                                    <input maxlength="100" id="txtPeriodo" type="text" required="required" class="form-control" placeholder="Período de plan de entrega" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha límite de ejecución</label>
+                                    <input maxlength="100" id="txtEjecucion" type="text" required="required" class="form-control fechas" placeholder="Fecha límite de ejecución" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Descripción</label>
+                                    <textarea maxlength="250" id="txtDescripcion" type="text" required="required" class="form-control" placeholder="Descripción de plan"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Responsable de PE</label>
+                                    <br />
+                                    <select id="DropResponsable" class="form-control DropResponsable clean"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Tipo de plan de entrega</label>
+                                    <select id="DropTipoPlan" class="form-control DropResponsable clean">
+                                        <option value="0">Seleccione...</option>
+                                        <option value="1">Fijo</option>
+                                        <option value="2">Variable</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <button class="btn btn-primary nextBtn pull-right" type="button" onclick="llenarVistaPrevia();">Siguiente</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="panel setup-content" id="step-3">
+                    <div class="panel-heading HeaderContent">
+                        <h3 class="panel-title">Ubicaciones</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" onclick="ModalAgregarUbicacion();" class="btn btn-box-tool" data-toggle="tooltip"
+                                            title="Agregar ubicación">
+                                        Agregar ubicación
+                                        <i class="fa fa-fw fa-plus-circle"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="box-body">
+
+                                <div class="row air" style="margin-top: 1%;">
+
+
+                                    <div class="col-lg-12">
+
+                                        <table id="tbl_ubicaciones" class="display" style="width:100%">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>ID</th>
+                                                    <th>ID2</th>
+                                                    <th>Ubicación</th>
+                                                    <th>Responsable</th>
+                                                    <th>Actividades</th>
+                                                    <th>Productos</th>
+                                                    <th>Asignar producto</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+
+                                    </div>
+
+
+
+                                </div>
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary nextBtn pull-right" type="button" onclick="llenarVistaPrevia();">Siguiente</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="panel setup-content" id="step-4">
+                <div class="panel-heading HeaderContent">
+                    <h3 class="panel-title">Plan de entrega</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label">Identificador</label>
+                                <input maxlength="100" id="txtIdentificador_vw" disabled type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label">Período</label>
+                                <input maxlength="100" id="txtPeriodo_vw" disabled type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label">Fecha límite de ejecución</label>
+                                <input maxlength="100" id="txtEjecucion_vw" disabled type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label">Descripción</label>
+                                <textarea maxlength="250" id="txtDescripcion_vw" disabled type="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label">Responsable</label>
+                                <br />
+                                <input maxlength="100" id="DropResponsable_vw" disabled type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de plan de entrega</label>
+                                <input maxlength="100" id="DropTipoPlan_vw" disabled type="text" class="form-control" />
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+
+                    <div class="box box-default">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Ubicaciones</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="box box-body">
+
+                            <div class="row">
+                                <div class="row air" style="margin-top: 1%;">
+                                    <div class="col-lg-12">
+                                        <div id="divTabla">
+                                            <table id="tbl_ubicaciones_vw" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ubicación</th>
+                                                        <th>Ejecutor</th>
+                                                        <th>Actividades</th>
+                                                        <th>Productos</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <br />
+
+
+                    @*<div class="row">
+                            <div class="col-lg-12">
+                                <button class="btn btn-info pull-right" type="submit" id="btnEnviarPlanEntrega">Enviar plan al interlocutor</button>
+                            </div>
+                        </div>*@
+
+                    <div class="row">
+                        <div align="center">
+                            <button class="btn btn-success pull-center" type="submit" id="btnGuardarPlanEntrega">Guardar plan</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @await Html.PartialAsync("AgregarProducto")
+    @await Html.PartialAsync("AgregarUbicacion")
+</section>

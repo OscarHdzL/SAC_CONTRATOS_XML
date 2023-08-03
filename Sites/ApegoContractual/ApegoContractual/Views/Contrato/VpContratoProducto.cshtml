@@ -1,0 +1,79 @@
+﻿
+
+
+<div id="ContratoProducto" class="modal" role="dialog">
+    <div class="modal-dialog" style=" width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close cerrarMCP" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title titulo">Agregar un nuevo registro</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Seleccione el producto/servicio</label>
+                        <br />
+                        <select name="ProductoSer" id="ProductoSer" class="form-control ProductoSer"></select>
+                    </div>
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Cantidad mínima</label>
+                        <br />
+                        <input type="text" id="CantMin" class="form-control CleanCP" placeholder="Ingrese la cantidad mínima" />
+                    </div>
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Cantidad máxima</label>
+                        <br />
+                        <input type="text" id="CantMax" class="form-control CleanCP" placeholder="Ingrese la cantidad máxima" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Precio unitario</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanCP" id="Unitario">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Monto mínimo</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" class="form-control CleanCP" id="MontoMin" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Monto máximo</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="number" class="form-control CleanCP" id="MontoMax" disabled>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Descripción</label>
+                        <textarea id="txtDescripcion" rows="2" class="form-control CleanCP" style=" resize: none" placeholder="Ingrese una descripción"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="GuardarCP">Guardar</button>
+                    <button type="button" class="btn btn-danger cerrarMCP" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@{
+
+    Layout = null;
+}
+<div class="box box-default div_firmantes" style="display:none">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <table id="firmantes_tbl" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row text-right">
+            <button onclick="validate_firmantes__()" class="btn btn-success firmantesupd_btn" style="margin-right:10px;margin-top: 30px;"><i class="fa fa-fw fa-check-circle-o"></i>Validar</button>
+        </div>
+
+    </div>
+</div>
+
+<input type="hidden" id="firmates_censo" value="0" />
+

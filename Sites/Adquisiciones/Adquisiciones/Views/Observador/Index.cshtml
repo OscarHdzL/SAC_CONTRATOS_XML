@@ -1,0 +1,35 @@
+﻿@model Guid
+
+
+
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>Nombre completo del observador:</label>
+    </div>
+
+    <div class="col-lg-3">
+        <input type="text" class="form-control textobservadores" />
+    </div>
+    <div class="col-lg-1">
+        <button class="btn btn-success btn-save-observador">Agregar</button>
+    </div>
+</div>
+
+<div class="row air" style="margin-top: 4%;">
+    <div class="col-lg-12">
+
+        <table id="tbl_observadores" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Folio conv.</th>
+                    <th>Observador</th>
+                    @*<th>Tipo</th>*@
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+

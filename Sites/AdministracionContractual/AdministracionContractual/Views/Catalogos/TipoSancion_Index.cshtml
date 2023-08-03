@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+@section ViewScripts{
+    <script src="~/Resources/Catalogos/Tipo_Sanciones/Jquery.Tipo_Sancion.js"></script>
+    <script src="~/Resources/Catalogos/Tipo_Sanciones/Jquery.Tipo_Sancion_Modificar.js"></script>
+}
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Tipo de sancion</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" id="Add_TipoSancion" data-toggle="tooltip"
+                    title="Agregar nuevo tipo de sancion">
+                Agregar un nuevo tipo de sancion
+                <i class="fa fa-fw fa-plus-circle"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <table id="tbl_tipo_sancion" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Tipo de sancion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<div id="Modal_Tipo_Sancion" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 60%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Nuevo tipo de sancion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Tipo de sancion</label>
+                        <textarea class="form-control clear_txt" id="txt_tipo_sancion_add" style="resize:none" rows="2" placeholder="Tipo de sancion"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_guardar_tipo_sancion">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="id_tipo_sancion" value="" />
+<div id="Modal_Tipo_Sancion_Upd" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 60%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar tipo de sancion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Tipo de sancion</label>
+                        <textarea class="form-control clear_txt_upd" id="txt_tipo_sancion_upd" style="resize:none" rows="2" placeholder="Tipo de sancion"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_tipo_sancion">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

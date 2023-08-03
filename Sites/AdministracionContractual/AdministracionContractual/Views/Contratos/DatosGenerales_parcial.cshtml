@@ -1,0 +1,102 @@
+﻿
+@{
+
+    Layout = null;
+}
+
+
+<div class="box box-default div_datosgenerales" style="display:none">
+    <div class="box-header with-border">
+       
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <label>Tipo Contratacion</label>
+                <select class="form-control" requerido_val="val"  id="cmb_tipo_contratacion_contratos">
+                    <option value="">Seleccione...</option>
+                    <option value="8304fa71-5ce5-11ea-8324-00155d1b3502">Producto</option>
+                    <option value="7d3f05c9-5ce5-11ea-8324-00155d1b3502">Servicio</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <label>Proyecto</label>
+                <select class="form-control" requerido_val="val"   id="cmb_proyecto_contratos"></select>
+            </div>
+            <div class="col-lg-3" style="visibility:hidden">
+                <label>Fecha Inicio</label>
+                <input id="txt_fecha_inicio_contratos"  requerido_val="val" type="text" class="form-control" />
+            </div>
+            <div class="col-lg-3" style="visibility:hidden">
+                <label>Fecha Final</label>
+                <input id="txt_fecha_final_contratos"  requerido_val="val" type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <label>Número</label>
+                <input id="txt_numero_contratos" requerido_val="val" type="text" class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Nombre contrato</label>
+                <input id="txt_nombre_contrato_contratos" requerido_val="val" type="text" class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Objeto</label>
+                <input id="txt_objeto_contratos" requerido_val="val" type="text" class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Fecha registro</label>
+                
+
+
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input id="txt_fecha_registro_contratos" requerido_val="val" type="text" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <label>Tipo contrato</label>
+                <select class="form-control" requerido_val="val" id="cmb_tipo_contrato_contratos"></select>
+            </div>
+            <div class="col-lg-3">
+                <label>Monto Mínimo sin IVA</label>
+                
+                <input id="txt_minsiniva_contratos" onkeyup="formatNumberInput(this)" onchange="formatNumberInput(this)" requerido_val="val" class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Monto Máximo sin IVA</label>
+                <input id="txt_maxsiniva_contratos" onkeyup="formatNumberInput(this)" onchange="formatNumberInput(this)" requerido_val="val"  class="form-control" />
+            </div>
+            <div class="col-lg-3">
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row text-right">
+            <button class="btn btn-success valDatGrales" style="margin-right:10px;"><i class="fa fa-fw fa-check-circle-o"></i>SIGUIENTE</button>
+        </div>
+    </div>
+</div>
+

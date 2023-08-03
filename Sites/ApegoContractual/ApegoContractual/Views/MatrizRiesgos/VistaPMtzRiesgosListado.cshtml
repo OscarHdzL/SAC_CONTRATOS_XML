@@ -1,0 +1,51 @@
+﻿@model Guid
+
+<div id="Riesgosmdl" class="modal" role="dialog">
+	<div class="modal-dialog" style="width:80% !important;  padding-top: 5%; background-color: transparent;">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Asignar riesgo</h4>
+			</div>
+
+
+			<div class="modal-body" id="Cont">
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" id="AddRiesgo" data-toggle="tooltip">
+						Agregar un nuevo riesgo
+						<i class="fa fa-fw fa-plus-circle"></i>
+					</button>
+				</div>
+				<div class="box-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<table id="MatrizRiesgos" class="display nowrap " cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>No.</th>
+										@*<th>Obligación</th>*@
+										<th>Riesgo</th>
+										<th>Categorización</th>
+										<th>Probabilidad</th>
+										<th>Impacto</th>
+										<th>Prioridad</th>
+										<th>Respuesta</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div align="center">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

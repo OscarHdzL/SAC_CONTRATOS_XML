@@ -1,0 +1,388 @@
+﻿
+
+
+<div class='modal fade' id='RegistrarEstudio' role='dialog' tabindex="-1">
+    <div class='modal-dialog' style="WIDTH: 40%; padding-top: 5%; background-color: transparent;">
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Estudio de mercado</h4>
+            </div>
+            <div class='modal-body'>
+                <input type="hidden" id="id_solicitud_REM" value="" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label>Folio de solicitud:</label>
+                                <input type="text" id="folio_sol_REM" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label>Descripción de bien o servicio:</label>
+                                <textarea type="text" id="descr_REM" class="form-control" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label>Adjuntar documento:</label>
+                                <input type="file" id="file_REM" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Tipo de documento:</label>
+                                <select class="form-control" id="tipo_docto_est_merc_REM"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>
+                <button type='button' class='btn btn-success' id="R_E_G">Registrar</button>
+                <button type='button' class='btn btn-success' id="S_E_G">Solicitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class='modal fade' id='SolicitarCotizacion' role='dialog' tabindex="-1">
+    <div class='modal-dialog' style="WIDTH: 50%; padding-top: 1%; background-color: transparent;">
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Solicitar Cotizaciones</h4>
+            </div>
+            <div class='modal-body'>
+                <input type="hidden" id="id_solicitud_docts_SCZ" value="" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row margin-bottom">
+                            <div class="col-lg-4">
+                                <label>Folio de solicitud:</label>
+                                <input type="text" id="folio_sol_SCZ" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label>Descripción de bien o servicio:</label>
+                                <textarea type="text" id="descr_SCZ" class="form-control" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">
+                                <label>Cargar documento faltantes:</label>
+                                <div class="form-inline margin-bottom">
+                                    <div class="form-group">
+                                        <input class="form-control" type="file" id="carga_docts_SCZ" />
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="tipo_dcto_SCZ">
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-success" id="add_SCZ">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">
+                                <label>Seccion de interlocutores a invitar:</label>
+                                <select class="form-control js-states" name="proveedores[]" multiple="multiple" id="prov_a_inv_SCZ" data-placeholder="Seleccione proveedores" style="width: 100%">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">
+                                <label>Seccion de documentos adjuntos:</label>
+                                <select class="form-control" name="proveedores[]" multiple="multiple" id="doc_adj_a_inv_SCZ" data-placeholder="Seleccione docuemntos para enviar" style="width: 100%">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col-lg-9"></div>
+                            <div class="col-lg-3">
+                                <label>Tiempo de adjuntos:</label>
+                                <select class="form-control" id="time_adjuntos">
+                                    <option value="360">6hrs</option>
+                                    <option value="720">12hrs</option>
+                                    <option value="1440">24hrs</option>
+                                    <option value="2880">48hrs</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>
+                <button type='button' class='btn btn-success' id="S_C_G">Solicitar Cotización</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class='modal fade' id='CargarCotizacion' role='dialog' tabindex="-1">
+    <div class='modal-dialog' style="WIDTH: 50%; padding-top: 0%; background-color: transparent;">
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Cargar Cotizaciones</h4>
+            </div>
+            <div class='modal-body'>
+                <div class="box-body">
+                    <input type="hidden" id="id_solicitud_docts_CCZ" value="" />                    
+                    <div class="form-group">
+                        <div class="row margin-bottom">
+                            <div class="col-lg-4">
+                                <label>Folio de solicitud:</label>
+                                <input type="text" id="folio_sol_CCZ" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label>Descripción de bien o servicio:</label>
+                                <textarea type="text" id="descr_CCZ" class="form-control" disabled></textarea>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">
+                                <label>Cotizaciones:</label>
+                                <select class="form-control" id="proveedor_CCZ">
+                                    <option value="" disabled selected>Selecciona interlocutor...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">                                
+                                <div class="form-inline margin-bottom">
+                                    <div class="form-group">
+                                        <input class="form-control" type="file" id="file_CCZ" />
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="tipo_dcto_CCZ">
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-success" id="Add_docto_CCZ">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">
+                                <table class="table table-sm text-center" id="tbl_docum_adj_CCZ" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Interlocutor</th>
+                                            <th scope="col">Nombre documento</th>
+                                            <th scope="col">Tipo documento</th>
+                                            <th scope="col">Acción</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row margin-bottom">
+                            <div class="col-lg-7"></div>
+                            <div class="col-lg-5 text-center">
+                                <input type="checkbox" class="form-check-input" id="chkbx_CCZ">
+                                <label class="form-check-label" for="chkbx_CCZ">Cotizaciones completas</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>
+                <button type='button' class='btn btn-success' id="C_C_G">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='modal fade' id='RegisSolicAdqu' role='dialog' tabindex="-1">
+    <div class='modal-dialog' style="WIDTH: 55%; padding-top: 1%; background-color: transparent;">
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Registrar solicitud de adquisición de bienes y servicios</h4>
+            </div>
+            <div class='modal-body'>
+                <input type="hidden" id="id_solicitud_docts" value="" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row margin-bottom">
+                            <div class="col-lg-6">
+                                <label>Folio de solicitud de requisición:</label>
+                                <input type="text" id="folio_sol_RSA" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Folio solicitud de adquisición:</label>
+                                <input type="text" id="folio_sol_adq_RSA" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row margin-bottom" id="RegisSolicAdqu_div_solicitante">
+                            <div class="col-lg-9">
+                                <label>Cargar documento adjuntos</label>
+                                <div class="form-inline margin-bottom">
+                                    <div class="form-group">
+                                        <input class="form-control" type="file" id="carga_docts_RSA" />
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="tipo_dcto_RSA">
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-success" id="add_RSA">Agregar</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" id="registrar_sol_adq_IP">
+                                <label>Turnar solicitud:</label>
+                                <select class="form-control" id="turnar_solic_RSA"></select>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col-lg-12">
+                                <table class="table table-sm text-center" id="tbl_docum_adj_RSA" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre documento</th>
+                                            <th scope="col">Tipo documento</th>
+                                            <th scope="col">Acción</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>
+                <button type='button' class='btn btn-success' id="A_R_S_A" >Autorizar solicitud</button>
+                <button type='button' class='btn btn-success' id="G_R_S_A" >Turnar</button>
+                <button type='button' class='btn btn-success' id="R_S_A" >Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='modal fade' id='dictamen_modal' role='dialog' tabindex="-1">
+    <div class='modal-dialog' style="WIDTH: 40%; padding-top: 5%; background-color: transparent;">
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Dictamen</h4>
+            </div>
+            <div class='modal-body'>
+                <input type="hidden" id="id_solicitud_RDIC" value="" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label>Folio de solicitud:</label>
+                                <input type="text" id="folio_sol_RDIC" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label>Descripción de bien o servicio:</label>
+                                <textarea type="text" id="descr_RDIC" class="form-control" disabled></textarea>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row margin-bottom" id="solic_dict_RDIC" hidden>
+                            <div class="col-lg-6">
+                                <label>Tipo de dictamen:</label>
+                                <select class="form-control" id="tipodict_RDIC"></select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Descripción del tipo de dictamen:</label>
+                                <textarea type="text" id="desc_tipo_dict_RDIC" class="form-control" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom" id="reg_dict_RDIC" hidden>
+                            <div class="row margin-bottom">
+                                <div class="col-lg-3">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Folio de dictamen:</label>
+                                    <input type="text" id="folio_dictamen_RDIC" class="form-control" maxlength="50"/>
+                                </div>
+                                <div class="col-lg-3">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Dictamen:</label>
+                                    <input type="file" id="file_dictamen_RDIC" class="form-control" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Tipo de documento:</label>
+                                    <select class="form-control" id="tipo_docto_dictamen"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>
+                <button class="btn btn-success" id="guardar_solic_RDIC">Solicitar</button>
+                <button class="btn btn-success" id="guardar_regi_RDIC">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class='modal fade' id='TurnarA_SDRM' role='dialog' tabindex="-1">
+    <div class='modal-dialog' style="WIDTH: 40%; padding-top: 5%; background-color: transparent;">
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Subir oficio para turnar suficiencia</h4>
+            </div>
+            <div class='modal-body'>
+                <input type="hidden" id="id_solicitud_TSDRM" value="" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label>Folio de solicitud:</label>
+                                <input type="text" id="folio_sol_TSDRM" class="form-control" disabled />
+                            </div>
+                            <div class="col-lg-8">
+                                <label>Descripción de bien o servicio:</label>
+                                <textarea type="text" id="descr_TSDRM" class="form-control" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label>Adjuntar documento:</label>
+                                <input type="file" id="file_TSDRM" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Tipo de documento:</label>
+                                <select class="form-control" id="tipo_docto_est_merc_TSDRM"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>
+                <button type='button' class='btn btn-success' id="S_E_G_TSDRM">Turnar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+@section ViewScripts{
+    <script src="~/Resources/Asignacion_Org/Jquery.AsignacionOrganizacional.js"></script>
+}
+
+<input type="hidden" id="IdItem" value="" />
+<input type="hidden" id="IdItem_d" value="" />
+<input type="hidden" id="ItemTexto" value="" />
+<input type="hidden" id="TipoItem" value="" />
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-5">
+            <label>Ejercicio</label>
+            <select class="form-control" id="opt_Ejercicio"></select>
+        </div>
+        <div class="col-lg-7 div_titulo">
+            <div class="div_titulo HeaderContent" style="background:#3c8dbc; padding:2px 12px 2px 12px; border-radius:4px;">
+                <h4 class="box-title titulo" style="font-family: 'Source Sans Pro',sans-serif; color:white"></h4>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="box box-solid box-primary" id="contenedor_box">
+                <div class="box-header with-border HeaderContent">
+                    <h3 class="box-title">Estructura organizacional</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body" style="overflow: auto; direction: ltr;" id="body_contenedor">
+                    <div id="_arbol">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border HeaderContent">
+                    <h3 class="box-title">Capitulos de gastos</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <input type="hidden" id="id_area" value="" />
+                    <input type="hidden" id="id_subarea" value="" />
+                    <input type="hidden" id="id_area_sub" value="" />
+
+                    <div id="Desglose_partidas">
+                    </div>
+                    <br />
+                    <div class="box box-default" id="_div_informacion_x_dep">
+                        <div class="box-header with-border HeaderContent">
+                            <h3 class="box-title">Información general.</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="_info">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div align="right" class="col-lg-12" id="foter"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+@await Html.PartialAsync("lista_informativa")

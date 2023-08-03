@@ -1,0 +1,61 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@{
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    var dep = @HttpContextAccessor.HttpContext.Session.GetString("Dep_Area_Navegacion");
+    if ((dep != null) && (dep != ""))
+    {
+
+        ruta.Add(@"\Home\Index", "Inicio");
+        ruta.Add(@"\Dependencias\Index", "Dependencias");
+        ruta.Add("-", "Áreas");
+
+    }
+
+}
+@if ((dep != null) && (dep != ""))
+{
+        @await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+}
+@section ViewScripts{
+    <script src="~/Resources/Areas/Jquery.Areas.js"></script>
+}
+<input type="hidden" id="id_dependencia_area_nav" value="@dep" />
+
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Áreas</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="Add_area" data-toggle="tooltip"
+                        title="Agregar una nueva área">
+                    Agregar una nueva área
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-lg-12">
+                <table id="tbl_Areas" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Dependencia</th>
+                            <th>Área</th>
+                            <th>Sub-Áreas</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("ModalAgregarArea")

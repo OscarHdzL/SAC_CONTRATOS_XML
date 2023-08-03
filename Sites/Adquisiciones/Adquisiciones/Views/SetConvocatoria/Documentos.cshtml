@@ -1,0 +1,69 @@
+﻿<div class="tab-pane" id="7">
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label>Tipo de documento:</label>
+            <select class="form-control clr" id="cmb_docval"> </select>
+
+        </div>
+        <div class="col-lg-8">
+            <label>Proposito del documento:</label>
+            <input type="text" class="form-control clr" id="input_docval" placeholder="Proposito" />
+        </div>
+    </div>
+    <div class="row" style="padding:5px;">
+        <div align="center">
+            <button class="btn btn-success btn_Add_DocVal"> Agregar </button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="tbl_docval" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Folio conv.</th>
+                        <th>Tipo de doc.</th>
+                        <th>Justificación.</th>
+                        <th>Acciones.</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="id_conv_doc" value="" />
+<div id="Modal_Doc_Upd" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar documento solicitado.</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Tipo de documento:</label>
+                        <select class="form-control clr" id="cmb_docval_upd"> </select>
+
+                    </div>
+                    <div class="col-lg-8">
+                        <label>Proposito del documento:</label>
+                        <input type="text" class="form-control clr" id="input_docval_upd" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_doc">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,70 @@
+﻿
+<input type="hidden" id="idAcuerdo" value="" calss="Clean"/>
+
+<div class="modal" id="Modal_EditarAcuerdo" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel2">Editar Acuerdo</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Tipo de acuerdo</label>
+                        <select name="TipoA_update" id="TipoA_update" class="form-control TipoA_update">
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Responsable</label>
+                        <select name="ResponsableA_update" id="ResponsableA_update" class="form-control ResponsableA_update">
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Acuerdo</label>
+                        <textarea placeholder="Ingrese acuerdo" id="txt_Acuerdo_update" class="form-control"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Fecha registro</label>
+                        <input type="text" id="txt_FechaRegistro_update" value="" class="form-control fechas" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha compromiso</label>
+                        <input type="text" id="txt_FechaCompromiso_update" value="" class="form-control fechas" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha cierre</label>
+                        <input type="text" id="txt_FechaCierre_update" value="" class="form-control fechas" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Estatus</label>
+                        <select id="cmbEstatusAcuerdo_update" class="form-control " disabled>
+                            <option value="">Seleccione...</option>
+                            <option value="Abierto">Abierto</option>
+                            <option value="Cerrado">Cerrado</option>
+                            <option value="En proceso">En proceso</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Comentario</label>
+                        <textarea placeholder="Ingrese comentario" id="txt_ComentarioAcuerdo_update" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  onclick="UpdateAcuerdo();" id="EditarAcuerdo">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

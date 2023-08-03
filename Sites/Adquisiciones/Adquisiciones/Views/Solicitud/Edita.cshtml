@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Alta Solicitud";
+    ViewBag.Description = "Complementar Docuemntación";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+@section ViewScripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="~/Resources/ComentariosSC/jquery.Comentarios.js"></script>
+    <script src="~/Resources/Solicitud/Entidad.js"></script>
+    <script src="~/Resources/Solicitud/jquery.Solicitud.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+    <script src="~/Resources/Responsable_Solicitud/Entidad.js"></script>
+    <script src="~/Resources/Responsable_Solicitud/jquery.Responsable_Solicitud.js"></script>
+
+
+}
+@section ViewStyles{
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    <link href="~/Resources/Solicitud/Salicitud.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+
+    </h1>
+</section>
+<br />
+
+<input type="hidden" id="usuario_hd" value="" />
+
+<input type="hidden" id="idsol" />
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-default">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Número de solicitud:</label>
+                        <input type="text" id="txt_numsol" class="form-control" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Tipo de solicitud:</label>
+                        <select id="drop_TipoSolicitud" class="form-control">
+                            <option value="">Seleccione...</option>
+                            @*<option value="servicio">Servicio</option>
+                            <option value="obra">Obra</option>*@
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Tipo contrato:</label>
+                        <select id="drop_TipoContrato" class="form-control">
+                            <option value="">Seleccione...</option>
+                            @*<option value="anual">Anual</option>
+                            <option value="plurianual">Plurianual</option>*@
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha solicitud:</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' id="txt_FechaSolicitud" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <label>Elaboró:</label>
+                        <input type="text" id="txt_elaboro" class="form-control" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Dependencia:</label>
+                        <select name="drop_dependencia" id="drop_dependencia" class="form-control drop_dependencia">
+                            <option value="">Seleccione...</option>
+                        </select>
+                        @*@Html.DropDownList("drop_dependencia", new SelectList(ViewBag.DropDownDependencias, "Value", "Text"), "Seleccione...", new { @class = "form-control" })*@
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Área:</label>
+                        <select name="drop_area" id="drop_area" class="form-control drop_area">
+                            <option value="">Seleccione...</option>
+                        </select>
+                        @*@Html.DropDownList("drop_area", Enumerable.Empty<SelectListItem>(), "Seleccione...", new { @class = "form-control" })*@
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Proyecto:</label>
+                        <select name="drop_Proyecto" id="drop_Proyecto" class="form-control drop_Proyecto">
+                            <option value="">Seleccione...</option>
+                        </select>
+                        @*@Html.DropDownList("drop_Proyecto", Enumerable.Empty<SelectListItem>(), "Seleccione...", new { @class = "form-control" })*@
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <label>Descripción del bien, arrendamiento o servicio a contratar: </label>
+                        <textarea placeholder="Descripción" id="txt_descripcion" class="form-control"></textarea>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Monto solicitud: </label>
+                        <input type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" disabled id="txt_montosolicitud" />
+
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Monto autorizado: </label>
+                        <input type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" disabled id="txt_montoautorizado" />
+
+                    </div>
+                
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <label>Comentarios: </label>
+                        <textarea disabled id="txt_comentarios" class="form-control"></textarea>
+                    </div>
+                 
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <label>Documento solicitante:</label>
+                        <input type="file" class="form-control" id="FileSolicitante" />
+                    </div>
+                    <div class="col-lg-6  text-center">
+                        <label>Documento autorización:</label>
+                        <input type="file" disabled class="form-control" id="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4 Container-buttons">
+                        <button type="button" class="btn btn-success btnDoOk">Guardar</button>
+                        <button type="button" class="btn btn-danger btnGoHome">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("ModalAsignacionResponsables_Sol.cshtml")
+@await Html.PartialAsync("ModalAsignacionPresupuesto.cshtml")
+
+
+

@@ -1,0 +1,115 @@
+﻿@model Guid
+
+<input type="hidden" id="idContratoMensaje" value="@Model" />
+<input type="hidden" id="idMensaje" value"" />
+
+<div class="box ">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Comunicación organizacional</h3>
+        <div class="box-tools pull-right">
+            <button type="button" onclick="ModalAgregarMensaje();" class="btn btn-box-tool" data-toggle="tooltip"
+                    title="Agregar mensaje de comunicación">
+                Agregar mensaje de comunicación
+                <i class="fa fa-fw fa-plus-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+
+    </div>
+    <div class="box-body">
+        <div class="row air" style="margin-top: 1%;">
+
+            <div class="col-lg-12">
+
+                <table id="tbl_MensajesComunicacion" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Tipo de información</th>
+                            <th>Responsable de fuente de información</th>
+                            <th>Tipo de audiencia</th>
+                            <th>Canal</th>
+                            <th>Destinatario</th>
+                            <th>Mensaje</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal Agregar/Editar*@
+
+<div class="modal" id="ModalMensajeComunicacion" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModalMensaje();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalMensajeC">Agregar mensaje de comunicación</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Tipo información</label>
+                        <br />
+                        <select name="DropTipoInformacion" id="DropTipoInformacion" class="form-control DropTipoInformacion clean">
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Responsable de fuente de información</label>
+                        <br />
+                        <select name="DropRespFuenteInfo" id="DropRespFuenteInfo" class="form-control DropRespFuenteInfo clean">
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <label>Tipo audiencia</label>
+                        <br />
+                        <select name="DropTipoAudiencia" id="DropTipoAudiencia" class="form-control DropTipoAudiencia clean">
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Canal</label>
+                        <br />
+                        <select name="DropCanal" id="DropCanal" class="form-control DropCanal clean">
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Destinatario</label>
+                        <br />
+                        <select name="DropDestinatario" id="DropDestinatario" class="form-control TxtDestinatario clean">
+                        </select>
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Mensaje</label>
+                        <br />
+                        <textarea type="text" id="TxtMensaje" placeholder="Agregue un mensaje" class="form-control" maxlength="300"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="center">
+                    <button class="btn btn-primary" id="AddMensaje">Guardar</button>
+                    <button class="btn btn-danger" onclick="CerrarModalMensaje();">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

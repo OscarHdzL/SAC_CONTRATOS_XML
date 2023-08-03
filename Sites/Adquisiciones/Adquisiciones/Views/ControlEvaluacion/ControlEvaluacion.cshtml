@@ -1,0 +1,99 @@
+﻿@model Guid
+@{
+
+    ViewBag.Title = "Control de evaluación";
+    ViewBag.Description = "Control de evaluación";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+}
+
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/ControlEvaluacion/Jquery.ControlEvaluacion.js"></script>
+
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+
+
+
+<div class="box box-default">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Control y evaluación de la adquisición</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Número solicitud:</label>
+                <input type="text" disabled class="form-control txt_SolicitudControlEvaluacion" value="" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Listado de evaluaciones de propuestas técnicas y económicas por interlocutor</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row air">
+            <div class="col-lg-12">
+
+                <table id="tbl_EvaluacionPropuestas" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>RFC</th>
+                            <th>Análisis técnica/económico</th>
+                            <th>Motivo incumplimiento</th>
+
+                            <th>Ganador</th>
+
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                </table>
+
+            </div>
+        </div>
+
+        <br />
+        @*<div class="row">
+                <div class="col-lg-8">
+                    <label>Comentarios: </label>
+                    <textarea id="txt_ComentarioEvaluación" class="form-control"></textarea>
+                </div>
+
+            </div>*@
+        <br />
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                @*<input type="button" class="btn btn-success" value="Registrar" />*@
+                <input type="button" class="btn btn-danger" onclick="GoBandeja();"  value="Cancelar" />
+                <input type="button" disabled class="btn btn-info" id="btn_AvanzaFase" value="Avanzar fase" />
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+

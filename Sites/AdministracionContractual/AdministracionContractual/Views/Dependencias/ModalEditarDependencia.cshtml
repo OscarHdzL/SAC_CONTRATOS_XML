@@ -1,0 +1,44 @@
+﻿
+    <div class="modal" id="ModalEditarDependencia" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input type="hidden" id="id_dep_edit" value="" />
+        <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="exampleModalLabel">Editar dependencia</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Dependencia</label>
+                            <input type="text" id="Dependencia_ed" class="form-control Dependencia_ed Clean" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Instancia</label>
+                            <select name="instancia_dep_ed" id="instancia_dep_ed" class="form-control instancia_dep_ed Clean"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Estado</label>
+                            <select name="Estado_ed" id="Estado_ed" class="form-control Estado_ed Clean"></select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Ciudad</label>
+                            <select name="Ciudad_ed" id="Ciudad_ed" class="form-control Ciudad_ed Clean"></select>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <div align="center">
+                        <button type="button" class="btn btn-primary" id="EditarDependencia">Editar</button>
+                        <button type="button" id="Close" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

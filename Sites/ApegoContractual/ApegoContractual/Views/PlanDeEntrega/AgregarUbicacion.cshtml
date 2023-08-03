@@ -1,0 +1,64 @@
+﻿@*Sin servicios*@
+
+<input type="hidden" id="HD1_idUbicacion" value="" />
+<input type="hidden" id="HD1_idEjecutor" value="" />
+<input type="hidden" id="HD1_idElemento" value="" />
+<input type="hidden" id="ModoEditar" value="0" />
+
+<div class="modal" id="ModalAgregarUbicacion" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 60%;padding-top: 5%; background-color: transparent;" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModalUbicacion();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalUbicacion"></h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+
+                            @*<div class="ui-widget">*@
+                            <label class="control-label">Ubicación</label>
+                            <br />
+                            <select id="DropUbicaciones" class="form-control DropUbicaciones clean"></select>
+
+                            @*</div>*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <label class="control-label">Ejecutor</label>
+                        <br />
+                        <select id="DropEjecutores" class="form-control DropResponsables clean"></select>
+
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="control-label">Detalle actividades</label>
+                            <textarea maxlength="250" id="txtActividades" type="text" required="required" class="form-control" placeholder="Agregar detalle de actividades"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="right">
+                    <button class="btn btn-primary" id="AgregarUbicacion">Guardar</button>
+                    <button class="btn btn-danger" onclick="CerrarModalUbicacion();">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

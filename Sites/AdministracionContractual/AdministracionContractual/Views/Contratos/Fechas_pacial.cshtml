@@ -1,0 +1,51 @@
+﻿
+@{
+
+    Layout = null;
+}
+
+
+<div class="box box-default div_fechas" style="display:none">
+    <div class="box-header with-border">
+ 
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3 style="margin-bottom: 40px;" id="lbl_proyecto"></h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Fecha Inicio Proyecto</label>
+                <input id="txt_fecha_inicio_proyecto_contratos" requerido="val" type="text" disabled class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Fecha Inicio Contrato</label>
+                <input id="txt_fecha_inicio_contrato_contratos" requerido="val" type="text" class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Fecha Fin Proyecto</label>
+                <input id="txt_fecha_fin_proyecto_contratos" requerido="val" type="text" disabled class="form-control" />
+            </div>
+            <div class="col-lg-3">
+                <label>Fecha Fin Contrato</label>
+                <input id="txt_fecha_fin_contrato_contratos" requerido="val" type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row text-right">
+            <button class="btn btn-success valFechar_" style="margin-right:10px;margin-top: 30px;"><i class="fa fa-fw fa-check-circle-o"></i>Validar</button>
+        </div>
+
+
+
+    </div>
+</div>

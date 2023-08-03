@@ -1,0 +1,51 @@
+﻿
+<div class="modal" id="ModalAreas" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel">Sub_Áreas</h3>
+            </div>
+            <div class="modal-body">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Áreas</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" id="Add_area" data-toggle="tooltip"
+                                title="Agregar una nueva área">
+                            Agregar una nueva área
+                            <i class="fa fa-fw fa-plus-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="col-lg-12">
+                        <table id="tbl_Areas" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Dependencia</th>
+                                    <th>Área</th>
+                                    @*<th>Sub-Áreas</th>*@
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" id="Close" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("ModalAgregarArea")

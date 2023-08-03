@@ -1,0 +1,194 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@using ModeloItemBandeja = SistemaDeAdquisiciones.Models.elementos_bandeja
+@using Bandeja_Solicitudes = SistemaDeAdquisiciones.Models.Bandeja_Solicitudes
+@using BandejaDetalle = SistemaDeAdquisiciones.Models.BandejasItems
+@using ModeloSolicitud = SistemaDeAdquisiciones.Models.tbl_solicitud;
+@using contador_solicitud = SistemaDeAdquisiciones.Models.contador_solicitud;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+@{
+
+
+    ViewBag.Title = "Bandeja de pendientes";
+    ViewBag.Description = "Bandeja de pendientes";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    List<String> Li = new List<String>();
+    List<String> Lo = new List<String>();
+
+    List<Bandeja_Solicitudes> LISTA = new List<Bandeja_Solicitudes>();
+
+
+}
+
+
+@section ViewScripts{
+    <script src="~/Resources/Bandeja/Jquery.Bandeja.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/Resources/Justificacion/Entidad.js"></script>
+    <script src="~/Resources/Justificacion/Jquery.Justificacion.js"></script>
+    <script src="~/Resources/Modals/Jquery.Modals.js"></script>
+}
+@section ViewStyles{
+    <link href="~/Resources/Bandeja/bandeja.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+
+    </h1>
+</section>
+
+<br />
+
+@{
+    string ruta = string.Empty;
+    Guid usuario = Guid.Parse(HttpContextAccessor.HttpContext.Session.GetString("IdUsuario"));
+    HttpClient clienteHttp = new HttpClient();
+
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    //se
+    HttpResponseMessage request = await clienteHttp.GetAsync("SerElementosBandeja/Get/tabs/" + usuario.ToString());
+
+
+    if (request.IsSuccessStatusCode)
+    {
+        String obj = await request.Content.ReadAsStringAsync();
+        List<ModeloItemBandeja> bandejas = JsonConvert.DeserializeObject<List<ModeloItemBandeja>>(obj);
+        //ModeloItemBandeja bandejas = JsonSerializer.Deserialize(obj);
+        //JArray Bandejas = JArray.Parse(await request.Content.ReadAsStringAsync());
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-body">
+
+                    <div class="tab" style="width:20%">
+
+                        @foreach (ModeloItemBandeja row in bandejas)
+                        {
+                            if (!Lo.Contains(row.identificador_pestana.ToString()))
+                            {
+
+                                Guid RolUsuario = Guid.Parse(HttpContextAccessor.HttpContext.Session.GetString("IdRolUsuario"));
+                                HttpClient cliente2Http = new HttpClient();
+                                cliente2Http.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+                                cliente2Http.DefaultRequestHeaders.Accept.Clear();
+                                cliente2Http.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+                                //HttpResponseMessage request2 = await cliente2Http.GetAsync("SerSolicitud/Get/Contador/" + RolUsuario.ToString() + "/" + row.parametro1);
+                                HttpResponseMessage request2 = await cliente2Http.GetAsync("SerSolicitud/Get/" + RolUsuario.ToString() + "/" + row.parametro1);
+
+                                List<ModeloSolicitud> Solicitudes_ = new List<ModeloSolicitud>();
+
+                                int contador = 0;
+                                if (request2.IsSuccessStatusCode)
+                                {
+
+                                    String obj2 = await request2.Content.ReadAsStringAsync();
+                                    //contador_solicitud Solicitudes = JsonConvert.DeserializeObject<contador_solicitud>(obj2);
+                                    Solicitudes_ = JsonConvert.DeserializeObject<List<ModeloSolicitud>>(obj2);
+                                    //contador = Solicitudes.total;
+                                    contador = Solicitudes_.Count();
+                                }
+
+                                Lo.Add(row.identificador_pestana);
+                                LISTA.Add(new Bandeja_Solicitudes { Bandeja = row, Solicitudes = Solicitudes_ });
+
+                                <button class="tablinks" onclick="openCity(event, '@row.identificador_pestana')"> @row.texo_pestana (@contador)@*<span id="contador_@row.identificador_pestana"></span>*@</button>
+
+                            }
+
+                        }
+
+                    </div>
+
+                    @foreach (Bandeja_Solicitudes row in LISTA)
+                    {
+
+
+                        if (row.Bandeja.controller.ToString() == "Solicitud")
+                        {
+                            @await Html.PartialAsync("Solicitante/BandejaBody", new BandejaDetalle { EntidadBandeja = row.Bandeja, Solicitudes = row.Solicitudes, Usuario = usuario })
+                        }
+                        else if (row.Bandeja.controller.ToString() == "Modalidad")
+                        {
+                            @await Html.PartialAsync("Modalidad/BandejaBody", new BandejaDetalle { EntidadBandeja = row.Bandeja, Solicitudes = row.Solicitudes, Usuario = usuario })
+                        }
+                        else if (row.Bandeja.controller.ToString() == "EvaluarJustificacion")
+                        {
+
+                            @await Html.PartialAsync("Justificacion/BandejaBody", new BandejaDetalle { EntidadBandeja = row.Bandeja, Solicitudes = row.Solicitudes, Usuario = usuario })
+                        }
+                        else if (row.Bandeja.controller.ToString() == "FaseCero")
+                        {
+
+                            @await Html.PartialAsync("FaceCero/BandejaBody", new BandejaDetalle { EntidadBandeja = row.Bandeja, Solicitudes = row.Solicitudes, Usuario = usuario })
+                        }
+
+
+
+                    }
+
+
+
+
+                    @*@foreach (ModeloItemBandeja row in bandejas)
+                    {
+                        if (!Li.Contains(row.identificador_pestana.ToString()))
+                        {
+
+                            Li.Add(row.identificador_pestana.ToString());
+
+                            if (row.controller.ToString() == "Solicitud")
+                            {
+                                @await Html.PartialAsync("Solicitante/BandejaBody", new BandejaDetalle { Entidad = row, Usuario = usuario })
+                            }
+                            else if (row.controller.ToString() == "Modalidad")
+                            {
+                                @await Html.PartialAsync("Modalidad/BandejaBody", new BandejaDetalle { Entidad = row, Usuario = usuario })
+                            }
+                            else if (row.controller.ToString() == "EvaluarJustificacion")
+                            {
+
+                                @await Html.PartialAsync("Justificacion/BandejaBody", new BandejaDetalle { Entidad = row, Usuario = usuario })
+                            }
+
+                        }
+
+                    }*@
+
+
+                </div>
+            </div>
+        </div>
+
+        @*<button class="btn btn-success" onclick="Modalsinit('SolicitarCotizacion','847b8c47-9d8d-4a3a-81ef-d441ec257077')">Solicitar cotizacion</button>
+        <button class="btn btn-success" onclick="Modalsinit('Turnar_SDRM','847b8c47-9d8d-4a3a-81ef-d441ec257077')">Turnar SDRM</button>*@
+
+
+    </div>
+
+
+
+
+    }
+}
+
+
+
+

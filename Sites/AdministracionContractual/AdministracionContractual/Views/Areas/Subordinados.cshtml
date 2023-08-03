@@ -1,0 +1,99 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+@model Guid
+@{
+    Guid area = new Guid(@HttpContextAccessor.HttpContext.Session.GetString("Id_area"));
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    var dep = @HttpContextAccessor.HttpContext.Session.GetString("Dep_Area_Navegacion");
+    if ((dep != null) && (dep != ""))
+    {
+        ruta.Add(@"\Home\Index", "Inicio");
+        ruta.Add(@"\Dependencias\Index", "Dependencias");
+        ruta.Add(@"\Areas\Index", "Áreas");
+        ruta.Add(@"\Areas\Subareas\" + area, "Subárea");
+        ruta.Add("-", "Departamentos");
+    }
+    else {
+        ruta.Add(@"\Areas\Index", "Áreas");
+        ruta.Add(@"\Areas\Subareas\" + area, "Subárea");
+        ruta.Add("-", "Departamentos");
+    }
+    String Subarea = @HttpContextAccessor.HttpContext.Session.GetString("Nombre_Subarea");
+}
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+@section ViewScripts{
+    <script src="~/Resources/Areas/Jquery.Subordinados.js"></script>
+}
+
+<input type="hidden" id="id_subarea" value="@Model" />
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title" id="title_areasub">Oficinas de @Subarea</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-9">
+                    <label>Nombre del departamento</label>
+                    <input type="text" class="form-control clr_as" id="txt_area_sub" placeholder="Nombre de la subárea" />
+                </div>
+                <div class="col-lg-3">
+                    <br />
+                    <button class="btn btn-primary" id="btn_add_area_sub">Agregar</button>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="tbl_area_sub" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Subárea.</th>
+                                <th>Dptos.</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<input type="hidden" id="id_area_subordinada_upd" value="" />
+<div id="Modal_Upd_area_subordinada" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 50%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar área subordinada (Depto.)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Departamento</label>
+                        <input type="text" id="txt_area_sub_upd" class="form-control clr_as" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_area_sub">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+@section ViewScripts{
+    <script src="~/Contratos/Entidad.js"></script>
+    <script src="~/Contratos/DatosGenerales.js"></script>
+    <script src="~/Contratos/Contratos.js"></script>
+    <script src="~/Contratos/Fechas.js"></script>
+    <script src="~/Contratos/Areas.js"></script>
+    <script src="~/Contratos/Firmantes.js"></script>
+    <script src="~/Contratos/Proveedores.js"></script>
+    <script src="~/Contratos/adicionales.js"></script>
+    <script src="~/Contratos/formalizacion.js"></script>
+    <script src="~/Contratos/actualizacion.js"></script>
+    <script src="~/Contratos/estructura_organica.js"></script>
+
+}
+@section ViewStyles{
+    <link href="~/Contratos/Contratos.css" rel="stylesheet" />
+}
+@await Html.PartialAsync("Timeline_parcial")
+@await Html.PartialAsync("DatosGenerales_parcial")
+@await Html.PartialAsync("Fechas_pacial")
+@await Html.PartialAsync("Areas")
+@await Html.PartialAsync("Firmantes")
+@await Html.PartialAsync("Proveedores")
+@await Html.PartialAsync("PenasDeductivas")
+@await Html.PartialAsync("formalizacion")
+
+<input type="hidden" value="@ViewData["contrato"].ToString()" id="contrato_identifier" />
+
+
+<div class="row id_container"></div>
+<input type="hidden" id="objeto_contrato_temp" />
+<input type="hidden" id="objeto_datos_generales" />
+<input type="hidden" id="catalogo_gral_" />
+<input type="hidden" id="adicionales_" />
+<input type="hidden" id="responsables_hd" />
+<input type="hidden" id="firmantes_hd" />
+<input type="hidden" id="proveedores__" />
+<input type="hidden" id="Token__" />
+<input type="hidden" id="areaSeleccionada" />
+<input type="hidden" id="codSeleccionado" />
+
+
+<input type="hidden" id="a1" />
+<input type="hidden" id="a2" />
+<input type="hidden" id="a3" />
+<input type="hidden" id="a4" />
+<input type="hidden" id="a5" />
+<input type="hidden" id="a6" />
+<input type="hidden" id="a7" />
+
+<input type="hidden" id="hd_tokengral" />
+
+
+<input type="hidden" id="dependenciaContrato" />
+<input type="hidden" id="areaAsignadaContrato" />
+<input type="hidden" id="nivelAreaAsignadaContrato" />
+
+<input type="hidden" id="areaAsignadaContratoBandera" value="1" />
+
+
+

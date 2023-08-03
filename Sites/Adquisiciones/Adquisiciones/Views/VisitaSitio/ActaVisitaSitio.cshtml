@@ -1,0 +1,205 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@using Modeloprogramacion = SistemaDeAdquisiciones.Models.tbl_programacion;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+
+
+@model Guid
+@{
+    /**/
+
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    ViewBag.Title = "Visita Sitio";
+    ViewBag.Description = "Visita Sitio";
+
+}
+
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/VisitaAsitio/Jquery.VisitaAsitio.js"></script>
+    <script src="~/Resources/Licitante/Jquery.Licitante.js"></script>
+    <script src="~/Resources/Funcionarios publicos/Jquery.Funcionarios.js"></script>
+    <script src="~/Resources/Observadores/Jquery.Observadores.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+@{
+    HttpClient clienteHttp = new HttpClient();
+
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    //se
+    HttpResponseMessage request = await clienteHttp.GetAsync("Eventos/Get/Solicitud/" + @Model + "/SiglaTipoEvento/VS");
+    Modeloprogramacion obj_Programacion = new Modeloprogramacion();
+
+    if (request.IsSuccessStatusCode)
+    {
+        String obj = await request.Content.ReadAsStringAsync();
+        obj_Programacion = JsonConvert.DeserializeObject<Modeloprogramacion>(obj);
+
+        if (obj_Programacion != null)
+        {
+            <input type="hidden" value="@obj_Programacion.id" id="HD_programacion" />            
+        }
+        else
+        {
+            <input type="hidden" value="" id="HD_programacion" />
+        }
+    }
+
+}
+
+
+
+
+<input type="hidden" value="VS" id="Sigla_Programacion" />
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+<input type="hidden" value="Sitio" id="_TIPOACTA" />
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+<div class="box box-default exist">
+
+
+
+
+    <div class="box-body">
+        @*<h3 class="box-title">Acta de visita a Sitio</h3>*@
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>Acta de visita a sitio con fecha: <label class="fecha_event"></label> </h3>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="box box-default collapsed-box exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de licitantes</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+        @await Html.PartialAsync("~/Views/Licitante/Index.cshtml")
+        @*@Html.Partial("~/Views/Licitante/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+<div class="box box-default collapsed-box exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de funcionarios públicios</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Funcionario/Index.cshtml")
+        @*@Html.Partial("~/Views/FuncionarioConv/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+<div class="box box-default collapsed-box exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de observadores</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Observador/Index.cshtml")
+        @*@Html.Partial("~/Views/Observador/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+<div class="box box-default exist">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-4 text-center"></div>
+            <div class="col-lg-4 text-center">
+                <label>Generar Acta</label><br />
+                @*<button class="btn btn-success">Generar</button>*@
+                <button class="btn btn-success btn-avanzarfase" onclick="AvanzaFaseActas()">Avanzar de fase</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="box box-default ">
+
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-info" onclick="CallModalProgramacion();">Programar Visita a Sitio</button>
+                <button class="btn btn-danger" id="Cerra15" onclick="GoBandeja();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

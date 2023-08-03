@@ -1,0 +1,19 @@
+﻿.LogoInstancia {
+	padding: 0;
+	margin: 0;
+	line-height: 0;
+}
+.modal-header {
+	background-color: #3c8dbc;
+}
+
+.selected {
+	background-color: orange;
+}
+
+.p-selected {
+	background-color: #f39c124f;
+}
+.hijo-padding {
+	padding-left: 10px;
+}

@@ -1,0 +1,171 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+<style>
+    .AccesoDirecto {
+        color: red;
+        font-size: 150%;
+    }
+
+    .AccesoDirectoHome {
+        color: green;
+        font-size: 150%;
+    }
+</style>
+
+@{
+    string idCon = HttpContextAccessor.HttpContext.Session.GetString("IdContrato");
+
+    Layout = null;
+    string ruta = string.Empty;
+    var rol = HttpContextAccessor.HttpContext.Session.GetString("IdRol");
+    HttpClient clienteHttp = new HttpClient();
+    clienteHttp.BaseAddress = new Uri("http://107.178.210.37:8081/");
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+    HttpResponseMessage request = await clienteHttp.GetAsync("EndPoint/Sidebar/Get/" + rol);
+
+    if (request.IsSuccessStatusCode)
+    {
+        JArray sidebar = JArray.Parse(await request.Content.ReadAsStringAsync());
+
+        foreach (JObject row in sidebar.Children<JObject>())
+        {
+
+            if (row["orden"].ToString() == "0")
+            { 
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa @row["clase"].ToString()"></i> <span>@row["valor"].ToString()</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        @foreach (JObject sub in sidebar)
+                        {
+                            //if (sub.tbl_elemento_siderbar_id == "0d29c6c2-3d37-11ea-9fcf-00155d1b3502")
+                            //{
+                            //    //Continua
+                            //}
+                            //else*@
+
+                            @if (sub["tiene_contrato"].ToString().ToLower() == "true" && sub["orden"].ToString().ToLower() != "0" )
+                            {
+                                ruta = "index.html";
+
+                                if (sub["tag"].ToString().ToLower() == "-" & sub["accion"].ToString().ToLower() == "-")
+                                {
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa @sub["clase"].ToString()"></i> <span>@sub["valor"].ToString()</span>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @{
+                                                //List<Modelos.Modelos.vs_siderbar> ListSubInt = item.Subordinados.Where(x => x.Parametro2.ToLower() == "item" && x.Parametro3 == sub.id_Pricinpal.ToString()).ToList();
+
+                                                foreach (JObject element in sidebar)
+                                                {
+                                                    //if (element.tiene_contrato.GetValueOrDefault(false) & (sub.tbl_elemento_siderbar_id == element.tbl_elemento_siderbar_id) & (element.tag == "Item"))
+                                                    if (sub["tbl_elemento_siderbar_id"].ToString() == element["subordinado"].ToString())
+                                                    {
+                                                        if (element["controlador"].ToString() != "-" || element["accion"].ToString() != "-")
+                                                        {
+                                                            if (idCon != "")
+                                                            {
+                                                                Guid idContrato = new Guid(idCon.ToString());
+                                                                ruta = "/" + element["controlador"].ToString() + "/" + element["accion"].ToString() + "/" + idContrato;
+                                                            }
+                                                            else
+                                                            {
+                                                                ruta = "/index.html";
+                                                            }
+
+                                                            <li><a href="@ruta"><i class="fa @element["clase"].ToString()"></i>@element["valor"].ToString()</a></li>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                                @*else if (sub["tag"].ToString().ToLower() == "item")
+                                {
+                                    //--------------------JC
+                                    if (sub.tbl_elemento_siderbar_id == "0d3253cd-3d37-11ea-9fcf-00155d1b3502" && idRolSesion == "820aa780-37e8-11ea-82d7-00155d1b3502")
+                                    {
+
+
+                                        if (id != null)
+                                        {
+                                            Guid idContrato = new Guid(id.ToString());
+                                            ruta = "/" + sub.controlador + "/" + sub.accion + "/" + idContrato;
+                                            <li><a href="@ruta"><i class="fa @sub.clase"></i>@sub.valor</a></li>
+                                        }
+                                        else
+                                        {
+                                            ruta = "/index.html";
+                                        }
+
+                                    }
+                                }*@
+                                else if (sub["tag"].ToString().ToLower() != "item")
+                                {
+                                    if ((idCon != "") && (sub["tag"].ToString().ToLower() == "-") && (sub["accion"].ToString().ToLower() != "-") )
+                                    {
+                                        Guid idContrato = new Guid(idCon.ToString());
+                                        ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString() + "/" + idContrato;
+                                    }
+                                    else
+                                    {
+                                        ruta = "/contrato/index";
+                                    }
+
+                                    <li><a href="@ruta"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+                                }
+                            }
+                            @*else if (sub["tag"].ToString().ToLower() == "-" || sub["tag"].ToString().ToLower() == "")
+                            {
+                                ruta = "/index.html";
+
+                                if (idCon != null && (sub["controlador"].ToString() != "-" || sub["accion"].ToString() != "-"))
+                                {
+                                    ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString() + "/" + idCon;
+                                }
+
+                                <li><a href="@ruta"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+                            }*@
+                        } 
+                     }
+                    </ul>
+                </li>
+            }
+            //else
+            //{
+                @*<li>
+                        <a href="https://adminlte.io/docs">
+                            <i class="fa @item.clase"></i>
+                            <span>@item.valor</span>
+                        </a>
+                    </li>*@
+            //}
+
+        }
+    }
+}
+
+@*<li class="header">Navegación</li>*@
+
+<li class="text-center">
+
+    <br />
+
+    <i id="LogOut" onclick="window.location.href = '/Login/logOut';"
+       class="fa fa-power-off AccesoDirecto"></i>
+    @*<button class="btn btn-danger fa fa-power-off AccesoDirecto" ></button>*@
+</li>

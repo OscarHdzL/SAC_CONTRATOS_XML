@@ -1,0 +1,318 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor;
+
+@{
+    ViewBag.Title = "Index";
+
+    //if (httpContextAccessor.HttpContext.Session.GetString("IdContrato") != null)
+    //{
+    Layout = "~/Views/MasterPages/Master_SinContrato.cshtml";
+    //}
+    //else
+    //{
+    //    Layout = "~/Views/MasterPages/Master.cshtml";
+    //}
+
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Lista de ubicaciones");
+    //Guid idcon = new Guid(Session["Contrato"].ToString());
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Ubicacion/Ubicacion.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+
+<input type="hidden" id="hdnIdDependencia" name="hdnIdDependencia" value="@httpContextAccessor.HttpContext.Session.GetString("IdDependencia")" />
+<input type="hidden" id="hdnId" name="hdnId" />
+<input type="hidden" id="hdnIdUbicacionServidor"  />
+<input type="hidden" id="hdnIdInstancia" name="hdnIdInstancia" value="@httpContextAccessor.HttpContext.Session.GetString("IdInstancia")" />
+<input type="hidden" id="BagsControlResp" value="" />
+
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Ubicaciones</h3>
+            <div class="box-tools pull-right">
+                <button type="button" id="btn-abrir-modal-guardar" class="btn btn-box-tool" title="Agregar ubicación">
+                    Agregar ubicación
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <table id="tbl_ubicaciones" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Clave</th>
+                        <th>Unidad</th>
+                        <th>Dirección</th>
+                        <th>Teléfonos</th>
+                        <th>Responsable</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<div id="modalGuardarUbicacion" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close Clear" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title AltUbicacion">Alta de ubicación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label id="lblClave">Clave</label>
+                        <input class="form-control campo-formulario" id="clave" type="text" placeholder="Clave de la ubicación" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblUnidad">Unidad</label>
+                        <input class="form-control campo-formulario" id="unidad" type="text" placeholder="Unidad" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label id="lblDireccion">Dirección</label>
+                        <input class="form-control campo-formulario" id="direccion" type="text" placeholder="Dirección de la ubicación" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label id="lblReferencia">Referencia</label>
+                        <input class="form-control campo-formulario" id="referencia" type="text" placeholder="Referencia de la ubicación" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblResponsable">Responsable</label>
+                        <br />
+                        <select name="responsable" id="responsable" class="form-control campo-formulario"></select>
+                        @*@Html.DropDownList("responsable", new SelectList(ViewBag.lstResponsables, "Value", "Text"), "Seleccione...", new { @class = "form-control" })*@
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblTelefonos">Teléfonos</label>
+                        <input class="form-control campo-formulario" id="telefonos" type="text" maxlength="15" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label id="lblDiasAtencion">Días de atención</label>
+                        <input class="form-control campo-formulario" id="txtDiasAtencion" type="text" placeholder="Días de atención en la unidad" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblHorarioAtencion">Horario de atención</label>
+                        <input class="form-control campo-formulario" id="txtHorarioAtencion" type="text" placeholder="Horario de atención" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblEstado">Estado</label>
+                        <br />
+                        <select name="estado" id="estado" class="form-control campo-formulario"></select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblCiudad">Ciudad</label>
+                        <br />
+                        <select name="ciudad" id="ciudad" class="form-control campo-formulario"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label id="lblEjecutores">Ejecutores</label>
+
+                        <table>
+                            <tr>
+                                <td style="vertical-align:middle">
+                                    <select name="ejecutores" id="ejecutores" class="form-control campo-formulario"></select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success" onclick="addRespo_bag();"><i class="fa fa-fw fa-plus-circle"></i></button>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <div id="bloque_ejecutores"></div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                    <button type="button" class="btn btn-danger Clear" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="modalEditarUbicacion" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close Clear" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title AltUbicacion">Alta de ubicación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label id="lblClave">Clave</label>
+                        <input class="form-control campo-formulario" id="clave_editar" type="text" placeholder="Clave de la ubicación" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblUnidad">Unidad</label>
+                        <input class="form-control campo-formulario" id="unidad_editar" type="text" placeholder="Unidad" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label id="lblDireccion">Dirección</label>
+                        <input class="form-control campo-formulario" id="direccion_editar" type="text" placeholder="Dirección de la ubicación" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label id="lblReferencia">Referencia</label>
+                        <input class="form-control campo-formulario" id="referencia_editar" type="text" placeholder="Referencia de la ubicación" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblResponsable">Responsable</label>
+                        <br />
+                        <select name="responsable" id="responsable_editar" class="form-control campo-formulario"></select>
+                        @*@Html.DropDownList("responsable", new SelectList(ViewBag.lstResponsables, "Value", "Text"), "Seleccione...", new { @class = "form-control" })*@
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblTelefonos">Teléfonos</label>
+                        <input class="form-control campo-formulario" id="telefonos_editar" type="text" maxlength="15" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label id="lblDiasAtencion">Días de atención</label>
+                        <input class="form-control campo-formulario" id="txtDiasAtencion_editar" type="text" placeholder="Días de atención en la unidad" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblHorarioAtencion">Horario de atención</label>
+                        <input class="form-control campo-formulario" id="txtHorarioAtencion_editar" type="text" placeholder="Horario de atención" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblEstado">Estado</label>
+                        <br />
+                        <select name="estado" id="estado_editar" class="form-control campo-formulario"></select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label id="lblCiudad">Ciudad</label>
+                        <br />
+                        <select name="ciudad" id="ciudad_editar" class="form-control campo-formulario"></select>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btnEditar">Editar</button>
+                    <button type="button" class="btn btn-danger Clear" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <div id="modalEjecutores" class="modal" role="dialog">
+        <div class="modal-dialog" style="width: 60%; padding-top: 5%; background-color: transparent;">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close Clear" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lista de ejecutores</h4>
+                </div>
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Ubicaciones</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" id="btn-abrir-modal-guardar-ejecutor" class="btn btn-box-tool" title="Agregar ejecutor">
+                            Agregar ejecutor
+                            <i class="fa fa-fw fa-plus-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="tbl_Ejecutores" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Ejecutor</th>
+                                <th>Unidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+            <br />
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modalGuardarEditarEjecutor" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 20%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <button type="button" class="close Clear" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ejecutor</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <label id="lblEjecutores">Ejecutores</label>
+                        <br />
+                        <select name="responsable" id="drop_ejecutor" class="form-control campo-formulario"></select>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <br />
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btnGuardar_Ejecutor">Guardar</button>
+                    <button type="button" class="btn btn-danger Clear" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+</div>

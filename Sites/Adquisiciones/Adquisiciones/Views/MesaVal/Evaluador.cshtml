@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+@section ViewScripts{
+    <script src="~/Resources/MesaValidacion/MesaVal.js"></script>
+}
+
+<input type="hidden" value="@ViewData["MV"].ToString()" id="MV" />
+<input type="hidden" value="" id="IDD" />
+<input type="hidden" value="1" id="Evaluador" />
+
+
+
+<input type="hidden" value="" id="TOKENSS" />
+
+
+
+ 
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-default">
+            <div class="box-body">
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <h3 id="nsol"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-default">
+            <div class="box-body">
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <table id="TBLDOCUMENTSEVAL" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                     
+                                    <th>Nombre del documento:</th>
+
+                                    <th>Versión</th>
+                                    <th>Comentario</th>
+
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

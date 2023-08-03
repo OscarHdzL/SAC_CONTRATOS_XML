@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Modelos.Interfaz
+{
+    public interface CRUD<T>
+    {
+        //Response.Response Guardar(T entidad);
+        //    Response.Response Modificar(T entidad);
+        //    Response.Response Eliminar(T entidad);
+        Response.ResponseGeneric<List<T>> Consultar(T entidads);        
+    }
+}

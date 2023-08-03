@@ -1,0 +1,40 @@
+﻿@{
+
+    Layout = null;
+}
+<div class="box box-default div_proveedores" style="display:none">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3" style="margin: 30px auto;">
+            <select class="form-control" id="txt_tipo_interlocutor_list" onchange="call_Proveedores_catalog_filtro(this.value)">
+            </select>
+        </div>
+    </div>
+    
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <table id="Proveedores" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row text-right">
+            <button onclick="validate_proveedores__()" class="btn btn-success proveedoresupd_btn" style="margin-right:10px;margin-top: 30px;"><i class="fa fa-fw fa-check-circle-o"></i>Validar</button>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="prov_hidden" value="0" />
+
+

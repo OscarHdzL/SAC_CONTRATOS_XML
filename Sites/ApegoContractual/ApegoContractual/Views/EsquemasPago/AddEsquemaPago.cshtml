@@ -1,0 +1,132 @@
+﻿<input type="hidden" class="form-control CleanEP" id="id_esquema_edicion" >
+
+<div id="AltaEsquemaPago" class="modal" role="dialog">
+    <div class="modal-dialog" style=" width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close cerrarMEP" id="cerrarMEP" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title" id="TituloModal"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+
+                        <label>Seleccione el usuario</label>
+                        <br />
+                        <select name="Autoriza" id="Autoriza" class="form-control Autoriza"></select>
+                    </div>
+                    @*<div class="col-lg-3">
+                <br />
+                <label>Seleccione el Entregable</label>
+                <br />
+                <select name="Entregable" id="Entregable" class="form-control Entregable "></select>
+            </div>*@
+                    <div class="col-lg-4">
+
+                        <label>Fecha estimada de pago</label>
+                        <br />
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' id="txt_FechaEntrega" class="form-control CleanEP" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Seleccione la razón social del interlocutor</label>
+                        <br />
+                        <select name="Proveedor" id="Proveedor" class="form-control Proveedor"></select>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Adjuntar factura</label>
+                        <br />
+                        <input type="file" class="CleanEP" id="Factura" accept=".pdf, .jpg, .jpeg, .png" />
+                    </div>
+                    <div class="col-lg-4">
+                        <br />
+                        <label>Firma digital</label>
+                        <br />
+                        <input type="checkbox" id="Firma" disabled />
+                    </div>
+                    <div class="col-lg-4">
+                        <br />
+                        <label id="FacturaAdj"></label>
+                        <a id="downloadfilejust" onclick="modalVisualizacion();">Descargar Archivo</a>
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Observaciones</label>
+                        <br />
+                        <textarea id="txtObservaciones" rows="2" class="form-control CleanEP" style=" resize: none" placeholder="Digite las observaciones para la entrega"></textarea>
+                    </div>
+                    <div class="col-lg-6">
+
+                        @*<label>Estado de plan de entrega</label>
+                <br />
+                <textarea id="txtEstadoEntrega" rows="2" class="form-control CleanEP" style=" resize: none" placeholder="Digite el estado de entrega" disabled></textarea>*@
+                        <label>Seleccionar plan de entrega</label>
+                        <br />
+                        <select name="PEntrega" id="PEntrega" class="form-control PEntrega"></select>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Ingrese el monto</label>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanEP" id="Monto" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Monto del IVA</label>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanEP" id="MontoIVA" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Total</label>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanEP" id="Total" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+
+                        <label>Notificación</label>
+                        <br />
+                        <select name="CuentasxPagar" id="CuentasxPagar" class="form-control"></select>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="GuardarEsqPag">Guardar</button>
+                    <button type="button" class="btn btn-danger cerrarMEP" id="cerrarMEP" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,68 @@
+﻿
+<div class="modal" id="ModalAgregarAcuerdo" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel">Agregar acuerdo</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Tipo de acuerdo</label>
+                        <select name="TipoA" id="TipoA" class="form-control TipoA Clean">
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Responsable</label>
+                        <select name="ResponsableA" id="ResponsableA" class="form-control ResponsableA Clean">
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Acuerdo</label>
+                        <textarea placeholder="Ingrese acuerdo" id="txt_Acuerdo" class="form-control Clean"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Fecha registro</label>
+                        <input type="text" id="txt_FechaRegistro" class="form-control fechas Clean" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha compromiso</label>
+                        <input type="text" id="txt_FechaCompromiso" class="form-control fechas Clean" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha cierre</label>
+                        <input type="text" id="txt_FechaCierre" class="form-control fechas Clean" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Estatus</label>
+                        <select id="cmbEstatusAcuerdo_" class="form-control" disabled>
+                            <option value="Abierto" selected>Abierto</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Comentario</label>
+                        <textarea placeholder="Ingrese comentario" id="txt_ComentarioAcuerdo" class="form-control Clean"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="GuardarAcuerdo">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,145 @@
+﻿
+@{
+
+    Layout = null;
+}
+
+
+<div class="box box-default div_areas" style="display:none">
+
+    <div class="box-body">
+
+        <div class="panel panel-primary" style="background-color: #337ab747;">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label>Selecciona la dependencia</label>
+                    <select id="dependencias_usuario">
+                    </select>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Selecciona la estructura</label>
+                    <div id="_arbol">
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label>Estructura seleccionada</label>
+                    <div>
+                        <br />
+                        <label id="nombre_arbol_seleccionado">Ninguna </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-lg-4">
+                <div class="list-group" id="identifier_areas" role="tablist"></div>
+            </div>
+            <div class="col-lg-4">
+                <div class="list-group" id="identifier_CAP_GASTO" role="tablist"></div>
+            </div>
+            <div class="col-lg-4">
+                <div class="list-group" id="identifier_Montos_Acciones" role="tablist">
+
+                    <a class='list-monto list-group-item active' id='panel-list-press'>
+                        <div class="row">
+                            <div class="col-lg-4 text-center">
+                                <label> Cod. Capítulo: <p id="p_capitulo"></p> </label>
+                            </div>
+                            <div class="col-lg-8  text-center">
+                                <label> Capítulo: <p id="p_capitulo_des"></p> </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label> Monto disponible: <p style="border-style: dashed;border-color: #00A65A;border-width: 7px; text-align:center;" id="p_monto"></p> </label>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <label>$ Monto por ejercer</label>
+                                <input type="number" id="monto_por_ejercer" class="form-control" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label>Número de partida</label>
+                                <input type="number" id="txt_numero_ejercer" class="form-control" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Descripción</label>
+                                <input type="text" id="txt_numero_descripcion" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 text-center">
+                                <br />
+                                <button onclick="fillBag()" type="button" class="btn btn-success"><i class="fa fa-fw fa-plus-circle"></i></button>
+                            </div>
+                            <div class="col-lg-6 text-center">
+
+                                Monto total a ejercer:
+                                <br />
+                                <label>$</label>
+                                <label id="mtae"></label>
+                            </div>
+                        </div>
+
+                    </a>
+
+                    <div id="input_bags">
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="row text-right">
+            <button onclick="validate_Areas__()" class="btn btn-success validateareas_btn" style="margin-right:10px;margin-top: 30px;"><i class="fa fa-fw fa-check-circle-o"></i>Validar</button>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="modaldetails" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body modaldetails_body">
+                <div class="row">
+                    <div class="col-lg-12">Código Cap Gasto: <label id="lbl_cap_gasto_modal" style="color:black;"></label></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">Capítulo Gasto: <label id="lbl_gasto_modal" style="color:black;"></label></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">Número: <label id="lbl_numero_modal" style="color:black;"></label></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">Descripción: <label id="lbl_descripcion_modal" style="color:black;"></label></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">Monto por ejercer: <label id="lbl_monto_ejercer_modal" style="color:black;"></label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input type="hidden" id="JSONupdate"/>

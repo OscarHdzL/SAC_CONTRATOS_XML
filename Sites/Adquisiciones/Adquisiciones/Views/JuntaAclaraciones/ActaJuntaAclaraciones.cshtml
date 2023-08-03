@@ -1,0 +1,249 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@using Modeloprogramacion = SistemaDeAdquisiciones.Models.tbl_programacion;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    ViewBag.Title = "Junta de aclaraciones";
+    ViewBag.Description = "Junta de aclaraciones";
+
+    //Guid idcon = new Guid(httpContextAccessor.HttpContext.Session.GetString("HDidContrato"));
+
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Aclaraciones/Jquery.Aclaraciones.js"></script>
+    <script src="~/Resources/Licitante/Jquery.Licitante.js"></script>
+    <script src="~/Resources/Funcionarios publicos/Jquery.Funcionarios.js"></script>
+    <script src="~/Resources/Observadores/Jquery.Observadores.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+
+@{
+
+    HttpClient clienteHttp = new HttpClient();
+
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    //se
+    HttpResponseMessage request = await clienteHttp.GetAsync("Eventos/Get/Solicitud/" + @Model + "/SiglaTipoEvento/JA");
+    Modeloprogramacion obj_Programacion = new Modeloprogramacion();
+    if (request.IsSuccessStatusCode)
+    {
+        String obj = await request.Content.ReadAsStringAsync();
+        obj_Programacion = JsonConvert.DeserializeObject<Modeloprogramacion>(obj);
+
+        if (obj_Programacion != null)
+        {
+            <input type="hidden" value="@obj_Programacion.id" id="HD_programacion" />
+        }
+        else
+        {
+            <input type="hidden" value="" id="HD_programacion" />
+        }
+    }
+
+}
+
+
+<input type="hidden" value="JA" id="Sigla_Programacion" />
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+<input type="hidden" value="Aclaraciones" id="_TIPOACTA" />
+
+
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+@*<div class="box box-default collapsed-box exist">
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Acta de junta de aclaraciones</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Fecha de celebración:</label>
+                    <input type="datetime" class="form-control txt_FechaAclaracion" />
+                </div>
+
+                <div class="col-lg-2">
+                    <label>Número de junta</label>
+                    <input type="text" disabled class="form-control" id="txt_NumJunta" />
+                </div>
+
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-8">
+                    <label>Aclaración: </label>
+                    <textarea placeholder="Ingrese aclaración" id="txt_Aclaracion" class="form-control"></textarea>
+                </div>
+                <div class="col-lg-4">
+
+                    <input type="checkbox" id="cbx_ReqJunta" style="display:none" /> <label style="display:none">Requiere otra reunión: </label>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <br />
+                    <button class="btn btn-success btn-save-aclaracion">Agregar</button>
+                </div>
+            </div>
+            <br />
+
+            <div class="box-header with-border">
+                <h3 class="box-title">Histórico de aclaraciones</h3>
+            </div>
+
+            <div class="box-body">
+                <div class="row air" style="margin-top: 4%;">
+                    <div class="col-lg-12">
+
+                        <table id="tbl_Historico_Aclaraciones" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Número solicitud</th>
+                                    <th>Número junta</th>
+                                    <th>Aclaración</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>*@
+
+
+
+
+<div class="box box-default collapsed-box exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de licitantes</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+        @await Html.PartialAsync("~/Views/Licitante/Index.cshtml", Model)
+        @*@Html.Partial("~/Views/Licitante/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+<div class="box box-default collapsed-box exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de funcionarios públicos</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Funcionario/Index.cshtml", Model)
+        @*@Html.Partial("~/Views/FuncionarioConv/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+<div class="box box-default collapsed-box exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de observadores</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Observador/Index.cshtml", Model)
+        @*@Html.Partial("~/Views/Observador/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+<div class="box box-default">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                @*<button class="btn btn-success">Generar acta</button>*@
+                <button type="button" class="btn btn-info" onclick="CallModalProgramacion()">Programar eventos</button>
+
+                <button class="btn btn-avanzarfase" onclick="AvanzaFaseActas()">Avanzar de fase</button>
+                <button class="btn btn-danger" id="Cerra15" onclick="GoBandeja();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="ModalAclaracion" role="dialog">
+    <div class="modal-dialog">
+        @*Modal content*@
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Aclaración</h4>
+            </div>
+            <div class="modal-body">
+                <p id="textAclaracion">Texto_Aclaración</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+

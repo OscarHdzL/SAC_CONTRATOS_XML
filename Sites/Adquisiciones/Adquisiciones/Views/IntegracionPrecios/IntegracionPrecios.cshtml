@@ -1,0 +1,219 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+@model Guid
+@{
+    ViewBag.Title = "IntegracionPrecios";
+    ViewBag.Description = "IntegracionPrecios";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/IntegracionPrecios/Jquery.integracionprecios.js"></script>
+}
+
+
+
+
+<div class="box box-default">
+    <div class="row">
+        <div class="col-lg-12 margin-bottom">
+            <h3>Integración a precios <label class=""></label> </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-3 text-center margin-bottom">
+            <label>Menú de opciones</label>
+            <select class="form-control" id="opciones_integracion">
+                <option value="0" selected disabled>Seleccione una opción...</option>
+                <option value="1">Validar documentos</option>
+                <option value="2">Cotización</option>
+                <option value="3">Dictamen</option>
+                <option value="4">Estudio de mercado</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="validardocumentos">
+    <div class="box-header with-border">
+        <h3 class="box-title">Validar documentos</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="box-header with-border">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <table id="tbl_validar_documentos" class="display nowrap " cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th width="10%">Folio solicitud</th>
+                            <th width="15%">Estatus suficiencia</th>
+                            <th width="10%">Fecha solicitud estudio mercado</th>
+                            <th width="30%">Proyecto</th>
+                            <th width="15%">Área</th>
+                            <th width="15%">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*quitar en cuanto se cargen datos*@
+                        <tr>
+                            <td><a href="">SOL0001</a></td>
+                            <td>En validación</td>
+                            <td>23/03/2020</td>
+                            <td>Mantener la sanitización de los quirófanos duranteun periodos de medio año</td>
+                            <td>Dirección de finanzas</td>
+                            <td>
+                                <button class="btn btn-success">Validar documentos</button>
+                                <button class="btn btn-primary">cotizar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="">SOL0001</a></td>
+                            <td>En validación</td>
+                            <td>23/03/2020</td>
+                            <td>Mantener la sanitización de los quirófanos duranteun periodos de medio año</td>
+                            <td>Dirección de finanzas</td>
+                            <td>
+                                <button class="btn btn-success">Validar documentos</button>
+                                <button class="btn btn-primary">cotizar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="cotizacion">
+    <div class="box-header with-border">
+        <h3 class="box-title">Cotización</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="box-header with-border">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <table id="tbl_Cotizacion" class="display nowrap " cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Folio solicitud</th>
+                            <th>Estatus suficiencia</th>
+                            <th>Fecha solicitud estudio mercado</th>
+                            <th>Proyecto</th>
+                            <th>Área</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*quitar en cuanto se cargen datos*@
+                        <tr>
+                            <td><a href="">SOL0001</a></td>
+                            <td>En validación</td>
+                            <td>23/03/2020</td>
+                            <td>Mantener la sanitización de los quirófanos duranteun periodos de medio año</td>
+                            <td>Dirección de finanzas</td>
+                            <td>
+                                <button class="btn btn-success">Cargar cotizaciones</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="">SOL0001</a></td>
+                            <td>En validación</td>
+                            <td>23/03/2020</td>
+                            <td>Mantener la sanitización de los quirófanos duranteun periodos de medio año</td>
+                            <td>Dirección de finanzas</td>
+                            <td>
+                                <button class="btn btn-outline-primary">Cargar cotizaciones</button>                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="dictamen">
+    <div class="box-header with-border">
+        <h3 class="box-title">Dictamen</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="box-header with-border">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <table id="tbl_dictamen" class="display nowrap " cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Folio solicitud</th>
+                            <th>Estatus suficiencia</th>
+                            <th >Fecha solicitud 
+                            estudio mercado</th>
+                            <th>Proyecto</th>
+                            <th>Área</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>   @*quitar en cuanto se cargen datos*@
+                        <tr>
+                            <td><a href="">SOL0001</a></td>
+                            <td>En validación</td>
+                            <td>23/03/2020</td>
+                            <td>Mantener la sanitización de los quirófanos duranteun periodos de medio año</td>
+                            <td>Dirección de finanzas</td>
+                            <td>
+                                <button class="btn btn-success">Registrar dictamen</button>
+                                <button class="btn btn-primary">Solicitar dictamen</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="">SOL0001</a></td>
+                            <td>En validación</td>
+                            <td>23/03/2020</td>
+                            <td>Mantener la sanitización de los quirófanos duranteun periodos de medio año</td>
+                            <td>Dirección de finanzas</td>
+                            <td>
+                                <button class="btn btn-success">Registrar dictamen</button>
+                                <button class="btn btn-primary">Solicitar dictamen</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

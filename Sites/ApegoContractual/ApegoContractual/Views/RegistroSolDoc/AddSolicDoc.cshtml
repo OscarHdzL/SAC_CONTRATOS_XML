@@ -1,0 +1,79 @@
+﻿
+
+<input type="hidden" id="IdMR" class="Clean" value="" />
+
+<div id="ModalNuevaSolicitud" class="modal bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="WIDTH: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="cerrarMMR" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="tituloM">Agregar nueva solicitud</h3>
+            </div>
+            <div class="modal-body">
+                <div class="box box-warning">
+
+                    <form role="form">
+                        <div class="box-body">
+                            <input type="hidden" id="resapego_con_id" value="" class="Clean" />
+                            <input type="hidden" id="idarearesp" value="" class="Clean" />
+                            <div class="form-group">
+                                <div class="col-lg-3 text-center">
+                                    <label>Nombre documento</label>
+                                    <textarea id="txtnomdoc" rows="1" class="form-control Clean" style=" resize: none"></textarea>
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <label>Área responsable</label>
+                                    <input id="txtarearesp" class="form-control Clean" disabled />
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <label>Nombre del responsable</label>
+                                    <select name="nomresp" id="nomresp" class="form-control Clean">
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <label>Correo responsable</label>
+                                    <input type="text" id="txtcorreoresp" class="form-control Clean" disabled />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-2 text-center">
+                                    <label>Fecha solicitud</label>
+                                    <input type="text" id="txt_fsolic" class="form-control Clean" />
+                                </div>
+                                <div class="col-lg-2 text-center">
+                                    <label>Fecha entrega</label>
+                                    <input type="text" id="txt_fentrega" class="form-control Clean" />
+                                </div>
+                                <div class="col-lg-2 text-center">
+                                    <label>Tipo de entrega</label>
+                                    <select id="cmbTipoEntrega" class="form-control Clean">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Digital">Digital</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Observaciones / Comentarios</label>
+                                    <textarea id="txtobs" rows="1" class="form-control Clean" style=" resize: none"></textarea>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Correo solicitante</label>
+                                    <textarea id="txtcorrsol" rows="1" class="form-control Clean" style=" resize: none"></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" aling="center">
+                <div align="center">
+                    <button class="btn btn-primary" id="AddNuevaS">Guardar</button>
+                    <button class="btn btn-danger" id="cerrarMMR" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

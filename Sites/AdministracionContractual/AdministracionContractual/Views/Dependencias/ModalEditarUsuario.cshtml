@@ -1,0 +1,150 @@
+﻿
+<div class="modal" id="ModalEditarUsuario" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <input type="hidden" id="id_Persona_ed" value="" />
+    <input type="hidden" id="id_Usuario_ed" value="" />
+    <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title"><span id="title"></span></h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Nombre</label>
+                        <input type="text" id="txt_Nombre_ed" class="form-control txt_Nombre_ed Clean" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Apellido Paterno</label>
+                        <input type="text" id="txt_Apellido_Paterno_ed" class="form-control txt_Apellido_Paterno_ed Clean" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Apellido Materno</label>
+                        <input type="text" id="txt_Apellido_Materno_ed" class="form-control txt_Apellido_Materno_ed Clean" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>RFC</label>
+                        <input type="text" id="txt_RFC_ed" class="form-control txt_RFC_ed Clean" maxlength="13" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Fecha inicial</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' id="txt_Fecha_Inicial_ed" class="form-control Clean" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Fecha final</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' id="txt_Fecha_Final_ed" class="form-control Clean" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Nombre de usuario</label>
+                        <input disabled type="text" id="txt_usuario_ed" class="form-control txt_usuario_ed" placeholder="Nombre de usuario" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Correo electrónico</label>
+                        <input type="text" id="txt_Correo_ed" class="form-control txt_Correo_ed Clean" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Teléfono</label>
+                        <input type="text" id="Telefono_ed" class="form-control Telefono_ed Clean" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Extensión </label>
+                        <input type="text" id="Extension_ed" class="form-control Extension_ed Clean" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Dependencia</label>
+                        <select name="DependenciaA_ed" id="DependenciaA_ed" class="form-control DependenciaA_ed Clean"></select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Área</label>
+                        <select name="ddl_Area_ed" id="ddl_Area_ed" class="form-control ddl_Area_ed Clean"></select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Rol</label>
+                        <select name="ddl_Rol_ed" id="ddl_Rol_ed" class="form-control ddl_Rol_ed Clean"></select>
+                    </div>
+                    <div class="col-lg-2">
+                        <label>&nbsp;</label>
+                        <button type="button" class="form-control btn btn-primary" id="add_rol" onclick="add_rol(ddl_Rol_ed.value)">Agregar rol</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Roles asignados</label>
+                        <table class="table table-hover" id="tbl_roles">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Rol Principal</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_body_roles">
+@*                                <tr>
+                                    <td>Administrador de dependencias</td>
+                                    <td>
+                                        <input type="radio" name="optradio" checked>
+                                    </td>
+                                    <td><button type="button" class="btn btn-primary" title="Borrar rol" id="EditarUsuario"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Administrador de dependencias</td>
+                                    <td>
+                                        <input type="radio" name="optradio">
+                                    </td>
+                                    <td><button type="button" class="btn btn-primary" title="Borrar rol" id="EditarUsuario"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Responsable de contrato</td>
+                                    <td>
+                                        <input type="radio" name="optradio">
+                                    </td>
+                                    <td><button type="button" class="btn btn-primary" title="Borrar rol" id="EditarUsuario"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                </tr>*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-5">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-check hidden">
+                            <input class="form-check-input" type="checkbox" value="" id="SuperUser_ed">
+                            <label class="form-check-label" for="SuperUser_ed">
+                                Super Usuario
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="EditarUsuario">Editar</button>
+                    <button type="button" id="Close" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

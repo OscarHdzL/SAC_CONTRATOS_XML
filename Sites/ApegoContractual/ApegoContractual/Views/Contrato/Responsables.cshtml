@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Responsables";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+@section ViewScripts{
+    <script src="~/Resources/AsignacionResponsabilidades/Jquery.Responsables.js"></script>
+}
+<input type="hidden" id="IdDependencia" value="06015F20-B402-4FD0-8A97-9C5786656D9B" />
+<input type="hidden" id="IdInstancia" value="260B3331-237B-41EF-9DDF-010EB8187C91" />
+<input type="hidden" id="IdContrato" value="539C111A-4F07-48FE-81F6-0F21BB274509" />
+<input type="hidden" id="IdFuncion" value="" />
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Registro de Responsabilidades</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="AddResponsables" data-toggle="tooltip"
+                        title="Agregar Obligación">
+                    Asignar responsabilidades
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-3">
+                        <label>Ingrese la responsabilidad</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="text" id="txtFuncion" class="form-control" placeholder="Ingrese la responsabilidad" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12" align="center">
+                    <button class="btn btn-primary" id="AddFuncion">Guardar</button>
+                    <button class="btn btn-danger" id="Cerrar">Cancelar</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="Responsabilidades" class="display nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Función</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

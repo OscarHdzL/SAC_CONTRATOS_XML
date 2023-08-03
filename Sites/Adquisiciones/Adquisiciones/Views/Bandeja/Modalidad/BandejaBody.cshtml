@@ -1,0 +1,86 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+@using BandejasItems = SistemaDeAdquisiciones.Models.BandejasItems;
+@using ModeloSolicitud = SistemaDeAdquisiciones.Models.tbl_solicitud;
+@using ModeloBandejaItem = SistemaDeAdquisiciones.Models.elementos_bandeja
+
+@model BandejasItems
+
+@{
+
+    List<Guid> Lst = new List<Guid>();
+
+    ModeloBandejaItem BandejaItem = (ModeloBandejaItem)Model.EntidadBandeja;
+    List<ModeloSolicitud> Solicitudes = (List<ModeloSolicitud>)Model.Solicitudes;
+
+
+    //Guid RolUsuario = Guid.Parse(HttpContextAccessor.HttpContext.Session.GetString("IdRolUsuario"));
+    //HttpClient clienteHttp = new HttpClient();
+
+    //clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    //clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    //clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    ////se
+    //HttpResponseMessage request = await clienteHttp.GetAsync("SerSolicitud/Get/" + RolUsuario.ToString() + "/" + BandejaItem.parametro1);
+
+
+    //if (request.IsSuccessStatusCode)
+    //{
+    //    String obj = await request.Content.ReadAsStringAsync();
+    //    List<ModeloSolicitud> Solicitudes = JsonConvert.DeserializeObject<List<ModeloSolicitud>>(obj);
+
+
+
+		<input type="hidden" id="tsxt_solicitud_hd" />
+		<input type="hidden" id="NumSol_hd" />
+
+		<div id="@BandejaItem.identificador_pestana" style="display:none" class="tabcontent">
+			<table id="tbl_@BandejaItem.identificador_pestana" class="display eachTbl" style="width:100%">
+				<thead>
+					<tr>
+						<th>Num. solicitud</th>
+						<th>Tipo solicitud</th>
+						<th>Proyecto</th>
+						<th>Área</th>
+						<th>Fecha solicitud</th>
+						<th>Detalles</th>
+					</tr>
+				</thead>
+				<tbody>
+					@*@foreach (PMS.Entrega.Datos.ContextoSac.tbl_Modalidad item in Modalidad)
+                    {
+						<tr>
+							@{
+                                String Txt = (item.FaltaDocumentacion == null ? false : true) ? "Completo" : "Incompleto";
+                                String Bag = (item.FaltaDocumentacion == null ? false : true) ? "bagComplete" : "bagIncomplete";
+
+                                String TxtJ = (item.RequiereJustificacion == null ? false : true) ? "Completo" : "Incompleto";
+                                String BagJ = (item.RequiereJustificacion == null ? false : true) ? "bagComplete" : "bagIncomplete";
+
+							}
+							<td>@item.tbl_Solicitud.NumSolicitud</td>
+							<td>@item.tbl_tipo_Modalidad.Modalidad</td>
+							<td>@item.tbl_tipo_licitacion.Licitacion</td>
+							<td class="text-center"><label class='@Bag'>@Txt</label></td>
+							<td class="text-center"><label class='@BagJ'>@TxtJ</label></td>
+							<td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.Controller, new { id = item.tbl_Solicitud_id }, null)</td>
+
+
+						</tr>
+                                }*@
+
+				</tbody>
+
+			</table>
+		</div>
+        //}
+}
+
+
+

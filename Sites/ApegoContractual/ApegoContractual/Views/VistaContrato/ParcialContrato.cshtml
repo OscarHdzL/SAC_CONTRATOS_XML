@@ -1,0 +1,75 @@
+﻿@model Guid
+
+<style>
+
+    .VisCont {
+        color: black;
+        font-size: 80%;
+        border: 0px solid #ccc;
+        height: 1%;
+        border-radius: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background-color: white !important;
+    }
+
+    .VisContLbl {
+        font-size: 80%;
+        color: lightslategray;
+    }
+
+    .bb {
+        background-color: #D2D6DE;
+        border-radius: 31px;
+    }
+
+    .b {
+        border-radius: 31px;
+    }
+</style>
+
+<input type="hidden" id="idcontrato_VistaContrato" value="@Model" />
+<div class="box box-default b">
+    <div class="box-body bb">
+
+        <div id="Div_VistaContrato" class="col-xs-12">
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Número de contrato</label>
+                    <input type="text" disabled id="txt_numcon" style="color:red; font-weight:900;text-align:center;" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Nombre de contrato</label>
+                    <input type="text" disabled id="txt_nomcont" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-6 text-center">
+                    <label class="VisContLbl">Objeto de contrato</label>
+                    <input type="text" disabled id="txt_objcon" class="form-control VisCont" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Monto máximo</label>
+                    <input type="text" disabled id="txt_monmax" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Monto mínimo</label>
+                    <input type="text" disabled id="txt_monmin" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Fecha inicio</label>
+                    <input type="text" disabled id="txt_finicio" class="form-control txt_finicio  VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Fecha fin</label>
+                    <input type="text" disabled id="txt_ffin" class="form-control txt_ffin  VisCont" />
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="txt_dependencia_contrato_v" />
+    </div>
+
+
+</div>

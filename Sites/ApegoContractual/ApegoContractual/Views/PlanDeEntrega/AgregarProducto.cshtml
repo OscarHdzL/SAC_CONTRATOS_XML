@@ -1,0 +1,165 @@
+﻿@*Sin servicios*@
+
+<input type="hidden" id="HD_idUbicacion" value="" />
+<input type="hidden" id="HD_idEjecutor" value="" />
+<input type="hidden" id="HD_idElemento" value="" />
+<input type="hidden" id="HD_nombreUbicacion" value="" />
+<select style="visibility:hidden" name="DropProductosGlobal" id="DropProductosGlobal" class="form-control DropProductosGlobal clean">
+</select>
+
+<div class="modal" id="ModalAgregarProducto" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModalProducto();" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="TitleModalProducto"></h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Producto</label>
+                        <br />
+                        <select name="DropProductos" id="DropProductos" onclick="" class="form-control DropProductos clean">
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <label>Clave de producto</label>
+                        <br />
+                        <input type="text" id="txtClaveProducto" disabled class="form-control" />
+                    </div>
+
+                    <div class="col-lg-3">
+                        <label>Cantidad total</label>
+                        <br />
+                        <input type="text" id="txtCantidadTotal" disabled class="form-control" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Cantidad</label>
+                        <br />
+                        <input type="number" id="txtCantidad" min="1" class="form-control input-number" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Monto</label>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanEP" id="Monto">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Monto del IVA</label>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanEP" id="MontoIVA" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Total</label>
+                        <br />
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control CleanEP" id="Total" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">                                        
+                    <div class="col-lg-12 listado-obligaciones" style="padding-top: 20px;">
+                        
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-lg-12" align="left">
+                        <button class="btn btn-success" id="AgregarProducto">Agregar</button>
+                    </div>
+                    <div class="col-lg-12" align="left">
+                        <button class="btn btn-danger" id="CancelarVerProducto" hidden>Cancelar</button>
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="row air" style="margin-top: 2%;">
+
+
+                    <div class="col-lg-12">
+
+                        <table id="tbl_productos" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="C1_hd">JSON</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Acción</th>
+                                    <th>ID</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12" align="right">
+                    <button class="btn btn-primary" id="GuardarProductos">Guardar</button>
+                    <button class="btn btn-danger" onclick="CerrarModalProducto();">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*////Editar producto  *@
+@*<div class="modal" id="ModalEditarProducto" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="WIDTH: 80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="TitleModalEditarProducto"></h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>Cantidad</label>
+                            <br />
+                            <input type="text" id="txtCantidad" class="form-control" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-lg-12" align="center">
+                        <button class="btn btn-primary" id="AgregarProducto">Agregar</button>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <br />
+                    <br />
+                    <br />
+                    <div class="col-lg-12" align="right">
+                        <button class="btn btn-primary" id="GuardarProductos">Guardar</button>
+                        <button class="btn btn-danger" onclick="CerrarModalProducto();">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+

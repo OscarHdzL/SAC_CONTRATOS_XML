@@ -1,0 +1,173 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+    ViewBag.Title = "Index";
+    if (@HttpContextAccessor.HttpContext.Session.GetString("Contrato") != "")
+    {
+        Layout = "~/Views/MasterPages/Master_SinContrato.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/MasterPages/Master_SinContrato.cshtml";
+    }
+    <!--breadcrumb Dictionary-->
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Productos y servicios");
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+    <script src="~/Resources/ProductoServicio/Jquery.ProductoServicio.js"></script>
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+@*<input type="hidden" id="hdnId" name="hdnId" />
+<input type="hidden" id="hdnIdInstancia" name="hdnIdInstancia" value="@HttpContextAccessor.HttpContext.Session.GetString("IdInstancia")" />
+<input type="hidden" id="hdnIdDependencia" name="hdnIdDependencia" value="@HttpContextAccessor.HttpContext.Session.GetString("IdDependencia")" />
+<input type="hidden" id="hdnIdUsuarioAlta" name="hdnIdUsuarioAlta" value="@HttpContextAccessor.HttpContext.Session.GetString("IdUsuario")" />*@
+
+<input type="hidden" id="hdnId" name="hdnId" />
+<input type="hidden" id="hdnIdDependencia" name="hdnIdDependencia" value="442a01d4-3639-11ea-82d7-00155d1b3502" />
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+<section class="content">
+
+    <div class="box">
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Registro de productos (bienes y/o servicios)</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="btn-abrir-modal-guardar" data-toggle="tooltip"
+                        title="Agregar producto o servicio">
+                    Agregar producto o servicio
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+                @*<button type="button" id="btnCargaMasiva" class="btn btn-box-tool" title="Carga masiva">
+                    Carga masiva
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>*@
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="box-header with-border"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="tbl_productoservicio" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Clave de producto</th>
+                                <th>Especificación del bien o servicio</th>
+                                <th>Unidad de medida</th>
+                                <th>Tipo</th>
+                                <th>Comentarios</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para cargar excel de carga masiva de contratos -->
+<div id="modalCargaMasiva" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Carga masiva de productos o servicios</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Archivo</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input type="file" id="archivo" name="archivo" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnRealizarCargaMasiva" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalGuardarProductoServicio" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="width: 70%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close Clear" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="tituloPS">Alta de producto o servicio</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    @*<div class="col-lg-3">
+                        <label id="lblIdProductoServicio">Número</label>
+                        <input class="form-control campo-formulario" id="idProductoServicio" value="" type="text" placeholder="Número" />
+                    </div>*@
+                    <div class="col-lg-3">
+                        <label id="lblClaveProducto">Clave</label>
+                        <input class="form-control campo-formulario" id="claveProducto" type="text" maxlength="20" placeholder="Clave"/>
+                    </div>
+                    <div class="col-lg-9">
+                        <label id="lblElemento">Nombre</label>
+                        <input class="form-control campo-formulario" id="elemento" type="text" placeholder="Nombre del producto/servicio"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label id="">Tipo</label>
+                        <select class="form-control tbl_prodserv campo-formulario">
+                            <option>Seleccione...</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Unidad de medida</label>
+                        <select class="form-control cmb_unidadmedida clean">
+                            <option>Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label id="lblDescripcionElemento">Descripción</label>
+                        @*<input class="form-control campo-formulario" id="descripcionElemento" type="text" maxlength="1000" placeholder="Descripción" />*@
+                        <textarea class="form-control campo-formulario" id="descripcionElemento" type="text" maxlength="1000" placeholder="Descripción" ></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label id="lblComentarios">Comentarios</label>
+                        <textarea class="form-control campo-formulario" id="txtComentarios" maxlength="1000" placeholder="Comentarios"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger Clear" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

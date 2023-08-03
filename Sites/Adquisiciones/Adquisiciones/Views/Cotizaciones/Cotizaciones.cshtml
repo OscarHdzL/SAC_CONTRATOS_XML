@@ -1,0 +1,63 @@
+﻿@model Guid
+@{
+    ViewBag.Title = "Cotizaciones";
+    ViewBag.Description = "Cotizaciones";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    //Guid Sol = PMS.Adquisiciones.Negocio.ConvocatoriaNeg.getSol(Model);
+
+    //FileManager.FileManager FileM = new FileManager.FileManager("EndPointDesCarga");
+}
+@section ViewScripts{
+    <script src="~/Resources/Cotizaciones/Jquery.Cotizaciones.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Licitante/Jquery.LicitanteCotizacion.js"></script>
+
+}
+@section ViewStyles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+
+    </h1>
+</section>
+<br />
+
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+@*<input type="hidden" value="@Sol.ToString()" id="HDSOL_Agenda" />
+    <input type="hidden" value="@Model" id="HDConv_" />*@
+
+
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de licitante(s)</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+        @await Html.PartialAsync("~/Views/Licitante/Index_Cotizacion.cshtml")
+        @*@Html.Partial("~/Views/Licitante/Index_Cotizacion.cshtml", Model)*@
+
+    </div>
+    <div class="box-footer">
+        <div class="col-lg-12" align="center">
+            <br />
+            <button class="btn btn-info" onclick="AvanzaFaseActas()">Avanzar de fase</button>
+
+            <button class="btn btn-danger" id="Cerra15" onclick="GoBandeja();">Cancelar</button>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "Alta convocatoria";
+    ViewBag.Description = "Alta convocatoria";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+}
+@section ViewScripts{
+    <script src="~/Resources/Convocatoria/Jquery.convocatoria.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.responsable.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.requerimientos.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.condiciones.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.criterio.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.documentos.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.pagos.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.penalizaciones.js"></script>
+    <script src="~/Resources/Convocatoria/Jquery.publicar.js"></script>
+
+}
+@section ViewStyles{
+    <link href="~/Resources/Convocatoria/Convocatoria.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+}
+
+<input type="hidden" id="_SOLICITUD" value="@ViewBag.id_solicitud" />
+<input type="hidden" id="id_convocatoria" value="" />
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>Folio de convocatoria:</label>
+                            <input type="text" class="form-control input_con" id="txt_folio_con" placeholder="Folio de convocatoria" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Número solicitud:</label>
+                            <input type="text" class="form-control input_con" id="txt_num_sol" disabled />
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Folio procedimiento:</label>
+                            <input type="text" class="form-control input_con" id="txt_folio_proc" placeholder="Folio procedimiento" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>Tipo de licitación:</label>
+                            <input type="text" class="form-control" id="txt_tipo_licitacion" disabled />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Área contratante:</label>
+                            <input type="text" class="form-control" id="txt_area" placeholder="Área contratante" disabled />
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Fecha:</label>
+                            <br />
+                            <div class='input-group date' id="datetimepicker_conv">
+                                <input type='text' id="txt_fecha" class="form-control input_con" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <label>Descripción bien o servicio</label>
+                            <textarea class="form-control" id="txt_descripcion" style="resize:none" rows="2" disabled></textarea>
+                        </div>
+                        <div class="col-lg-3">
+                            <br />
+                            <br />
+                            <button type="button" class="btn btn-success btn_con_save">Guardar</button>
+                            <button type="button" class="btn btn-danger btn_con_cancel">Cancelar</button>
+                        </div>
+                    </div>
+
+
+
+                    <div style="display:none" class="row air tabspanel">
+
+
+                        <div id="exTab1" class="container forConteiner">
+                            <ul class="nav nav-pills">
+                                <li class="active text-center">
+                                    <a href="#1a" data-toggle="tab">Responsable </a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#2a" data-toggle="tab" id="get_table1">Requerimientos</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#5a" data-toggle="tab">Penalizaciones</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#3a" data-toggle="tab">Condiciones</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#6a" data-toggle="tab">Pagos</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#4a" data-toggle="tab">Criterios</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#7" data-toggle="tab">Documentación</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#10" data-toggle="tab" onclick="Validar_pub();">Publicar</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content clearfix">
+
+                                @await Html.PartialAsync("Responsable")
+                                @await Html.PartialAsync("Obligaciones")
+                                @await Html.PartialAsync("Penalizaciones")
+                                @await Html.PartialAsync("Condiciones")
+                                @await Html.PartialAsync("Pago")
+                                @await Html.PartialAsync("Criterio")
+                                @await Html.PartialAsync("Documentos")
+                                @await Html.PartialAsync("Publicar")
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

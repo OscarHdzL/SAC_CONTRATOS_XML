@@ -1,0 +1,63 @@
+﻿@*Sin servicios*@
+
+@*@model PMS.ApegoContractual.Datos.ContextoApegoContractual.tbl_PlanEntrega_ac*@
+
+
+<style>
+
+    .VisCont {
+        color: black;
+        font-size: 80%;
+        border: 0px solid #ccc;
+        height: 1%;
+        border-radius: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background-color: white !important;
+    }
+
+    .VisContLbl {
+        font-size: 80%;
+        color: lightslategray;
+    }
+
+    .bb {
+        background-color: #D2D6DE;
+        border-radius: 31px;
+    }
+
+    .b {
+        border-radius: 31px;
+    }
+</style>
+<br />
+<input type="hidden" id="idcontrato_VistaContrato" value="@Model.tblent_contrato_id" />
+<div class="box box-default b">
+    <div class="box-body bb">
+
+        <div id="Div_VistaContrato" class="col-xs-12">
+
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Identificador</label>
+                    <input type="text" value="@Model.tbl_PlanEntregaDetalle_ac.Identificador" disabled id="" style="color:red; font-weight:900;text-align:center;" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Descripción</label>
+                    <input type="text" value="@Model.tbl_PlanEntregaDetalle_ac.Descripcion" disabled id="" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Ejecución</label>
+                    <input type="text" value="@Model.tbl_PlanEntregaDetalle_ac.Ejecucion" disabled id="" class="form-control VisCont" />
+                </div>
+                <div class="col-lg-3 text-center">
+                    <label class="VisContLbl">Tipo</label>
+                    <input type="text" value="@Model.tbl_PlanEntregaDetalle_ac.Tipo" disabled id="" class="form-control VisCont" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

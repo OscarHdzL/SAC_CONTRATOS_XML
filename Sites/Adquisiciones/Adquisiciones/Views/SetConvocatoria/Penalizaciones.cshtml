@@ -1,0 +1,124 @@
+﻿<input type="hidden" id="json_hd" />
+
+<div class="tab-pane" id="5a">
+
+    <div class="row">
+        <div class="col-lg-8">
+            <label>Penalización:</label>
+            <input type="text" class="form-control clr" id="input_Penalizacion" placeholder="Penalización" />
+        </div>
+        <div class="col-lg-4">
+            <label>Porcentaje máximo de penalización</label>
+            <div class="input-group">
+                <input type="number" class="form-control clr" id="txt_porcentaje_pena" placeholder="Ingrese el %" />
+                <span class="input-group-addon">%</span>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <label>Porcentaje máximo de deductivas</label>
+            <div class="input-group">
+                <input type="number" class="form-control clr" id="txt_porcentaje_deduc" placeholder="Ingrese el %" />
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <label>Porcentaje de garantía</label>
+            <div class="input-group">
+                <input type="number" class="form-control clr" id="txt_porcentaje_garantia" placeholder="Ingrese el %" />
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <label>Monto de garantía</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control clr" id="txt_monto_garantia" placeholder="0.00" />
+            </div>
+            
+        </div>
+    </div>
+    <div class="row" style="padding:5px">
+            <div align="center">
+                <button class="btn btn-success btn_Add_Pena"> Agregar </button>
+            </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="tbl_penalizaciones" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Folio conv.</th>
+                        <th>Penalización</th>
+                        <th>% de penalizacion</th>
+                        <th>% de deductiva</th>
+                        <th>% de garantia</th>
+                        <th>Monto de garantía</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="id_conv_pena" value=""/>
+<div id="Modal_Penalizaciones_Upd" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar penalización</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <label>Penalización:</label>
+                        <input type="text" class="form-control clr" id="input_Penalizacion_upd" placeholder="Penalización" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Porcentaje máximo de penalización</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control clr" id="txt_porcentaje_pena_upd" placeholder="Ingrese el %" />
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Porcentaje máximo de deductivas</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control clr" id="txt_porcentaje_deduc_upd" placeholder="Ingrese el %" />
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Porcentaje de garantía</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control clr" id="txt_porcentaje_garantia_upd" placeholder="Ingrese el %" />
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Monto de garantía</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control clr" id="txt_monto_garantia_upd" placeholder="0.00" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_pena">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

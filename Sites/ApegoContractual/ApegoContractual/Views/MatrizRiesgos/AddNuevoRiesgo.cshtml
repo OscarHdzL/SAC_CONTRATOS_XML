@@ -1,0 +1,85 @@
+﻿
+ <input type="hidden" id="IdMR" value="" />
+
+<div id="ModalNuevoRiesgo" class="modal modal-child" role="dialog">
+    <div class="modal-dialog" style=" width: 80%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="cerrarMMR" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="tituloM">Agregar un nuevo riesgo</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Riesgo identificado</label>
+                        <textarea id="txtRiesgo" rows="2" class="form-control Clean" style=" resize: none" placeholder="Digite el riesgo"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Categorización del riesgo</label>
+                        <br />
+                        <select name="CatRiesgo" id="CatRiesgo" class="form-control CatRiesgo Clean">
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Probabilidad</label>
+                        <br />
+                        <select name="Probabilidad" id="Probabilidad" class="form-control Probabilidad Clean">
+                          
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Impacto</label>
+                        <br />
+                        <select name="Impacto" id="Impacto" class="form-control Impacto Clean">
+                            
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Prioridad</label>
+                        <br />
+                        <input type="text" id="txtPrioridad" class="form-control Prioridad Clean" disabled />
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="col-lg-6">
+                        <label>Obligaciones Relacionados</label>
+                        <input type="text" id="Obligaciones" class="form-control Obligaciones Clean" disabled />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Responsable</label>
+                        <select name="Responsable" id="Responsable" class="form-control Responsable Clean">
+                        </select>
+                    </div>
+                </div>*@
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Tipo de respuesta</label>
+                        <br />
+                        <select name="TipoRespuesta" id="TipoRespuesta" class="form-control TipoRespuesta Clean">
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Acción de mitigación</label>
+                        <input type="text" id="txtAccioM" class="form-control Clean" placeholder="Acción de mitigación" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Resultado de acciones de certificaciones</label>
+                        <textarea id="txtAccionCertificacion" rows="2" class="form-control Clean" style=" resize: none" placeholder="Digite resultado"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" aling="center">
+                <div align="center">
+                    <button class="btn btn-primary" id="AddNuegoR">Registrar Riesgo</button>
+                    <button class="btn btn-danger" id="cerrarMMR" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

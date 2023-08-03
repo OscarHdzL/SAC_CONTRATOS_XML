@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.Title = "Bandeja de pendientes";
+    ViewBag.Description = "Bandeja de pendientes";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+
+@section ViewScripts{
+    <script src="~/Resources/Bandejas/Jquery.Bandeja.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/Resources/Justificacion/Entidad.js"></script>
+    <script src="~/Resources/Justificacion/Jquery.Justificacion.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Licitante/Jquery.Licitante.js"></script>
+    <script src="~/Resources/Funcionarios publicos/Jquery.Funcionarios.js"></script>
+
+}
+@section ViewStyles{
+    <link href="~/Content/Recursos/Bandeja/bandeja.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+
+
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Bienvenido al Sistema de Adquisiciones</h3>
+            <div class="box-tools pull-right">
+
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-lg-12 text-center">
+
+                <img id="logo_inicio" style="max-width:100%; width:540px;" />
+                @*<img src="https://snaphoto.com.mx/wordpress/wp-content/uploads/2018/12/GRUPO-PM-540x347.png" style="max-width:100%; width:540px;" />*@
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+

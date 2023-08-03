@@ -1,0 +1,90 @@
+﻿
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Home\Index", "Inicio");
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Reporte notificación de sanciones");
+
+    Guid idcontrato = Model;
+
+
+
+}
+
+@section ViewScripts{
+
+
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+    <script src="~/Resources/NotificacionSanciones/Jquery.ReporteNotificacionSanciones.js"></script>
+
+    @*<script src="~/Resources/PlanEntrega/fileStyle.js"></script>*@
+}
+
+<input type="hidden" id="txt_hdd_contrato" value="@idcontrato" />
+<input type="hidden" id="txt_PE" value="@idcontrato" />
+<input type="hidden" id="idContrato" value="@idcontrato" />
+
+
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+<section class="content">
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", idcontrato)
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Reporte notificación de sanciones </h3>
+            <div class="box-tools pull-right">
+
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label>Periodo de búsqueda</label>
+                    <div class="col-lg-10">
+                        <div class='input-group date' id='datetimepicker10'>
+                            <input type='text' id='datetimepicker11' class="form-control" placeholder="Indique la fecha (MM/YYYY)" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-primary" id="Buscar">Listar</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="NotificacionSanciones" class="display nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Identificador</th>
+                                <th>Periodo</th>
+                                <th>Descripción</th>
+                                <th>Fecha de Ejecución</th>
+                                <th>Tipo de entrega</th>
+                                <th>Cumplió PE</th>
+                                <th>Ver ubicaciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@await Html.PartialAsync("ReporteSancionesUbicaciones")
+@await Html.PartialAsync("ReporteSancionesProductos")
+@await Html.PartialAsync("ReporteSancionesObligaciones")

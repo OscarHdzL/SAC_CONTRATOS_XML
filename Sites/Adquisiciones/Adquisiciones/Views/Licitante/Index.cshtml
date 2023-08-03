@@ -1,0 +1,96 @@
+﻿@model Guid
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Licitante/Jquery.Licitante.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>Ingresa RFC del licitante</label>
+    </div>
+
+    <div class="col-lg-3">
+
+        <input maxlength="13" type="text" class="form-control txt_RFCs" />
+    </div>
+    <div class="col-lg-1">
+        <button class="btn btn-success" onclick="validacion_tipo_solicitud();">Agregar</button>
+    </div>
+</div>
+
+
+<div class="row air" style="margin-top: 4%;">
+    <div class="col-lg-12">
+
+        <table id="tbl_Licitacion_v2" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Obligación</th>
+                    <th>Tipo de obligación</th>
+                    <th>ID</th>
+                    <th>ID</th>
+                    <th>Estatus</th>
+
+
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+<div id="altalicitante" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alta Licitante</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Nombre R.L.</label>
+                        <input class="form-control NombreRL" type="text" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Apellido paterno R.L.</label>
+                        <input class="form-control PaternoRL" type="text" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Apellido materno R.L:</label>
+                        <input class="form-control MaternoRL" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Razón social</label>
+                        <input class="form-control RazonSocialRL" type="text" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>RFC</label>
+                        <input class="form-control RFCRL" type="text" />
+                    </div>
+                    <div class="col-lg-4"></div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success newLic">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

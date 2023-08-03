@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AdministracionContractual.estructura_lista_dep_areas>
+
+@if (Model != null && Model.Count() > 0)
+{
+
+        <ul id="lista2">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <a style="cursor: pointer" onclick="obtener_cap_gastos('@item.IdItem','@item.TipoItem', '@item.Texto')">
+                            <i class="fa fa-angle-double-right"></i>
+                            @item.Texto
+                        </a>
+                        @*@Html.ActionLink(item.Texto, "TablaPartidas", "Presupuesto", new { @id1 = item.IdItem, @id2 = item.TipoItem, @idEjercicio = ViewBag.IdEjercicio },
+                                                                                        new { @class = "", onclick = "titulo('" + item.Texto + "','" + item.IdItem + "');" })*@
+                        @if (item.Hijos != null)
+                        {
+
+                            @await Html.PartialAsync("_estructura", item.Hijos)
+                        
+                            
+                        }
+
+                    </li>
+                }
+        </ul>
+ }

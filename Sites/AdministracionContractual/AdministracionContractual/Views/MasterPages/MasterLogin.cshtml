@@ -1,0 +1,49 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using AdmonContratos = AdministracionContractual;
+
+@inject IOptions<AdmonContratos.EndPointAdmon> OptionsApplicationConfiguration
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/admin-lte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/admin-lte/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="~/Styles/Layout/Layout.css" />
+
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    @RenderSection("ViewStyles", required: false)
+</head>
+<body>
+    <input type="hidden" id="EndPointAdmon" value="http://107.178.210.37:8081/EndPoint/" />
+    <div class="content-wrapper">
+        @RenderBody()
+    </div>
+
+    @await Html.PartialAsync("~/Views/MasterPages/Loader.cshtml")
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/admin-lte/js/adminlte.min.js"></script>
+    <script src="~/Resources/Layout/Jquery.Layout.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script type="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    @RenderSection("ViewScripts", required: false)
+</body>
+</html>

@@ -1,0 +1,509 @@
+{
+  "ReRoutes": [
+
+    {
+      "DownstreamPathTemplate": "/usuarios/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerUsuario/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/FileManager/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/AdminArchivos/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/Sidebar/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Sidebar/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/areas/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerAreas/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/dependencia/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerDependencia/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/solicitud/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerSolicitud/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/proyectos/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerProyectos/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/responsablessolicitud/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerRespSolic/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/ProgramacionEventos/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Eventos/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/partidaarea/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerPartidaArea/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/Modalidad/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Modalidad/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/solicitudjustificacion/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerJustificacion/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/ElementosBandeja/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerElementosBandeja/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/Convocatoria/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Convocatoria/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/Licitante/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerLicitante/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/solicitudfuncionario/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/SerSolicitudFuncionario/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/JuntaAclaracion/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/JuntaAclaracion/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/visitasitio/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/VisitaSitio/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/Apertura/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Apertura/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/controlevaluacion/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/ControlEvaluacion/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/remitidas/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Remitidas/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/proposiciones/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Proposiciones/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+    {
+      "DownstreamPathTemplate": "/Fallo/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Fallo/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    }
+	,
+    {
+      "DownstreamPathTemplate": "/avanzarfase/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/AvanzarFase/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    }
+	,
+    {
+      "DownstreamPathTemplate": "/Comentario/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/Comentario/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    },
+	    {
+      "DownstreamPathTemplate": "/MesaValidacion/{path}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.2.15.40",
+          "Port": 6504
+        }
+      ],
+      "UpstreamPathTemplate": "/EndPoint/MesaValidacion/{path}",
+
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "ReRouteIsCaseSensitive": true
+    }
+
+
+
+
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://10.2.15.40:6501"
+  }
+}

@@ -1,0 +1,53 @@
+﻿<script>
+    $(".text-login").keyup(function (e) {
+        if (e.keyCode == 13) {
+            ValidarLogin();
+        }
+    });
+</script>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <br />
+        <br />
+        <p>MÓDULO DE DATOS MAESTROS</p>
+        <p>Usuario:</p>
+        <input type="text" id="Usuario" class="form-control text-login" placeholder="Usuario" />
+        <p>Contraseña:</p>
+        <input type="password" id="Contrasena" class="form-control text-login" placeholder="Contraseña" />
+        <input type="checkbox" onclick="myFunction()" id="showpass">
+        <label class="form-check-label" for="showpass">
+            ver contraseña
+        </label>
+        <br />
+    </div>
+</div>
+@*<div class="row">
+    <div>
+
+        @Model.Usuario
+
+    </div>
+</div>*@
+<div class="row" style="margin-top:15px">
+    <div class="col-md-6 col-md-offset-3">
+        <button type="submit" class=" btn-login btn btn-success btn-block btn-rounded z-depth-1" id="btnLogin" onclick="ValidarLogin()">Acceder</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+    </div>
+    @*<div class="col-md-12" style="display:none">*@
+    <div class="col-md-12">
+        <p class="font-login grey-text d-flex justify-content-end">
+            <a onclick="recupass();" class="orange-text ml-1 mb-1 font-weight-bold" style="color:#797979">¿No recuerdas tu contraseña?</a>
+        </p>
+        <br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Regresar</button>
+        <br />
+        <br />
+
+    </div>
+</div>
+@*}*@

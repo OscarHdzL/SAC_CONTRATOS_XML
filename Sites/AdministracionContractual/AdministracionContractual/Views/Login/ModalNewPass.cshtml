@@ -1,0 +1,32 @@
+﻿
+    <div class="modal" id="ModalNewPass" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input type="hidden" id="id_user" value="" />
+        <div class="modal-dialog" role="document" style="WIDTH: 32%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="exampleModalLabel">Actualiza contraseña</h3>
+                </div>
+                <div class="row" style="text-align:center">
+                    <div class="col-md-6 col-md-offset-3">
+                        <p>Contraseña nueva:</p>
+                        <input type="password" id="Contrasena_n" class="form-control text-login Clean" placeholder="Contraseña" />
+                        <p>Repita contraseña:</p>
+                        <input type="password" id="Contrasena_r" class="form-control text-login Clean" placeholder="Repita contraseña" />
+                        <input type="checkbox" onclick="myFunctionb();" id="showpass_mod">
+                        <label class="form-check-label" for="showpass_mod">
+                            ver contraseña
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div align="center">
+                        <button type="button" onclick="ActPassw()" class="btn btn-success ActCon">Actualizar</button>
+                        <button type="button" onclick="recovePassw()" class="btn btn-success recupcon" id="recupcon" hidden>Restaurar contraseña</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

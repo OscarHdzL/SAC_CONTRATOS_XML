@@ -1,0 +1,132 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+@using BandejasItems = SistemaDeAdquisiciones.Models.BandejasItems;
+@using ModeloSolicitud = SistemaDeAdquisiciones.Models.tbl_solicitud;
+@using ModeloBandejaItem = SistemaDeAdquisiciones.Models.elementos_bandeja;
+
+@model BandejasItems
+
+@{
+    List<Guid> LST = new List<Guid>();
+
+    ModeloBandejaItem BandejaItem = (ModeloBandejaItem)Model.EntidadBandeja;
+    List<ModeloSolicitud> Solicitudes = (List<ModeloSolicitud>)Model.Solicitudes;
+
+
+    //Guid RolUsuario = Guid.Parse(HttpContextAccessor.HttpContext.Session.GetString("IdRolUsuario"));
+    //HttpClient clienteHttp = new HttpClient();
+
+    //clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    //clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    //clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    ////se
+    //HttpResponseMessage request = await clienteHttp.GetAsync("SerSolicitud/Get/" + RolUsuario.ToString() + "/" + BandejaItem.parametro1);
+
+
+    //if (request.IsSuccessStatusCode)
+    //{
+    //    String obj = await request.Content.ReadAsStringAsync();
+    //    List<ModeloSolicitud> Solicitudes = JsonConvert.DeserializeObject<List<ModeloSolicitud>>(obj);
+
+
+        <div id="@BandejaItem.identificador_pestana" style="display:none; width:80%" class="tabcontent" >
+
+            <table id="tbl_@BandejaItem.identificador_pestana" class="display eachTbl" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Num. solicitud</th>
+                        <th>Tipo solicitud</th>
+                        <th>Proyecto</th>
+                        <th>Área</th>
+                        <th>Fecha solicitud</th>
+                        <th>Detalles</th>
+                        <th>Asignar responsables</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ModeloSolicitud item in Solicitudes)
+                    {
+                        if (!LST.Contains(item.id))
+                        {
+                            LST.Add(item.id);
+                    <tr>
+                        <td>@item.num_solicitud</td>
+                        <td>@item.tipo_solicitud</td>
+                        <td>@item.proyecto</td>
+                        <td>@item.area</td>
+                        <td>@item.fecha_solicitud.ToShortDateString()</td>
+                        @if (BandejaItem.controller.Trim() == "Solicitud")
+                        {
+                            if (BandejaItem.parametro2 == "Modalidad")
+                            {
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "setconvocatoria")
+                            {
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "Adquisiciones")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "JuntaAclaraciones")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "Cotizaciones")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "Fallo")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "ControlEvaluacion")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "VisitaSitio")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "ActaApertura")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+                            }
+                            else if (BandejaItem.parametro2 == "Proposiciones")
+                            {
+
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.parametro2, new { id = item.id }, null)</td>
+
+                            }
+                            else
+                            {
+                                <td>@Html.ActionLink("Link", BandejaItem.accion, BandejaItem.controller, new { id = item.id }, null)</td>
+                            }
+
+                        }
+
+                        <td>@item.id</td>
+
+                    </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    @*}*@
+}

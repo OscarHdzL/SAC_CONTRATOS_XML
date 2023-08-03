@@ -1,0 +1,202 @@
+﻿@model Guid
+
+@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+
+
+@{
+    ViewBag.Title = "IntegracionPrecios";
+    ViewBag.Description = "Estudio de mercado";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/EstudioMercado/Jquery.EstudioMercado.js"></script>
+}
+
+<input type="hidden" id="id_solicitud" value="@Model" />
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+
+    </h1>
+</section>
+<br />
+
+
+<div class="box box-default exist" id="autorizacion_sufic">
+    <div class="box-header with-border">
+        <h4 class="box-title">Suficiencia presupuestal</h4>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Fecha de solicitud de suficiencia:</label>
+                <input type="text" id="fecha_sol_suf" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Fecha de autorización de suficiencia:</label>
+                <input type="text" id="f_autrz" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Folio de autorización:</label>
+                <input type="text" id="foli_autrz" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Autorizó:</label>
+                <input type="text" id="autorizo" class="form-control" disabled />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Fuente de financiamiento:</label>
+                <input type="text" id="fuen_financ" class="form-control" disabled />
+            </div>
+            <div class="col-lg-6">
+                <label>Comentarios:</label>
+                <textarea id="Comentarios" rows="2" class="form-control Clean" style="resize: none" disabled></textarea>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="datos_basicos">
+    <div class="box-header with-border">
+        <h4 class="box-title">Datos básicos de solicitud</h4>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Folio de solicitud:</label>
+                <input type="text" id="folio_sol" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Tipo de solicitud:</label>
+                <input type="text" id="tipo_solic" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Tipo de contrato:</label>
+                <input type="text" id="tipo_contrato" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Fecha de solicitud:</label>
+                <input type='text' id="fecha_solicitud" class="form-control Clean" disabled />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="responsables">
+    <div class="box-header with-border">
+        <h4 class="box-title">Responsables</h4>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Elaboró:</label>
+                <input type="text" id="elaboro" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Dependencia:</label>
+                <input type="text" id="dependencia" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Área solicitante:</label>
+                <input type="text" id="area_solic" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Solicitante:</label>
+                <input type="text" id="solicitante" class="form-control" disabled />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="detalle_solic">
+    <div class="box-header with-border">
+        <h4 class="box-title">Detalle de solicitud</h4>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Proyecto:</label>
+                <input type="text" id="proyecto" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Nombre de bien o servicio:</label>
+                <input type="text" id="serv_bien" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3">
+                <label>Monto a autorizar:</label>
+                <input type="text" id="mon_autor" class="form-control" disabled />
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="visita_sitio" disabled>
+                    <label class="form-check-label" for="visita_sitio">
+                        Requiere visita a sitio
+                    </label>
+                </div>
+                <button class="btn btn-info btn-sm" id="ver_pres">Ver presupuesto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box box-default exist" id="documentos_adjuntos">
+    <div class="box-header with-border">
+        <h4 class="box-title">Documentos de solicitud</h4>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="box-header">
+        </div>
+        <div class="col-lg-3"></div>
+        <div class="row text-center col-lg-6">
+            <label>Documentos adjuntos</label>
+            <table class="table text-center table-bordered" id="tbl_doc_adjs" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom. documento</th>
+                        <th scope="col">Tipo de documento</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 text-center margin-bottom">
+        <button type="button" class="btn btn-danger" onclick="GoBandeja();">Cancelar</button>
+    </div>
+</div>
+
+@await Html.PartialAsync("ModalVerPresupuesto.cshtml")

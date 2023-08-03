@@ -1,0 +1,35 @@
+﻿@*@{
+	PMS.Adquisiciones.Negocio.Sidebar_ sidebar_ = new PMS.Adquisiciones.Negocio.Sidebar_();
+	List<PMS.Entrega.Datos.ContextoSac.tbl_elementos_Siderbar> List = sidebar_.GetItemsSidebar(SessionUsuario.GetUsuario().ID_USUARIO_PK);
+	List<String> LST = new List<String>();
+}*@
+
+<aside class="main-sidebar">
+    <section class="sidebar">
+ 
+        
+		<ul class="sidebar-menu" data-widget="tree">
+			<li class="header"> </li>
+			@*@foreach (PMS.Entrega.Datos.ContextoSac.tbl_elementos_Siderbar obj in List)
+			{
+				if (!LST.Contains(obj.Texto))
+				{
+					LST.Add(obj.Texto);
+					<li class="@Url.IsLinkActive(obj.Accion,obj.Controller)">
+						<a href="@Url.Action(obj.Accion,obj.Controller)"><i class="fa @obj.Param1"></i> <span>@obj.Texto</span></a>
+					</li>
+				}
+			}*@
+			<li class="header">Accesos Directos</li>
+			<li class="text-center">
+			 
+					
+					<i 
+					   onclick="window.location.href = '/Login/logOut';"
+					   class="fa fa-power-off cerrarSesion"></i>
+		 
+			</li>
+		</ul>
+     
+    </section>
+</aside>

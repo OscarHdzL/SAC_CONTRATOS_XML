@@ -1,0 +1,168 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@using Modeloprogramacion = SistemaDeAdquisiciones.Models.tbl_programacion;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    ViewBag.Title = "Apertura técnica";
+    ViewBag.Description = "Apertura técnica";
+
+
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Apertura/Jquery.Apertura.js"></script>
+    <script src="~/Resources/Licitante/Jquery.Licitante_Apertura.js"></script>
+    <script src="~/Resources/Funcionarios publicos/Jquery.Funcionarios.js"></script>
+    <script src="~/Resources/Observadores/Jquery.Observadores.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+@{
+
+    HttpClient clienteHttp = new HttpClient();
+
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    //se
+    HttpResponseMessage request = await clienteHttp.GetAsync("Eventos/Get/Solicitud/" + @Model + "/SiglaTipoEvento/APTEC");
+    Modeloprogramacion obj_Programacion = new Modeloprogramacion();
+
+    if (request.IsSuccessStatusCode)
+    {
+        String obj = await request.Content.ReadAsStringAsync();
+        obj_Programacion = JsonConvert.DeserializeObject<Modeloprogramacion>(obj);
+
+        if (obj_Programacion != null)
+        {
+            <input type="hidden" value="@obj_Programacion.id" id="HD_programacion" />
+        }
+        else
+        {
+            <input type="hidden" value="" id="HD_programacion" />
+        }
+
+    }
+
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+<input type="hidden" value="APTEC" id="Sigla_Programacion" />
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+<input type="hidden" value="tec" id="_TIPOACTA" />
+
+
+
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de licitantes</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+        @await Html.PartialAsync("~/Views/Licitante/Index_Apertura.cshtml")
+        @*@Html.Partial("~/Views/Licitante/Index_Apertura.cshtml", Model)*@
+
+    </div>
+</div>
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de funcionarios públicios</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Funcionario/Index.cshtml")
+        @*@Html.Partial("~/Views/FuncionarioConv/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de observadores</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Observador/Index.cshtml")
+        @*@Html.Partial("~/Views/Observador/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+
+<div class="box box-default">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-warning exist" onclick="DeclararDesierta()">Declarar Desierta</button>
+
+                <button class="btn btn-success exist" onclick="AvanzaFaseActas()">Avanzar fase</button>
+                
+                <button class="btn btn-info" onclick="CallModalProgramacion()">Reagendar evento</button>
+                
+                <button class="btn btn-danger" id="Cerra15" onclick="GoBandeja();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

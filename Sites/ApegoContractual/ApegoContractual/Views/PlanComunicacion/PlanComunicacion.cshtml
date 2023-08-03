@@ -1,0 +1,44 @@
+﻿@*Sin servicios*@
+
+
+
+@model Guid
+@{
+    ViewBag.Title = "PlanComunicacion";
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    //Guid idcon = new Guid(Session["Contrato"].ToString());
+    <!--breadcrumb Dictionary-->
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Reg. plan de comunicación");
+
+    //Guid Dep = PMS.ApegoContractual.Negocio.ContratoNeg.GetDependencia(Model);
+}
+
+@section ViewScripts{
+    <script src="~/Resources/PlanComunicacon/Jquery.PCMensajeComunicacion.js"></script>
+    <script src="~/Resources/PlanComunicacon/Jquery.PCContratante.js"></script>
+    <script src="~/Resources/PlanComunicacon/Jquery.PCProveedor.js"></script>
+    <script src="~/Resources/VistaContrato/Jquery.VistaContrato.js"></script>
+}
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+@*<input type="hidden" id="idDependenciaPC" value="@Dep" />*@
+
+<section class="content">
+
+
+    @await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+
+
+    <div class="box-header with-border">
+        <h1 class="box-title">Plan comunicación</h1>
+    </div>
+    @await Html.PartialAsync("MensajeComunicacion", Model)
+    @await Html.PartialAsync("Contratante", Model)
+    @await Html.PartialAsync("Proveedor", Model)
+
+</section>
+
+

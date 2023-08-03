@@ -1,0 +1,116 @@
+﻿
+@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+
+    <style>
+        .AccesoDirecto {
+            color: red;
+            font-size: 150%;
+        }
+
+        .AccesoDirectoHome {
+            color: green;
+            font-size: 150%;
+        }
+    </style>
+@{
+    Layout = null;
+    string ruta = string.Empty;
+    var rol = HttpContextAccessor.HttpContext.Session.GetString("IdRol");
+    HttpClient clienteHttp = new HttpClient();
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+    //HttpResponseMessage request = await clienteHttp.GetAsync("EndPoint/Sidebar/Get/" + rol);
+    //se 
+    HttpResponseMessage request = await clienteHttp.GetAsync("Sidebar/Get/" + rol);
+
+    if (request.IsSuccessStatusCode)
+    {
+        JArray sidebar = JArray.Parse(await request.Content.ReadAsStringAsync());
+        //var response = await request.Content.ReadAsStringAsync();
+
+        String response_ = await request.Content.ReadAsStringAsync();
+        foreach (JObject row in sidebar.Children<JObject>())
+        {
+            if (row["orden"].ToString() == "0")
+            {
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa @row["clase"].ToString()"></i> <span>@row["valor"].ToString()</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu disabled" style="display: block;">
+
+                        @foreach (JObject sub in sidebar) { 
+                           if (sub["tiene_contrato"].ToString().ToLower() == "false")
+                           {
+                               ruta = "~/index.html";
+
+                               if ((sub["tag"].ToString().ToLower() == "list") && (row["orden"].ToString() != "0"))
+                               {
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa @sub["clase"].ToString()"></i> <span style="w">@sub["valor"].ToString()</span>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @{ 
+                                                if (sub["controlador"].ToString().ToLower() != "-" || sub["accion"].ToString().ToLower() != "-")
+                                                {
+                                                            ruta = "~/index.html";
+
+                                                            if (sub["tag"].ToString() == "-")
+                                                            {
+                                                                ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString();
+                                                            }
+
+                                                            <li><a href="@ruta"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+
+                                                }
+                                            }
+
+                                        </ul>
+                                    </li>
+                                }
+                                else if (sub["tag"].ToString().ToLower() == "item" || sub["tag"].ToString().ToLower() == "-")
+                                {
+                                    if (sub["controlador"].ToString() != "-" || sub["accion"].ToString() != "-")
+                                    {
+                                        ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString();
+                                    }
+
+                                    <li><a href="@ruta"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+                                }
+                           }   
+                         }
+                    </ul>
+
+                </li>
+            }
+
+        }
+    }
+}
+
+
+
+
+<li class="text-center">
+
+    <br />
+    <i id="LogOut" onclick="window.location.href = '/Login/logOut';"
+       class="fa fa-power-off AccesoDirecto"></i>
+
+    @*<button class="btn btn-danger fa fa-power-off AccesoDirecto"></button>*@
+</li>
+

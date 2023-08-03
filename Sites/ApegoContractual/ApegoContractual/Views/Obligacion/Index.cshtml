@@ -1,0 +1,55 @@
+﻿@model Guid
+@{
+    Layout = null;
+}
+<input type="hidden" id="idContrato" value="@Model"/>
+<input type="hidden" id="InstanciaObj" value="" />
+<input type="hidden" id="BagsControl" value="" />
+<input type="hidden" id="BagsControlResp" value="" />
+<input type="hidden" id="responsive" value="" />
+<input type="hidden" id="idObli" value="" />
+
+
+
+<style>
+    .warning-icon {
+        width: 3%;
+    }
+</style>
+
+@await Html.PartialAsync("~/Views/VistaContrato/ParcialContrato.cshtml", Model)
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Obligaciones del contrato</h3>
+
+        <div class="box-tools pull-right">
+
+            <button type="button" class="btn btn-box-tool" data-toggle="" onclick="LaunchModalObligaciones()"
+                    title="Agregar obligación">
+                Agregar obligación
+                <i class="fa fa-fw fa-plus-circle"></i>
+
+            </button>
+
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Obligacion/ListaObligaciones.cshtml", Model)
+
+    </div>
+
+</div>
+
+@await Html.PartialAsync("~/Views/Obligacion/AltaObligacion.cshtml", Model)
+@await Html.PartialAsync("~/Views/Obligacion/ModificarObligacion.cshtml", Model)
+
+
+

@@ -1,0 +1,249 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@using Modeloprogramacion = SistemaDeAdquisiciones.Models.tbl_programacion;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using SistemaDeAdquisiciones = SistemaDeAdquisiciones;
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    ViewBag.Title = "Apertura económica";
+    ViewBag.Description = "Apertura económica";
+
+
+}
+
+@section ViewScripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Resources/Apertura/Jquery.Apertura.js"></script>
+    <script src="~/Resources/Licitante/Jquery.Licitante_Apertura.js"></script>
+    <script src="~/Resources/Funcionarios publicos/Jquery.Funcionarios.js"></script>
+    <script src="~/Resources/Observadores/Jquery.Observadores.js"></script>
+}
+@section ViewStyles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+}
+
+@{
+
+    HttpClient clienteHttp = new HttpClient();
+
+    clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    //se
+    HttpResponseMessage request = await clienteHttp.GetAsync("Eventos/Get/Solicitud/" + @Model + "/SiglaTipoEvento/APECO");
+    Modeloprogramacion obj_Programacion = new Modeloprogramacion();
+
+    if (request.IsSuccessStatusCode)
+    {
+        String obj = await request.Content.ReadAsStringAsync();
+        obj_Programacion = JsonConvert.DeserializeObject<Modeloprogramacion>(obj);
+
+        if (obj_Programacion != null)
+        {
+            <input type="hidden" value="@obj_Programacion.id" id="HD_programacion" />
+        }
+        else
+        {
+            <input type="hidden" value="" id="HD_programacion" />
+        }
+
+    }
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Description
+    </h1>
+</section>
+
+<br />
+
+<input type="hidden" value="APECO" id="Sigla_Programacion" />
+<input type="hidden" value="@Model" id="_SOLICITUD" />
+<input type="hidden" value="eco" id="_TIPOACTA" />
+
+
+
+@*<div style="display:none" class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Acta de presentación y apertura económica</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Número solicitud:</label>
+                <input type="text" disabled class="form-control txt_SolicitudApertura" value="" />
+            </div>
+
+            <div class="col-lg-4">
+                <label>Fecha:</label>
+                <input type="datetime" class="form-control txt_FechaApertura" />
+            </div>
+
+            <div class="col-lg-4">
+                <label>Hora:</label>
+                <input type="time" class="form-control txt_HoraApertura" />
+            </div>
+
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Dirección:</label>
+                <textarea class="form-control textarea_DireccionApertura" style="resize:none"></textarea>
+            </div>
+            <div class="col-lg-4">
+                <label>Estado:</label>
+                <select class="form-control" id="cmb_EstApertura">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <label>Municipio:</label>
+                <select class="form-control cmb_MunicipioApertura">
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Comentarios:</label>
+                <textarea class="form-control textarea_Comentarios" style="resize:none"></textarea>
+            </div>
+            <div class="col-lg-4">
+                <input type="checkbox" id="cbx_DeclaracionDesierta" /> <label>Declaración desierta: </label>
+            </div>
+            <div class="col-lg-4 text-center">
+                <label>Adjuntar acta de apertura:</label>
+                <input type="file" class="form-control" id="FileActaApertura" />
+            </div>
+        </div>
+
+
+        <div class="row">
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <br />
+                <button class="btn btn-success btn-save-Apertura">Agregar</button>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>*@
+
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de licitantes</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Licitante/Index_Apertura.cshtml")
+        @*@Html.Partial("~/Views/Licitante/Index_Apertura.cshtml", Model)*@
+
+    </div>
+</div>
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de funcionarios públicos</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Funcionario/Index.cshtml")
+        @*@Html.Partial("~/Views/FuncionarioConv/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+<div class="box box-default exist">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Alta de observadores</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        @await Html.PartialAsync("~/Views/Observador/Index.cshtml")
+        @*@Html.Partial("~/Views/Observador/Index.cshtml", Model)*@
+
+    </div>
+</div>
+
+
+
+
+<div class="box box-default">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-success exist" onclick="AvanzaFaseActas()">Avanzar Fase</button>
+                <button class="btn btn-info" onclick="CallModalProgramacion()">Reagendar Evento</button>
+                <button class="btn btn-danger" id="Cerra15" onclick="GoBandeja();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

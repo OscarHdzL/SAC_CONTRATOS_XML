@@ -1,0 +1,85 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptions<SistemaDeAdquisiciones.EndPoint> OptionsApplicationConfiguration
+@using BandejasItems = SistemaDeAdquisiciones.Models.BandejasItems;
+@using ModeloSolicitud = SistemaDeAdquisiciones.Models.tbl_solicitud;
+@using ModeloBandejaItem = SistemaDeAdquisiciones.Models.elementos_bandeja
+
+
+@model BandejasItems
+
+@{
+
+    List<Guid> Lst = new List<Guid>();
+
+    ModeloBandejaItem BandejaItem = (ModeloBandejaItem)Model.EntidadBandeja;
+    List<ModeloSolicitud> Solicitudes = (List<ModeloSolicitud>)Model.Solicitudes;
+
+    //Guid RolUsuario = Guid.Parse(HttpContextAccessor.HttpContext.Session.GetString("IdRolUsuario"));
+    //HttpClient clienteHttp = new HttpClient();
+
+    //clienteHttp.BaseAddress = new Uri(OptionsApplicationConfiguration.Value.EndPointGateway);
+    //clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    //clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+
+    ////se
+    //HttpResponseMessage request = await clienteHttp.GetAsync("SerSolicitud/Get/" + RolUsuario.ToString() + "/" + BandejaItem.parametro1);
+
+
+    //if (request.IsSuccessStatusCode)
+    //{
+    //    String obj = await request.Content.ReadAsStringAsync();
+    //    List<ModeloSolicitud> Solicitudes = JsonConvert.DeserializeObject<List<ModeloSolicitud>>(obj);
+
+
+
+        <input type="hidden" id="tsxt_solicitud_hd" />
+        <input type="hidden" id="NumSol_hd" />
+
+        <div id="@BandejaItem.identificador_pestana" style="display:none" class="tabcontent">
+            <table id="tbl_@BandejaItem.identificador_pestana" class="display eachTbl" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Num. solicitud</th>
+                        <th>Tipo solicitud</th>
+                        <th>Proyecto</th>
+                        <th>Área</th>
+                        <th>Fecha solicitud</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ModeloSolicitud item in Solicitudes)
+                    {
+                        if (!Lst.Contains(item.id))
+                        {
+                            //Guid valor = PMS.Adquisiciones.Negocio.Modalidad.GetToken(item.id);
+                            Lst.Add(item.id);
+                            <tr>
+
+                                <td>@item.num_solicitud</td>
+                                <td>@item.tipo_solicitud</td>
+                                <td>@item.proyecto</td>
+                                <td>@item.area</td>
+                                <td>@item.fecha_solicitud.ToShortDateString()</td>
+
+                                <td> <button type="button" onclick="LaunchJust('@item.id','@item.num_solicitud', '@item.token_modalidad')" class="btn btn-success btn-Mini">Ver Justificación</button> </td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+        @await Html.PartialAsync("../Justificacion/Modal_Justificacion.cshtml")
+
+        //}
+}
+
+

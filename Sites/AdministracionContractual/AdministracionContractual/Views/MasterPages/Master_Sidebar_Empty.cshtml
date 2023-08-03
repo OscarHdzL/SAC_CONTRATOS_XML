@@ -1,0 +1,194 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@using System.Net.Http;
+@using Newtonsoft.Json.Linq;
+@inject IHttpContextAccessor HttpContextAccessor;
+    <style>
+        .AccesoDirecto {
+            color: red;
+            font-size: 150%;
+        }
+
+        .AccesoDirectoHome {
+            color: green;
+            font-size: 150%;
+        }
+    </style>
+@{
+    Layout = null;
+    string ruta = string.Empty;
+    var rol = HttpContextAccessor.HttpContext.Session.GetString("IdRol");    
+    HttpClient clienteHttp = new HttpClient();
+    clienteHttp.BaseAddress = new Uri("http://107.178.210.37:8081/");
+    clienteHttp.DefaultRequestHeaders.Accept.Clear();
+    clienteHttp.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+    HttpResponseMessage request = await clienteHttp.GetAsync("EndPoint/Sidebar/Get/" + rol);
+
+    if (request.IsSuccessStatusCode)
+    {
+        JArray sidebar = JArray.Parse(await request.Content.ReadAsStringAsync());
+
+        foreach (JObject row in sidebar.Children<JObject>())
+        {            
+            if (row["orden"].ToString() == "0")
+            {
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa @row["clase"].ToString()"></i> <span>@row["valor"].ToString()</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu disabled" style="display: block;">
+
+                        @foreach (JObject sub in sidebar) { 
+                           if (sub["tiene_contrato"].ToString().ToLower() == "false")
+                           {
+                               ruta = "~/index.html";
+
+                               if (sub["tag"].ToString().ToLower() == "list")
+                               {
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa @sub["clase"].ToString()"></i> <span style="w">@sub["valor"].ToString()</span>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @{ 
+                                                if (sub["controlador"].ToString().ToLower() != "-" || sub["accion"].ToString().ToLower() != "-")
+                                                {
+                                                            ruta = "~/index.html";
+
+                                                            if (sub["tag"].ToString() == "-")
+                                                            {
+                                                                ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString();
+                                                            }
+
+                                                            <li><a href="@ruta"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+
+                                                }
+                                            }
+
+                                        </ul>
+                                    </li>
+                                }
+                                else if (sub["tag"].ToString().ToLower() == "item" || sub["tag"].ToString().ToLower() == "-")
+                                {
+                                    if (sub["controlador"].ToString() != "-" || sub["accion"].ToString() != "-")
+                                    {
+                                        ruta = "/" + sub["controlador"].ToString() + "/" + sub["accion"].ToString();
+                                    }
+
+                                    <li><a href="@ruta" onclick="return validarDependencia();"><i class="fa @sub["clase"].ToString()"></i>@sub["valor"].ToString()</a></li>
+                                }
+                           }   
+                         }
+                    </ul>
+
+                </li>
+            }
+
+        }
+    }
+}
+
+
+
+
+
+@*<ul class="sidebar-menu tree" data-widget="tree">*@
+
+@*@Html.DropDownList("dependencia", new SelectList(ViewBag.lstDependencias, "Value", "Text"), new { @class = "form-control" })*@
+
+
+@*@foreach (Modelos.Modelos.vs_siderbar item in ModelSidebar)
+{
+    if (item.orden == 0)
+    {
+        <li class="treeview">
+            <a href="#">
+                <i class="fa @item.clase"></i> <span>@item.valor</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu disabled" style="display: block;">
+                @foreach (Modelos.Modelos.vs_siderbar sub in ModelSidebar)
+                {
+                    //roles = RolesPorOpcion.Where(x => x.tbl_elementos_sidebarAc_Id == sub.id_Pricinpal && x.tblent_CatRol_Id == idRolSesion).ToList();
+                    //rolAsignado = roles.Count() > 0 ? true : false;
+
+                    //if (sub.rol_sidebar == HttpContextAccessor.HttpContext.Session.GetString("IdRol"))
+                    //{
+                    if (!sub.tiene_contrato.GetValueOrDefault(false))
+                    {
+                        ruta = "~/index.html";
+
+                        if (sub.tag.ToLower() == "list")
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa @sub.clase"></i> <span style="w">@sub.valor</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @{
+                                        //List<PMS.ApegoContractual.Datos.ContextoApegoContractual.tbl_elementos_sidebarAc> ListSubInt = item.Subordinados.Where(x => x.Parametro2.ToLower() == "item" && x.Parametro3 == sub.id_Pricinpal.ToString()).ToList();
+
+                                        foreach (Modelos.Modelos.vs_siderbar element in ModelSidebar)
+                                        {
+                                            if (!element.tiene_contrato.GetValueOrDefault(false))
+                                            {
+                                                if (element.controlador != "-" || element.accion != "-")
+                                                {
+                                                    ruta = "~/index.html";
+
+                                                    if (element.tag == "-")
+                                                    {
+                                                        ruta = "/" + element.controlador + "/" + element.accion;
+                                                    }
+
+                                                    <li><a href="@ruta"><i class="fa @element.clase"></i>@element.valor</a></li>
+
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                </ul>
+                            </li>
+                        }
+                        else if (sub.tag.ToLower() == "-" || sub.tag.ToLower() == "")
+                        {
+                            if (sub.controlador != "-" || sub.accion != "-")
+                            {
+                                ruta = "/" + sub.controlador + "/" + sub.accion;
+                            }
+
+                            <li><a href="@ruta" onclick="return validarDependencia();"><i class="fa @sub.clase"></i>@sub.valor</a></li>
+                        }
+                    }
+                    //}
+                }
+            </ul>
+
+        </li>
+    }
+}*@
+
+
+@*</ul>*@
+@*<li class="header">Navegación</li>*@
+<li class="text-center">
+
+    <br />
+    <i id="LogOut" onclick="window.location.href = '/Login/logOut';"
+       class="fa fa-power-off AccesoDirecto"></i>
+
+    @*<button class="btn btn-danger fa fa-power-off AccesoDirecto"></button>*@
+</li>
+

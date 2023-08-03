@@ -1,0 +1,36 @@
+﻿@model Guid
+
+
+
+
+<div class="row">
+    <div class="col-lg-2">
+        <label>Seleccione el funcionario Público</label>
+    </div>
+
+    <div class="col-lg-3">
+        <select class="form-control cmb_funcionarios">
+            <option value="">Seleccione...</option>
+        </select>
+    </div>
+    <div class="col-lg-1">
+        <button class="btn btn-success btn-save-servpublic">Agregar</button>
+    </div>
+</div>
+
+<div class="row air" style="margin-top: 4%;">
+    <div class="col-lg-12">
+
+        <table id="tbl_funcionarios" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Folio conv.</th>
+                    <th>Funcionario publico</th>
+                    @*<th>Tipo</th>*@
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
