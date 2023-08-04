@@ -25,8 +25,7 @@ using Utilidades.Log4Net;
 
 namespace Servicios_AdminitracionContratos.Controllers
 {
-
-    [Produces("application/json")]
+        [Produces("application/json")]
     [Route("GeneracionXMLController")]
     [EnableCors("CorsPolicy")]
     public class GeneracionXMLController : ControllerBase
