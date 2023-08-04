@@ -420,11 +420,24 @@
                             <li class="exist_menu @Html.IsSelected(actions: "Index", controllers: "Usuarios")"><a href="/Usuarios"><i class="fa fa-circle-o"></i>Usuarios</a></li>
                             <li class="noexist_menu @Html.IsSelected(actions: "Index", controllers: "Instancia")"><a href="/Instancia/Index"><i class="fa fa-circle-o"></i>Instancia</a></li>
                             <li class="exist_menu @Html.IsSelected(actions: "Index", controllers: "CargasMasivas")"><a href="/CargasMasivas"><i class="fa fa-circle-o"></i>Cargas masivas</a></li>
-                            
+                            <li class="exist_menu @Html.IsSelected(actions: "Index", controllers: "Facturas")"><a href="/Facturas"><i class="fa fa-circle-o"></i>Facturas</a></li>
                         </ul>
                     </li>
 
-
+@*                     <li class="treeview exist_menu menu_padre">
+                        <a href="#">
+                            <i class="fa fa-line-chart"></i> <span>Facturación</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="@Html.IsSelected(actions: "Index", controllers: "Proyectos")"><a class="" href="/Proyectos"><i class="fa fa-circle-o"></i>Proyectos</a></li>
+                            <li class="@Html.IsSelected(actions: "Lista", controllers: "Contratos")"><a href="/contratos/Lista"><i class="fa fa-circle-o"></i>Contratos</a></li>
+                            <li class="@Html.IsSelected(actions: "Index", controllers: "Reportes")"><a href="/Reportes"><i class="fa fa-circle-o"></i>Reportes BI</a></li>
+                        </ul>
+                    </li>
+ *@
                     <li class="text-center">
                         <br />
                         <i id="LogOut" onclick="window.location.href = '/Login/logOut';"

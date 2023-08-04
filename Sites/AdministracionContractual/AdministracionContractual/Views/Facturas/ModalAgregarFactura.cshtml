@@ -1,0 +1,138 @@
+﻿
+<div class="modal" id="ModalAgregarFactura" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="WIDTH: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="exampleModalLabel">Agregar factura</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Emisor:</label>
+                        <input type="text" id="txt_Emisor" class="form-control txt_Emisor Clean" placeholder="Emisor" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>RFC Emisor:</label>
+                        <input type="text" id="txt_RFC_Emisor" class="form-control txt_RFC_Emisor Clean" placeholder="RFC Emisor" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Lugar de Expedición:</label>
+                        <input type="text" id="txt_Lugar_Expedicion" class="form-control txt_Lugar_Expedicion Clean" placeholder="Lugar de Expedición" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Domicilio Fiscal del Emisor:</label>
+                        <input type="text" id="txt_Calle" class="form-control txt_Calle Clean" placeholder="Calle" />
+                    </div>
+                    <div class="col-lg-1">
+                        <label>No. Ext.</label>
+                        <input type="text" id="txt_NuExterior" class="form-control txt_NuExterior Clean" placeholder="No. Ext." />
+                    </div>
+                    <div class="col-lg-1">
+                        <label>No. Int.</label>
+                        <input type="text" id="txt_NuInterior" class="form-control txt_NuInterior Clean" placeholder="No. Int." />
+                    </div>
+                    <div class="col-lg-1">
+                        <label>C. P.</label>
+                        <input type="text" id="txt_CP" class="form-control txt_CP Clean" placeholder="C. P." />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Colonia</label>
+                        <input type="text" id="txt_Colonia" class="form-control txt_Colonia Clean" placeholder="Colonia" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Municipio</label>
+                        <input type="text" id="txt_Municipio" class="form-control txt_Municipio Clean" placeholder="Municipio" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Estado</label>
+                        <input type="text" id="txt_Estado" class="form-control txt_Estado Clean" placeholder="Estado" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>País</label>
+                        <input type="text" id="txt_Pais" class="form-control txt_Pais Clean" placeholder="País" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Regimen de Emisor:</label>
+                        <input type="text" id="txt_Regimen_Emisor" class="form-control txt_Regimen_Emisor Clean" placeholder="Regimen de Emisor" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Fecha de Emisión:</label>
+                        <input type="text" id="txt_Fecha_Emision" class="form-control txt_Fecha_Emision Clean" placeholder="Fecha de Emisión" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Receptor:</label>
+                        <input type="text" id="txt_Receptor" class="form-control txt_Receptor Clean" placeholder="Receptor" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>RFC Receptor:</label>
+                        <input type="text" id="txt_RFC_Receptor" class="form-control txt_RFC_Receptor Clean" placeholder="RFC Receptor" />
+                    </div>
+@*                     <div class="col-lg-4">
+                        <label>Lugar de Expedición:</label>
+                        <input type="text" id="txt_Lugar_Expedicion" class="form-control txt_Lugar_Expedicion Clean" placeholder="Lugar de Expedición" />
+                    </div> *@
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Domicilio Fiscal del Receptor:</label>
+                        <input type="text" id="txtCalle" class="form-control txtCalle Clean" placeholder="Calle" />
+                    </div>
+                    <div class="col-lg-1">
+                        <label>No. Ext.</label>
+                        <input type="text" id="txtNuExterior" class="form-control txtNuExterior Clean" placeholder="No. Ext." />
+                    </div>
+                    <div class="col-lg-1">
+                        <label>No. Int.</label>
+                        <input type="text" id="txtNuInterior" class="form-control txtNuInterior Clean" placeholder="No. Int." />
+                    </div>
+                    <div class="col-lg-1">
+                        <label>C. P.</label>
+                        <input type="text" id="txtCP" class="form-control txtCP Clean" placeholder="C. P." />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Colonia</label>
+                        <input type="text" id="txtColonia" class="form-control txtColonia Clean" placeholder="Colonia" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Municipio</label>
+                        <input type="text" id="txtMunicipio" class="form-control txtMunicipio Clean" placeholder="Municipio" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Estado</label>
+                        <input type="text" id="txtEstado" class="form-control txtEstado Clean" placeholder="Estado" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>País</label>
+                        <input type="text" id="txtPais" class="form-control txtPais Clean" placeholder="País" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Regimen de Receptor:</label>
+                        <input type="text" id="txtRegimen_Receptor" class="form-control txtRegimen_Receptor Clean" placeholder="Regimen de Receptor" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Forma de Pago:</label>
+                        <input type="text" id="txt_Forma_Pago" class="form-control txt_Forma_Pago Clean" placeholder="Forma de Pago" />
+                    </div>
+
+                </div>
+
+                <br />
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="GuardarFactura">Guardar factura</button>
+                    <button type="button" class="btn btn-primary" id="GenerarXML">Generar XML</button>
+                    <button type="button" id="Close" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>

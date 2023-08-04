@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor;
+@model Guid
+@{
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    ruta.Add("-", "Facturas");
+
+}
+@section ViewScripts{
+    <script src="~/Resources/Facturas/Jquery.Facturas.js"></script>
+}
+
+<section class="content">
+
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Facturas</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" onclick="muestraModalAgregarFactura();" data-toggle="tooltip"
+                        title="Agregar factura">
+                    Agregar factura
+                    <i class="fa fa-fw fa-plus-circle"></i>
+                </button>
+
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+
+            <div class="row air" style="margin-top: 1%;">
+
+                <div class="col-lg-12">
+
+                    <table id="DatosXmlRequest" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>tbl_contrato_id</th>
+                                <th>rfcEmisor</th>
+                                <th>nombreEmisor</th>
+                                <th>rfcReceptor</th>
+                                <th>nombreReceptor</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("ModalAgregarFactura")
+@await Html.PartialAsync("ModalEditarFactura")
