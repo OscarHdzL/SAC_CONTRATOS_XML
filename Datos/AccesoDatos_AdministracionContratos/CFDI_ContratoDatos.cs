@@ -66,7 +66,7 @@ namespace AccesoDatos_AdminContratos
 
 
 
-        public Respuesta InsertarCFDI(DatosXmlRequest datos)
+        public Respuesta InsertarCFDI(DatosXmlInput datos)
         {
 
             try
@@ -130,7 +130,7 @@ namespace AccesoDatos_AdminContratos
             return this.response;
         }
 
-        public Respuesta ActualizarCFDI(DatosXmlRequest datos)
+        public Respuesta ActualizarCFDI(DatosXmlInput datos)
         {
 
             try

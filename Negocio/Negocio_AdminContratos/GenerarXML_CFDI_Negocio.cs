@@ -44,14 +44,14 @@ namespace Negocio_AdminContratos
 
         }
 
-        public Respuesta guardarCFDI(DatosXmlRequest datos) {
+        public Respuesta guardarCFDI(DatosXmlInput datos) {
 
             CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();
             return negocio.InsertarCFDI(datos);
         }
 
 
-        public Respuesta actualizarCFDI(DatosXmlRequest datos)
+        public Respuesta actualizarCFDI(DatosXmlInput datos)
         {
 
             CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();

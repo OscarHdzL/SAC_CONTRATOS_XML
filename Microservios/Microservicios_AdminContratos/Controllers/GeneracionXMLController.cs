@@ -33,11 +33,41 @@ namespace Servicios_AdminitracionContratos.Controllers
         #region Instancias
 
         private readonly IConfiguration _configuration;
+        //public IConfiguration _configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false).Build();
         private readonly ILoggerManager _logger;
+
+        public string _RfcEmisor { get; set; }
+        public string _NombreEmisor { get; set; }
+        public string _NoInteriorEmisor { get; set; }
+        public string _NoExteriorEmisor { get; set; }
+        public string _CalleEmisor { get; set; }
+        
+        public string _ColoniaEmisor { get; set; }
+        public string _MunicipioEmisor { get; set; }
+        public string _EstadoEmisor { get; set; }
+        public string _PaisEmisor { get; set; }
+        public string _CodigoPostalEmisor { get; set; }
+        public string _RegimenEmisor { get; set; }
+
         #endregion
         public GeneracionXMLController(IConfiguration configuration)
         {
             _configuration = configuration;
+
+            _RfcEmisor = _configuration["RfcEmisor"].ToString();
+            _NombreEmisor = _configuration["NombreEmisor"].ToString();
+            _NoInteriorEmisor = _configuration["NoInteriorEmisor"].ToString();
+            _NoExteriorEmisor = _configuration["NoExteriorEmisor"].ToString();
+            _CalleEmisor = _configuration["CalleEmisor"].ToString();
+            _ColoniaEmisor = _configuration["ColoniaEmisor"].ToString();
+            _MunicipioEmisor = _configuration["MunicipioEmisor"].ToString();
+            _EstadoEmisor = _configuration["EstadoEmisor"].ToString();
+            _PaisEmisor = _configuration["PaisEmisor"].ToString();
+            _CodigoPostalEmisor = _configuration["CodigoPostalEmisor"].ToString();
+            _RegimenEmisor = _configuration["RegimenEmisor"].ToString();
+
+            
+
             _logger = new LoggerManager();
         }
         private GenerarXML_CFDI_Negocio Negocio = new GenerarXML_CFDI_Negocio();
@@ -65,12 +95,16 @@ namespace Servicios_AdminitracionContratos.Controllers
 
 
         [HttpPost("Generar")]
-        public IActionResult GenerarXML( [FromBody] DatosXmlRequest datos_facturacion_general)
+        public IActionResult GenerarXML( [FromBody] DatosXmlRequest request)
         {
 
                 try
                 {
 
+
+                DatosXmlInput datos_facturacion_general = this.LlenarModelo(request);
+
+                                
                 Comprobante objCompXSD = new Comprobante();
                 // Datos del CFDI Global
                 //objCompXSD.version = "3.2";
@@ -86,6 +120,24 @@ namespace Servicios_AdminitracionContratos.Controllers
                 //objCompXSD.tipoDeComprobante = new ComprobanteTipoDeComprobante();
                 objCompXSD.tipoDeComprobante = ComprobanteTipoDeComprobante.ingreso;
                 objCompXSD.LugarExpedicion = datos_facturacion_general.LugarExpedicion;
+
+                objCompXSD.Emisor = new ComprobanteEmisor();
+                objCompXSD.Emisor.rfc = datos_facturacion_general.rfcEmisor;
+                objCompXSD.Emisor.nombre = datos_facturacion_general.nombreEmisor;
+                // Datos del Domicilio del Emisor
+                objCompXSD.Emisor.DomicilioFiscal = new t_UbicacionFiscal();
+                objCompXSD.Emisor.DomicilioFiscal.calle = datos_facturacion_general.calleEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.noInterior = datos_facturacion_general.calleEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.noExterior = datos_facturacion_general.noExteriorEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.colonia = datos_facturacion_general.coloniaEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.municipio = datos_facturacion_general.municipioEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.estado = datos_facturacion_general.estadoEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.pais = datos_facturacion_general.paisEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.codigoPostal = datos_facturacion_general.codigoPostalEmisor;
+                // Regimen del Emisor
+                objCompXSD.Emisor.RegimenFiscal = new ComprobanteEmisorRegimenFiscal[1];
+                objCompXSD.Emisor.RegimenFiscal[0] = new ComprobanteEmisorRegimenFiscal();
+                objCompXSD.Emisor.RegimenFiscal[0].Regimen = datos_facturacion_general.RegimenEmisor;
 
                 // Datos del Emisor
                 objCompXSD.Emisor = new ComprobanteEmisor();
@@ -107,23 +159,6 @@ namespace Servicios_AdminitracionContratos.Controllers
 
 
                 objCompXSD.Emisor.RegimenFiscal[0].Regimen = datos_facturacion_general.RegimenEmisor;
-
-                // Datos del Receptor
-                objCompXSD.Receptor = new ComprobanteReceptor();
-                objCompXSD.Receptor.rfc = datos_facturacion_general.rfcReceptor;
-                objCompXSD.Receptor.nombre = datos_facturacion_general.nombreReceptor;
-
-                //// Datos del Domicilio del Receptor
-                objCompXSD.Receptor.Domicilio = new t_Ubicacion();
-                objCompXSD.Receptor.Domicilio.calle = datos_facturacion_general.calleReceptor;
-                objCompXSD.Receptor.Domicilio.noExterior = datos_facturacion_general.noExteriorReceptor;
-                objCompXSD.Receptor.Domicilio.noInterior = datos_facturacion_general.noInteriorReceptor;
-                objCompXSD.Receptor.Domicilio.colonia = datos_facturacion_general.coloniaReceptor;
-                objCompXSD.Receptor.Domicilio.municipio = datos_facturacion_general.municipioReceptor;
-                objCompXSD.Receptor.Domicilio.estado = datos_facturacion_general.estadoReceptor;
-                objCompXSD.Receptor.Domicilio.pais = datos_facturacion_general.paisReceptor;
-                objCompXSD.Receptor.Domicilio.codigoPostal = datos_facturacion_general.codigoPostalReceptor;
-                // Conceptops
 
 
 
@@ -220,11 +255,14 @@ namespace Servicios_AdminitracionContratos.Controllers
 
 
         [HttpPut("Actualizar")]
-        public IActionResult ActualizarXML([FromBody] DatosXmlRequest datos_facturacion_general)
+        public IActionResult ActualizarXML([FromBody] DatosXmlRequest request)
         {
 
             try
             {
+
+                DatosXmlInput datos_facturacion_general = this.LlenarModelo(request);
+
 
                 Comprobante objCompXSD = new Comprobante();
                 // Datos del CFDI Global
@@ -241,6 +279,23 @@ namespace Servicios_AdminitracionContratos.Controllers
                 //objCompXSD.tipoDeComprobante = new ComprobanteTipoDeComprobante();
                 objCompXSD.tipoDeComprobante = ComprobanteTipoDeComprobante.ingreso;
                 objCompXSD.LugarExpedicion = datos_facturacion_general.LugarExpedicion;
+                objCompXSD.Emisor = new ComprobanteEmisor();
+                objCompXSD.Emisor.rfc = datos_facturacion_general.rfcEmisor;
+                objCompXSD.Emisor.nombre = datos_facturacion_general.nombreEmisor;
+                // Datos del Domicilio del Emisor
+                objCompXSD.Emisor.DomicilioFiscal = new t_UbicacionFiscal();
+                objCompXSD.Emisor.DomicilioFiscal.calle = datos_facturacion_general.calleEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.noInterior = datos_facturacion_general.calleEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.noExterior = datos_facturacion_general.noExteriorEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.colonia = datos_facturacion_general.coloniaEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.municipio = datos_facturacion_general.municipioEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.estado = datos_facturacion_general.estadoEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.pais = datos_facturacion_general.paisEmisor;
+                objCompXSD.Emisor.DomicilioFiscal.codigoPostal = datos_facturacion_general.codigoPostalEmisor;
+                // Regimen del Emisor
+                objCompXSD.Emisor.RegimenFiscal = new ComprobanteEmisorRegimenFiscal[1];
+                objCompXSD.Emisor.RegimenFiscal[0] = new ComprobanteEmisorRegimenFiscal();
+                objCompXSD.Emisor.RegimenFiscal[0].Regimen = datos_facturacion_general.RegimenEmisor;
 
                 // Datos del Emisor
                 objCompXSD.Emisor = new ComprobanteEmisor();
@@ -259,8 +314,6 @@ namespace Servicios_AdminitracionContratos.Controllers
                 // Regimen del Emisor
                 objCompXSD.Emisor.RegimenFiscal = new ComprobanteEmisorRegimenFiscal[1];
                 objCompXSD.Emisor.RegimenFiscal[0] = new ComprobanteEmisorRegimenFiscal();
-
-
                 objCompXSD.Emisor.RegimenFiscal[0].Regimen = datos_facturacion_general.RegimenEmisor;
 
                 // Datos del Receptor
@@ -375,11 +428,13 @@ namespace Servicios_AdminitracionContratos.Controllers
 
 
         [HttpPost("Previsualizar")]
-        public IActionResult PrevisualizarXML([FromBody] DatosXmlRequest datos_facturacion_general)
+        public IActionResult PrevisualizarXML([FromBody] DatosXmlRequest request)
         {
 
             try
             {
+
+                DatosXmlInput datos_facturacion_general = this.LlenarModelo(request);
 
                 Comprobante objCompXSD = new Comprobante();
 
@@ -517,5 +572,52 @@ namespace Servicios_AdminitracionContratos.Controllers
         }
 
 
+        private DatosXmlInput LlenarModelo(DatosXmlRequest request) {
+
+
+            DatosXmlInput input = new DatosXmlInput();
+
+            input.tbl_contrato_id = request.tbl_contrato_id;
+            input.id = request.id;
+            input.folio = request.folio;
+            input.serie = request.serie;
+            input.fecha = request.fecha;
+            input.formaDePago = request.formaDePago;
+            input.condicionesDePago = request.condicionesDePago;
+            input.total = request.total;
+            input.moneda = request.moneda;
+            input.subTotal = request.subTotal;
+            input.metodoDePago = request.metodoDePago;
+            input.tipoDeComprobante = request.tipoDeComprobante;
+            input.LugarExpedicion = request.LugarExpedicion;
+            input.rfcEmisor = _RfcEmisor;
+            input.nombreEmisor = _NombreEmisor;
+            input.calleEmisor = _CalleEmisor;
+            input.noInteriorEmisor = _NoInteriorEmisor;
+            input.noExteriorEmisor = _NoExteriorEmisor;
+            input.coloniaEmisor = _ColoniaEmisor;
+            input.municipioEmisor = _MunicipioEmisor;
+            input.estadoEmisor = _EstadoEmisor;
+            input.paisEmisor = _PaisEmisor;
+            input.codigoPostalEmisor = _CodigoPostalEmisor;
+            input.RegimenEmisor = _RegimenEmisor;
+            input.rfcReceptor = request.rfcReceptor;
+            input.nombreReceptor = request.nombreReceptor;
+            input.calleReceptor = request.calleReceptor;
+            input.noInteriorReceptor = request.noInteriorReceptor;
+            input.noExteriorReceptor = request.noExteriorReceptor;
+            input.coloniaReceptor = request.coloniaReceptor;
+            input.municipioReceptor = request.municipioReceptor;
+            input.estadoReceptor = request.estadoReceptor;
+            input.paisReceptor = request.paisReceptor;
+            input.codigoPostalReceptor = request.codigoPostalReceptor;
+            input.xml_cadena = request.xml_cadena;
+            input.conceptos_cadena = request.conceptos_cadena;
+            input.traslados_cadena = request.traslados_cadena;
+            input.retenciones_cadena = request.retenciones_cadena;
+
+            return input;
+
+        }
     }
 }

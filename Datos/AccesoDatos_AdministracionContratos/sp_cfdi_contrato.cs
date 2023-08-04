@@ -134,54 +134,54 @@ namespace AccesoDatos_AdministracionDeContratos
                 #region Parametros
                 List<EntidadParametro> ListaEnvioParam = new List<EntidadParametro>();
 
-                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_opt ", Tipo = "String", Valor = datos.opt == 0 ? "0" : datos.opt.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_id ", Tipo = "String", Valor = datos.id == null ? "" : datos.id.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_tbl_contrato_id ", Tipo = "String", Valor = datos.tbl_contrato_id == null ? "" : datos.tbl_contrato_id.ToString() });
+                ////ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_opt ", Tipo = "String", Valor = datos.opt == 0 ? "0" : datos.opt.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_id ", Tipo = "String", Valor = datos.id == null ? "" : datos.id.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_tbl_contrato_id ", Tipo = "String", Valor = datos.tbl_contrato_id == null ? "" : datos.tbl_contrato_id.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_folio ", Tipo = "String", Valor = datos.folio == null ? "" : datos.folio.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_serie ", Tipo = "String", Valor = datos.serie == null ? "" : datos.serie.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_fecha ", Tipo = "String", Valor = datos.fecha == null ? "" : datos.fecha.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_folio ", Tipo = "String", Valor = datos.folio == null ? "" : datos.folio.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_serie ", Tipo = "String", Valor = datos.serie == null ? "" : datos.serie.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_fecha ", Tipo = "String", Valor = datos.fecha == null ? "" : datos.fecha.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_formaDePago ", Tipo = "String", Valor = datos.formaDePago == null ? "" : datos.formaDePago.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_formaDePago ", Tipo = "String", Valor = datos.formaDePago == null ? "" : datos.formaDePago.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_total ", Tipo = "String", Valor = datos.total == 0 ? "0" : datos.total.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_subTotal ", Tipo = "String", Valor = datos.subTotal == 0 ? "0" : datos.subTotal.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_moneda ", Tipo = "String", Valor = datos.moneda == null ? "" : datos.moneda.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_total ", Tipo = "String", Valor = datos.total == 0 ? "0" : datos.total.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_subTotal ", Tipo = "String", Valor = datos.subTotal == 0 ? "0" : datos.subTotal.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_moneda ", Tipo = "String", Valor = datos.moneda == null ? "" : datos.moneda.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_condicionesDePago  ", Tipo = "String", Valor = datos.condicionesDePago == null ? "" : datos.condicionesDePago.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_metodoDePago ", Tipo = "String", Valor = datos.metodoDePago == null ? "" : datos.metodoDePago.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_tipoDeComprobante  ", Tipo = "String", Valor = datos.tipoDeComprobante == null ? "" : datos.tipoDeComprobante.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_condicionesDePago  ", Tipo = "String", Valor = datos.condicionesDePago == null ? "" : datos.condicionesDePago.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_metodoDePago ", Tipo = "String", Valor = datos.metodoDePago == null ? "" : datos.metodoDePago.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_tipoDeComprobante  ", Tipo = "String", Valor = datos.tipoDeComprobante == null ? "" : datos.tipoDeComprobante.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_lugarExpedicion ", Tipo = "String", Valor = datos.LugarExpedicion == null ? "" : datos.LugarExpedicion.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_rfcEmisor  ", Tipo = "String", Valor = datos.rfcEmisor == null ? "" : datos.rfcEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_nombreEmisor  ", Tipo = "String", Valor = datos.rfcEmisor == null ? "" : datos.rfcEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_lugarExpedicion ", Tipo = "String", Valor = datos.LugarExpedicion == null ? "" : datos.LugarExpedicion.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_rfcEmisor  ", Tipo = "String", Valor = datos.rfcEmisor == null ? "" : datos.rfcEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_nombreEmisor  ", Tipo = "String", Valor = datos.rfcEmisor == null ? "" : datos.rfcEmisor.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_calleEmisor  ", Tipo = "String", Valor = datos.calleEmisor == null ? "" : datos.calleEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noInteriorEmisor  ", Tipo = "String", Valor = datos.noInteriorEmisor == null ? "" : datos.noInteriorEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noExteriorEmisor  ", Tipo = "String", Valor = datos.noExteriorEmisor == null ? "" : datos.noExteriorEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_calleEmisor  ", Tipo = "String", Valor = datos.calleEmisor == null ? "" : datos.calleEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noInteriorEmisor  ", Tipo = "String", Valor = datos.noInteriorEmisor == null ? "" : datos.noInteriorEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noExteriorEmisor  ", Tipo = "String", Valor = datos.noExteriorEmisor == null ? "" : datos.noExteriorEmisor.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_coloniaEmisor  ", Tipo = "String", Valor = datos.coloniaEmisor == null ? "" : datos.coloniaEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_municipioEmisor  ", Tipo = "String", Valor = datos.municipioEmisor == null ? "" : datos.municipioEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_estadoEmisor ", Tipo = "String", Valor = datos.estadoEmisor == null ? "" : datos.estadoEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_coloniaEmisor  ", Tipo = "String", Valor = datos.coloniaEmisor == null ? "" : datos.coloniaEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_municipioEmisor  ", Tipo = "String", Valor = datos.municipioEmisor == null ? "" : datos.municipioEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_estadoEmisor ", Tipo = "String", Valor = datos.estadoEmisor == null ? "" : datos.estadoEmisor.ToString() });
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_codigoPostalEmisor ", Tipo = "String", Valor = datos.codigoPostalEmisor == null ? "" : datos.codigoPostalEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_regimenEmisor ", Tipo = "String", Valor = datos.RegimenEmisor == null ? "" : datos.RegimenEmisor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_rfcReceptor ", Tipo = "String", Valor = datos.rfcReceptor == null ? "" : datos.rfcReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_nombreReceptor ", Tipo = "String", Valor = datos.nombreReceptor == null ? "" : datos.nombreReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_calleReceptor ", Tipo = "String", Valor = datos.calleReceptor == null ? "" : datos.calleReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noInteriorReceptor ", Tipo = "String", Valor = datos.noInteriorReceptor == null ? "" : datos.noInteriorReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noExteriorReceptor ", Tipo = "String", Valor = datos.noExteriorReceptor == null ? "" : datos.noExteriorReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_coloniaReceptor ", Tipo = "String", Valor = datos.coloniaReceptor == null ? "" : datos.coloniaReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_municipioReceptor ", Tipo = "String", Valor = datos.municipioReceptor == null ? "" : datos.municipioReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_estadoReceptor ", Tipo = "String", Valor = datos.estadoReceptor == null ? "" : datos.estadoReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_paisReceptor ", Tipo = "String", Valor = datos.paisReceptor == null ? "" : datos.paisReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_codigoPostalEmisor ", Tipo = "String", Valor = datos.codigoPostalEmisor == null ? "" : datos.codigoPostalEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_regimenEmisor ", Tipo = "String", Valor = datos.RegimenEmisor == null ? "" : datos.RegimenEmisor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_rfcReceptor ", Tipo = "String", Valor = datos.rfcReceptor == null ? "" : datos.rfcReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_nombreReceptor ", Tipo = "String", Valor = datos.nombreReceptor == null ? "" : datos.nombreReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_calleReceptor ", Tipo = "String", Valor = datos.calleReceptor == null ? "" : datos.calleReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noInteriorReceptor ", Tipo = "String", Valor = datos.noInteriorReceptor == null ? "" : datos.noInteriorReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_noExteriorReceptor ", Tipo = "String", Valor = datos.noExteriorReceptor == null ? "" : datos.noExteriorReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_coloniaReceptor ", Tipo = "String", Valor = datos.coloniaReceptor == null ? "" : datos.coloniaReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_municipioReceptor ", Tipo = "String", Valor = datos.municipioReceptor == null ? "" : datos.municipioReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_estadoReceptor ", Tipo = "String", Valor = datos.estadoReceptor == null ? "" : datos.estadoReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_paisReceptor ", Tipo = "String", Valor = datos.paisReceptor == null ? "" : datos.paisReceptor.ToString() });
 
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_codigoPostalReceptor ", Valor = datos.codigoPostalReceptor == null ? "" : datos.codigoPostalReceptor.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_conceptos ", Tipo = "String", Valor = datos.conceptos_cadena == null ? "" : datos.conceptos_cadena.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_traslados ", Tipo = "String", Valor = datos.traslados_cadena == null ? "" : datos.traslados_cadena.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_retenciones ", Tipo = "String", Valor = datos.retenciones_cadena == null ? "" : datos.retenciones_cadena.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_cadenaXML ", Tipo = "String", Valor = datos.xml_cadena == null ? "" : datos.xml_cadena.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_codigoPostalReceptor ", Valor = datos.codigoPostalReceptor == null ? "" : datos.codigoPostalReceptor.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_conceptos ", Tipo = "String", Valor = datos.conceptos_cadena == null ? "" : datos.conceptos_cadena.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_traslados ", Tipo = "String", Valor = datos.traslados_cadena == null ? "" : datos.traslados_cadena.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_retenciones ", Tipo = "String", Valor = datos.retenciones_cadena == null ? "" : datos.retenciones_cadena.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_cadenaXML ", Tipo = "String", Valor = datos.xml_cadena == null ? "" : datos.xml_cadena.ToString() });
 
 
                 List<Crudresponse> Lista = new List<Crudresponse>();
