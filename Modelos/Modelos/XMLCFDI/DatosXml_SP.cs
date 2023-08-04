@@ -48,11 +48,11 @@ namespace Modelos.Modelos.VerificacionContrato
 
         //Conceptos
 
-        public List<Concepto> Conceptos { get; set; } = new List<Concepto>();
+        public List<Concepto_> Conceptos { get; set; } = new List<Concepto_>();
         
     }
 
-    public class Concepto {
+    public class Concepto_ {
         public decimal importe { get; set; }
         public decimal valorUnitario { get; set; }
         public string descripcion { get; set; }

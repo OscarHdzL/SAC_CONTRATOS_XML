@@ -20,6 +20,9 @@ namespace AccesoDatos_AdministracionDeContratos
         public BDParametros GeneracionParametros = new BDParametros();
         private readonly ILoggerManager _logger;
         public IConfiguration Configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false).Build();
+        string sp_cfdi_contrato = "sp_cfdi_contrato";
+        
+        
         string sp_config_contrato = "sp_config_contrato";
         string StoreProcedure = "sp_get_tiposcontrato";
         string sp_get_partidas_montos_area = "sp_get_partidas_montos_area";
@@ -131,7 +134,7 @@ namespace AccesoDatos_AdministracionDeContratos
                 #region Parametros
                 List<EntidadParametro> ListaEnvioParam = new List<EntidadParametro>();
 
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_opt ", Tipo = "String", Valor = datos.opt == null ? 0 : datos.opt.ToString() });
+                //ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_opt ", Tipo = "String", Valor = datos.opt == 0 ? "0" : datos.opt.ToString() });
                 ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_id ", Tipo = "String", Valor = datos.id == null ? "" : datos.id.ToString() });
                 ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_tbl_contrato_id ", Tipo = "String", Valor = datos.tbl_contrato_id == null ? "" : datos.tbl_contrato_id.ToString() });
 
@@ -178,7 +181,7 @@ namespace AccesoDatos_AdministracionDeContratos
                 ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_conceptos ", Tipo = "String", Valor = datos.conceptos_cadena == null ? "" : datos.conceptos_cadena.ToString() });
                 ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_traslados ", Tipo = "String", Valor = datos.traslados_cadena == null ? "" : datos.traslados_cadena.ToString() });
                 ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_retenciones ", Tipo = "String", Valor = datos.retenciones_cadena == null ? "" : datos.retenciones_cadena.ToString() });
-                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_cadenaXML ", Tipo = "String", Valor = datos.rfcEmisor == null ? "" : datos.rfcEmisor.ToString() });
+                ListaEnvioParam.Add(new EntidadParametro { Nombre = "p_cadenaXML ", Tipo = "String", Valor = datos.xml_cadena == null ? "" : datos.xml_cadena.ToString() });
 
 
                 List<Crudresponse> Lista = new List<Crudresponse>();
@@ -191,7 +194,7 @@ namespace AccesoDatos_AdministracionDeContratos
                     switch (int.Parse(Configuration["TipoBase"].ToString()))
                     {
                         case 2:
-                            var resulMySQL = GeneracionParametros.ParametrosMySQL(ListaEnvioParam, sp_config_contrato);
+                            var resulMySQL = GeneracionParametros.ParametrosMySQL(ListaEnvioParam, sp_cfdi_contrato);
                             Lista = conexion.Query<Crudresponse>().FromSql<Crudresponse>(resulMySQL.Query, resulMySQL.ListaParametros.ToArray()).ToListAsync().Result;
                             break;
                     }

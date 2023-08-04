@@ -7,7 +7,6 @@ namespace Modelos.Modelos.VerificacionContrato
     public class DatosXmlRequest
     {
         // Datos del CFDI Global
-        public int opt { get; set; } = 0;
         public string tbl_contrato_id { get; set; }
         public string id { get; set; }
         public string folio { get; set; }

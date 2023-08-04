@@ -11,11 +11,56 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.Information;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using System.Drawing;
 using Negocio_AdminContratos.XMLCFDI;
+using Modelos.Modelos.VerificacionContrato;
+using AccesoDatos_AdminContratos;
+using AccesoDatos_AdminContratos.ModelosCFDI;
+using Modelos.Modelos;
 
 namespace Negocio_AdminContratos
 {
-    public class GenerarXML_CFDI
+    public class GenerarXML_CFDI_Negocio
     {
+
+        public List<TblCfdiContratos> ListarCFDI()
+        {
+            CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();
+
+            return negocio.ListarCFDI();
+
+        }
+
+
+        public List<TblCfdiContratos> ListarCFDIByContrato(string idContrato)
+        {
+            CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();
+            return negocio.ListarCFDIByContrato(idContrato);
+
+        }
+
+        public List<TblCfdiContratos> ListarCFDIById(string id)
+        {
+            CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();
+            return negocio.ListarCFDIById(id);
+
+        }
+
+        public Respuesta guardarCFDI(DatosXmlRequest datos) {
+
+            CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();
+            return negocio.InsertarCFDI(datos);
+        }
+
+
+        public Respuesta actualizarCFDI(DatosXmlRequest datos)
+        {
+
+            CFDI_ContratoDatos negocio = new CFDI_ContratoDatos();
+            return negocio.ActualizarCFDI(datos);
+        }
+
+
+
+
         public int genera_xml_factura(DatosXml datos_facturacion_general)
         {
 

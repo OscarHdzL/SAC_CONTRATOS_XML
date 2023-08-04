@@ -20,4 +20,12 @@ namespace Modelos.Modelos
 	{
 		public String cod { get; set; }
 	}
+
+
+	public class Respuesta
+	{
+		public Boolean exito { get; set; }
+		public String mensaje { get; set; }
+		public String respuesta { get; set; }
+	}
 }
