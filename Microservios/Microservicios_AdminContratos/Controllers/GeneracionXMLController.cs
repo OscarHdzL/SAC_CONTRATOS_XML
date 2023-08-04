@@ -221,7 +221,7 @@ namespace Servicios_AdminitracionContratos.Controllers
 
                 string xmlCadena = String.Empty;
 
-                using (StringWriter stringWriter = new System.IO.StringWriter())
+                using (StringWriter stringWriter = new Utf8StringWriter())
                 {
                     xmlSerialize.Serialize(stringWriter, objCompXSD, xmlNameSpace);
                     xmlCadena = stringWriter.ToString();
@@ -394,8 +394,9 @@ namespace Servicios_AdminitracionContratos.Controllers
 
                 string xmlCadena = String.Empty;
 
-                using (StringWriter stringWriter = new System.IO.StringWriter())
+                using (StringWriter stringWriter = new Utf8StringWriter())
                 {
+                    
                     xmlSerialize.Serialize(stringWriter, objCompXSD, xmlNameSpace);
                     xmlCadena = stringWriter.ToString();
                 }
@@ -552,7 +553,7 @@ namespace Servicios_AdminitracionContratos.Controllers
 
                 string xmlCadena = String.Empty;
 
-                using (StringWriter stringWriter = new System.IO.StringWriter())
+                using (StringWriter stringWriter = new Utf8StringWriter())
                 {
                     xmlSerialize.Serialize(stringWriter, objCompXSD, xmlNameSpace);
                     xmlCadena = stringWriter.ToString();
@@ -612,12 +613,19 @@ namespace Servicios_AdminitracionContratos.Controllers
             input.paisReceptor = request.paisReceptor;
             input.codigoPostalReceptor = request.codigoPostalReceptor;
             input.xml_cadena = request.xml_cadena;
+            input.Conceptos = request.Conceptos;
             input.conceptos_cadena = request.conceptos_cadena;
             input.traslados_cadena = request.traslados_cadena;
             input.retenciones_cadena = request.retenciones_cadena;
 
             return input;
 
+        }
+
+
+        private class Utf8StringWriter : StringWriter
+        {
+            public override Encoding Encoding => Encoding.UTF8;
         }
     }
 }
