@@ -30,7 +30,7 @@ var con = $("#EndPointAdmon").val();
 var ins = $('#HDidInstancia').val();
 
 function getFacturas() {
-    $.get(con + "GeneracionXMLController/Listar/", function (data, status) {
+    $.get(con + "GeneracionXMLController/Listar", function (data, status) {
         var Arreglo_arreglos = [];
         for (var i = 0; i <= data.length - 1; i++) {
             var ir_b = null;
@@ -72,10 +72,35 @@ function getFacturas() {
     });
 }
 
+function GetContrato(id) {
+    $.get(con + "GeneracionXMLController/Listar/", function (data, status) {
+        var body = "<option selected value=''>Seleccione...</option>";
+
+        const unicos = [];
+
+        for (var i = 0; i < data.length; i++) {
+
+            const elemento = data[i].tblContratoId;
+
+            if (!unicos.includes(data[i].tblContratoId)) {
+                unicos.push(elemento);
+            }
+        }
+
+        for (var i = 0; i <= unicos.length - 1; i++) {
+
+            body = body + "<option value='" + unicos[i] + "'>" + unicos[i] + "</option>";
+        }
+        $('#ddl_Contrato').html(body);
+        $('#ddl_Contrato_ed').html(body);
+    });
+    return;
+}
+
 function muestraModalAgregarFactura() {
     $('.Clean').val('');
     $('.Clean').prop("disabled", false);
-
+    GetContrato();
     $('#ModalAgregarFactura').modal('show');
 }
 
@@ -198,7 +223,7 @@ function AddFactura() {
     }
     else {
         var OBJ_Form = tbl_Factura_class;
-        OBJ_Form.tbl_contrato_id = "string";
+        OBJ_Form.tbl_contrato_id = $('#ddl_Contrato').val();;
         OBJ_Form.id = "string";
         OBJ_Form.folio = "string";
         OBJ_Form.serie = "string";
