@@ -45,7 +45,6 @@ function getFacturasF() {
             Interno.push(data[i].rfcReceptor);
             Interno.push(data[i].conceptos);
 
-
             Interno.push("<button class='btn btn-default' title='Detalle' onclick=\"muestraModaldetalle('" + data[i].id + "');\"><i class='fa fa-send'></i></button> <button class='btn btn-primary' title='Editar' onclick=\"muestraModalEditar('" + data[i].id + "');\"><i class='fa fa-edit'></i></button>");
 
             Arreglo_arreglos.push(Interno);
@@ -97,7 +96,8 @@ function GetContrato(id) {
             body = body + "<option value='" + unicos[i] + "'>" + unicos[i] + "</option>";
         }
         $('#ddl_Contrato').html(body);
-        $('#ddl_Contrato_ed').html(body);
+        $('#ddled_Contrato').html(body);
+    //    $('#ddled_Contrato > option[value="' + id + '"]').attr("selected", "selected");
     });
     return;
 }
@@ -110,6 +110,7 @@ function muestraModalAgregarFactura() {
 }
 
 function muestraModalEditar(item) {
+    //GetContrato();
     $("#id_Factura_ed").val(item);
     getedit(item);
     $('#title').html('Editar factura');
@@ -134,38 +135,35 @@ function getedit(item) {
     correo_editar = null;
     rfc_editar = null;
     var id_Factura;
-    $.get(con + "Facturas/Get_Persona/" + item, function (data, status) {
+    $.get(con + "GeneracionXMLController/ListarById/" + item, function (data, status) {
 
         if (data !== null) {
             for (var i = 0; i <= data.length - 1; i++) {
-                $('#txt_Nombre_ed').val(data[i].nombre);
-                $('#txt_Apellido_Paterno_ed').val(data[i].ap_paterno);
-                $('#txt_Apellido_Materno_ed').val(data[i].ap_materno);
-                $('#txt_Correo_ed').val(data[i].email);
-                $('#txt_RFC_ed').val(data[i].rfc);
-                $('#Telefono_ed').val(data[i].telefono);
-                $('#Extension_ed').val(data[i].extencion);
-                $('#txt_Factura_ed').val(data[i].Factura);
-                var fechainicio = (data[i].fecha_inicio).split('T');
-                var fechafin = (data[i].fecha_fin).split('T');
-                $('#txt_Fecha_Inicial_ed').val(fechainicio[0]);
-                $('#txt_Fecha_Final_ed').val(fechafin[0]);
-                GetSelectiveAreas(data[i].id_dependencia, data[i].id_area);
-                GetDependenciasM(data[i].id_dependencia);
-                GetRol(data[i].id_rol);
-                if (data[i].super_Factura == true) {
-                    $('#SuperUser_ed').prop("checked", true);
-                } else if (data[i].super_Factura == false) {
-                    $('#SuperUser_ed').prop("checked", false);
-                }
-                correo_editar = data[i].email;
-                rfc_editar = data[i].rfc;
-                id_Factura = data[i].id_Factura;
-                $("#id_Factura_ed").val(data[i].id_Factura);
+
+                $("#txted_Contratoid").val(data[i].tblContratoId);
+                $("#txted_Facturaid").val(data[i].id);
+
+                $("#txted_Lugar_Expedicion").val(data[i].lugarExpedicion);
+                $("#txted_Fecha_Emision").val(data[i].fecha);
+                $("#txted_Receptor").val(data[i].nombreReceptor);
+                $("#txted_RFC_Receptor").val(data[i].rfcReceptor);
+                $("#txtedCalle").val(data[i].calleReceptor);
+                $("#txtedNuExterior").val(data[i].noExteriorReceptor);
+                $("#txtedNuInterior").val(data[i].noInteriorReceptor);
+                $("#txtedCP").val(data[i].codigoPostalReceptor);
+
+                $("#txtedColonia").val(data[i].coloniaReceptor);
+                $("#txtedMunicipio").val(data[i].municipioReceptor);
+                $("#txtedEstado").val(data[i].estadoReceptor);
+                $("#txtedPais").val(data[i].paisReceptor);
+                //$("#txtedRegimen_Receptor").val(data[i].re);
+                $("#txted_Forma_Pago").val(data[i].formaDePago);
+
+                $("#txted_CadenaXML").val(data[i].cadenaXml);
 
             }
-            getRolesFactura(id_Factura);
-            getDependenciasAsignadasFactura(id_Factura);
+            //getRolesFactura(id_Factura);
+            //getDependenciasAsignadasFactura(id_Factura);
         }
 
     });
@@ -175,34 +173,30 @@ function geteditDetalle(item) {
     correo_editar = null;
     rfc_editar = null;
     var id_Factura;
-    $.get(con + "Facturas/Get_Persona/" + item, function (data, status) {
+    $.get(con + "GeneracionXMLController/ListarById/" + item, function (data, status) {
 
         if (data !== null) {
             for (var i = 0; i <= data.length - 1; i++) {
-                $('#txt_Nombre_ed').val(data[i].nombre);
-                $('#txt_Apellido_Paterno_ed').val(data[i].ap_paterno);
-                $('#txt_Apellido_Materno_ed').val(data[i].ap_materno);
-                $('#txt_Correo_ed').val(data[i].email);
-                $('#txt_RFC_ed').val(data[i].rfc);
-                $('#Telefono_ed').val(data[i].telefono);
-                $('#Extension_ed').val(data[i].extencion);
-                $('#txt_Factura_ed').val(data[i].Factura);
-                var fechainicio = (data[i].fecha_inicio).split('T');
-                var fechafin = (data[i].fecha_fin).split('T');
-                $('#txt_Fecha_Inicial_ed').val(fechainicio[0]);
-                $('#txt_Fecha_Final_ed').val(fechafin[0]);
-                GetSelectiveAreas(data[i].id_dependencia, data[i].id_area);
-                GetDependenciasM(data[i].id_dependencia);
-                GetRol(data[i].id_rol);
-                if (data[i].super_Factura == true) {
-                    $('#SuperUser_ed').prop("checked", true);
-                } else if (data[i].super_Factura == false) {
-                    $('#SuperUser_ed').prop("checked", false);
-                }
-                correo_editar = data[i].email;
-                rfc_editar = data[i].rfc;
-                id_Factura = data[i].id_Factura;
-                $("#id_Factura_ed").val(data[i].id_Factura);
+
+                $("#txted_Contratoid").val(data[i].tblContratoId);
+                $("#txted_Facturaid").val(data[i].id);
+                $("#txted_Lugar_Expedicion").val(data[i].lugarExpedicion);
+                $("#txted_Fecha_Emision").val(data[i].fecha);
+                $("#txted_Receptor").val(data[i].nombreReceptor);
+                $("#txted_RFC_Receptor").val(data[i].rfcReceptor);
+                $("#txtedCalle").val(data[i].calleReceptor);
+                $("#txtedNuExterior").val(data[i].noExteriorReceptor);
+                $("#txtedNuInterior").val(data[i].noInteriorReceptor);
+                $("#txtedCP").val(data[i].codigoPostalReceptor);
+
+                $("#txtedColonia").val(data[i].coloniaReceptor);
+                $("#txtedMunicipio").val(data[i].municipioReceptor);
+                $("#txtedEstado").val(data[i].estadoReceptor);
+                $("#txtedPais").val(data[i].paisReceptor);
+                //$("#txtedRegimen_Receptor").val(data[i].re);
+                $("#txted_Forma_Pago").val(data[i].formaDePago);
+
+                $("#txted_CadenaXML").val(data[i].cadenaXml);
 
             }
 
