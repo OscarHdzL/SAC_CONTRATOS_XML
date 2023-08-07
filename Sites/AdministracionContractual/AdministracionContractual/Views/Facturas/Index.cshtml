@@ -4,12 +4,12 @@
 @{
     Layout = "~/Views/MasterPages/Master.cshtml";
     Dictionary<String, String> ruta = new Dictionary<String, String>();
-    ruta.Add(@"\Contrato\Index", "Lista de contratos");
+    // ruta.Add(@"\Contrato\Index", "Lista de contratos");
     ruta.Add("-", "Facturas");
 
 }
 @section ViewScripts{
-    <script src="~/Resources/Facturas/Jquery.Facturas.js"></script>
+    <script src="~/Resources/Facturas/Jquery.FacturasF.js"></script>
 }
 
 <section class="content">
@@ -39,12 +39,13 @@
                     <table id="DatosXmlRequest" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>tbl_contrato_id</th>
-                                <th>rfcEmisor</th>
-                                <th>nombreEmisor</th>
-                                <th>rfcReceptor</th>
-                                <th>nombreReceptor</th>
+                                <th>No.</th>
+                                <th>Contrato Id</th>
+                                <th>Factura Id</th>
+                                <th>Fecha Emisión</th>
+                                <th>Nombre Receptor</th>
+                                <th>RFC Receptor</th>
+                                <th>Conceptos</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>

@@ -1,27 +1,28 @@
 ﻿$(document).ready(function () {
     LaunchLoader(true);
-    AjusteTabla();
-    getFacturas();
+    AjusteTablaF();
+    getFacturasF();
 });
 
 $(".btn-danger").click(function () {    
     $('.Clean').val(''); 
 });
 
-function AjusteTabla() {
+function AjusteTablaF() {
     $('#DatosXmlRequest').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "columnDefs": [
             { "className": "dt-center", "targets": "_all" },
-            { "width": "15%", "targets": 0 },
+            { "width": "5%", "targets": 0 },
             { "width": "15%", "targets": 1 },
             { "width": "15%", "targets": 2 },
-            { "width": "25%", "targets": 3 },
-            { "width": "10%", "targets": 4 },
+            { "width": "15%", "targets": 3 },
+            { "width": "20%", "targets": 4 },
             { "width": "10%", "targets": 5 },
-            { "width": "10%", "targets": 6 }
+            { "width": "10%", "targets": 6 },
+            { "width": "10%", "targets": 7 }
         ],
     });    
 }
@@ -29,37 +30,41 @@ function AjusteTabla() {
 var con = $("#EndPointAdmon").val();
 var ins = $('#HDidInstancia').val();
 
-function getFacturas() {
+function getFacturasF() {
     $.get(con + "GeneracionXMLController/Listar", function (data, status) {
         var Arreglo_arreglos = [];
         for (var i = 0; i <= data.length - 1; i++) {
             var ir_b = null;
             var Interno = [];
-            Interno.push(data[i].id);
+
+            Interno.push(i+1);
             Interno.push(data[i].tblContratoId);
+            Interno.push(data[i].id);
             Interno.push(data[i].fecha);
-            Interno.push(data[i].nombreEmisor);
-            Interno.push(data[i].rfcEmisor);
+            Interno.push(data[i].nombreReceptor);
             Interno.push(data[i].rfcReceptor);
+            Interno.push(data[i].conceptos);
+
+
             Interno.push("<button class='btn btn-default' title='Detalle' onclick=\"muestraModaldetalle('" + data[i].id + "');\"><i class='fa fa-send'></i></button> <button class='btn btn-primary' title='Editar' onclick=\"muestraModalEditar('" + data[i].id + "');\"><i class='fa fa-edit'></i></button>");
 
             Arreglo_arreglos.push(Interno);
         }
         var table = $('#DatosXmlRequest').DataTable();
         table.destroy();
-        //console.log(Arreglo_arreglos);
         $('#DatosXmlRequest').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
             },
             data: Arreglo_arreglos,
             columns: [
-                { title: "Id" },
+                { title: "No." },
                 { title: "Contrato Id" },
-                { title: "RFC Emisor" },
-                { title: "Nombre Emisor" },
-                { title: "RFC Receptor" },
+                { title: "Factura Id" },
+                { title: "Fecha Emisión" },
                 { title: "Nombre Receptor" },
+                { title: "RFC Receptor" },
+                { title: "Conceptos" },
                 { title: "Acción" }
             ],
             columnDefs: [
