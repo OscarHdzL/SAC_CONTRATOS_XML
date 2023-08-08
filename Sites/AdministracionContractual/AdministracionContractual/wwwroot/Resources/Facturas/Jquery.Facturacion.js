@@ -4,8 +4,8 @@
     getFacturasF();
 });
 
-$(".btn-danger").click(function () {    
-    $('.Clean').val(''); 
+$(".btn-danger").click(function () {
+    $('.Clean').val('');
 });
 
 function AjusteTablaF() {
@@ -24,7 +24,7 @@ function AjusteTablaF() {
             //{ "width": "10%", "targets": 6 },
             { "width": "10%", "targets": 4 }
         ],
-    });    
+    });
 }
 
 var con = $("#EndPointAdmon").val();
@@ -37,13 +37,15 @@ function getFacturasF() {
             var ir_b = null;
             var Interno = [];
 
-            Interno.push(i+1);
+            Interno.push(i + 1);
             Interno.push(data[i].tblContratoId);
             Interno.push(data[i].id);
             //Interno.push(data[i].fecha);
             //Interno.push(data[i].nombreReceptor);
             //Interno.push(data[i].rfcReceptor);
-            Interno.push(data[i].conceptos);
+            //Interno.push(data[i].conceptos);
+
+            Interno.push("<button class='btn btn-default' title='Listar conceptos de " + data[i].id + "' onclick=\"Conceptos('" + data[i].tblContratoId + "','" + data[i].id + "');\"><i class='fa fa-list'></i></button>");
 
             Interno.push("<button class='btn btn-default' title='Detalle' onclick=\"muestraModaldetalle('" + data[i].id + "');\"><i class='fa fa-send'></i></button> <button class='btn btn-primary' title='Editar' onclick=\"muestraModalEditar('" + data[i].id + "');\"><i class='fa fa-edit'></i></button>");
 
@@ -76,6 +78,13 @@ function getFacturasF() {
     });
 }
 
+function Conceptos(item, id) {
+    var route = '/Facturas/Conceptos/' + item;
+    $.get("/Facturas/NombreFactura/" + id, function (data, status) {
+        return window.location.replace(route);
+    });
+}
+
 function GetContrato(id) {
     $.get(con + "GeneracionXMLController/Listar/", function (data, status) {
         var body = "<option selected value=''>Seleccione...</option>";
@@ -97,7 +106,7 @@ function GetContrato(id) {
         }
         $('#ddl_Contrato').html(body);
         $('#ddled_Contrato').html(body);
-    //    $('#ddled_Contrato > option[value="' + id + '"]').attr("selected", "selected");
+        //    $('#ddled_Contrato > option[value="' + id + '"]').attr("selected", "selected");
     });
     return;
 }

@@ -1,0 +1,126 @@
+﻿@using Microsoft.Extensions.Options;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@model Guid
+
+@{
+
+    Layout = "~/Views/MasterPages/Master.cshtml";
+    Dictionary<String, String> ruta = new Dictionary<String, String>();
+    var dep = @HttpContextAccessor.HttpContext.Session.GetString("Dep_Area_Navegacion");
+    if ((dep != null) && (dep != ""))
+    {
+        
+        ruta.Add(@"\Home\Index", "Inicio");
+        ruta.Add(@"\Dependencias\Index", "Dependencias");
+        ruta.Add(@"\Areas\Index", "Áreas");
+        ruta.Add("-", "Subáreas");
+     
+    }
+    else {
+        ruta.Add(@"\Facturas\Index", "Facturas");
+        ruta.Add("-", "Conceptos");
+    }
+
+
+    String factura = @HttpContextAccessor.HttpContext.Session.GetString("Nombre_Factura");
+
+}
+
+@await Html.PartialAsync("~/Views/MasterPages/Breadcrumb.cshtml", ruta)
+
+@section ViewScripts{
+    <script src="~/Resources/Facturas/Jquery.Conceptos.js"></script>
+}
+
+<input type="hidden" id="id_factura" value=@HttpContextAccessor.HttpContext.Session.GetString("Nombre_Factura") />
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title" id="title_sub">Conceptos de @factura</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label>Importe:</label>
+                    <input type="text" class="form-control clr" id="txt_importe" placeholder="importe" />
+                </div>
+                <div class="col-lg-2">
+                    <label>Valor Unitario:</label>
+                    <input type="text" class="form-control clr" id="txt_valorUnitario" placeholder="valorUnitario" />
+                </div>
+                <div class="col-lg-6">
+                    <label>Descripción:</label>
+                    <input type="text" class="form-control clr" id="txt_descripcion" placeholder="descripcion" />
+                </div>
+                <div class="col-lg-2">
+                    <label>No. Identificación:</label>
+                    <input type="text" class="form-control clr" id="txt_noIdentificacion" placeholder="noIdentificacion" />
+                </div>
+                <div class="col-lg-2">
+                    <label>Unidad:</label>
+                    <input type="text" class="form-control clr" id="txt_unidad" placeholder="unidad" />
+                </div>
+                <div class="col-lg-2">
+                    <label>Cantidad:</label>
+                    <input type="text" class="form-control clr" id="txt_cantidad" placeholder="cantidad" />
+                </div>
+                <div class="col-lg-3">
+                    <br />
+                    <button class="btn btn-primary" id="btn_add_concepto">Agregar</button>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="tbl_concepto" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>importe</th>
+                                <th>valorUnitario</th>
+                                <th>descripcion</th>
+                                <th>noIdentificacion</th>
+                                <th>unidad</th>
+                                <th>cantidad</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<input type="hidden" id="id_concepto_upd" value="" />
+<div id="Modal_Upd_Concepto" class="modal" role="dialog">
+    <div class="modal-dialog" style="width: 50%; padding-top: 5%; background-color: transparent;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Actualizar concepto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label>Concepto</label>
+                        <input type="text" id="txt_concepto_upd" class="form-control clr" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div align="center">
+                    <button type="button" class="btn btn-primary" id="btn_upd_concepto">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

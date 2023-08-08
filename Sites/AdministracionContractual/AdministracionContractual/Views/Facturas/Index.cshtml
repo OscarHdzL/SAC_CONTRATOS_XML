@@ -5,11 +5,12 @@
     Layout = "~/Views/MasterPages/Master.cshtml";
     Dictionary<String, String> ruta = new Dictionary<String, String>();
     // ruta.Add(@"\Contrato\Index", "Lista de contratos");
-    ruta.Add("-", "Facturas");
+    //ruta.Add(@"\Home\Index", "Inicio");
+    // ruta.Add("-", "Facturas");
 
 }
 @section ViewScripts{
-    <script src="~/Resources/Facturas/Jquery.FacturasF.js"></script>
+    <script src="~/Resources/Facturas/Jquery.Facturacion.js"></script>
 }
 
 <section class="content">
@@ -42,9 +43,9 @@
                                 <th>No.</th>
                                 <th>Contrato Id</th>
                                 <th>Factura Id</th>
-                                <th>Fecha Emisión</th>
+@*                                 <th>Fecha Emisión</th>
                                 <th>Nombre Receptor</th>
-                                <th>RFC Receptor</th>
+                                <th>RFC Receptor</th> *@
                                 <th>Conceptos</th>
                                 <th>Acción</th>
                             </tr>
