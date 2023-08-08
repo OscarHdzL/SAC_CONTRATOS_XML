@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-lg-3">
                     <br />
-                    <button class="btn btn-primary" id="btn_add_concepto">Agregar</button>
+                    <button class="btn btn-primary" id="btn_add_Concepto">Agregar</button>
                 </div>
             </div>
             <br />
@@ -101,7 +101,7 @@
 
 <input type="hidden" id="id_concepto_upd" value="" />
 <div id="Modal_Upd_Concepto" class="modal" role="dialog">
-    <div class="modal-dialog" style="width: 50%; padding-top: 5%; background-color: transparent;">
+    <div class="modal-dialog" style="width: 90%; padding-top: 5%; background-color: transparent;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -109,15 +109,38 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <label>Concepto</label>
-                        <input type="text" id="txt_concepto_upd" class="form-control clr" />
+                    <div class="col-lg-2">
+                        <label>Importe:</label>
+                        <input type="text" class="form-control clr" id="txt_importe_upd" />
                     </div>
+                    <div class="col-lg-2">
+                        <label>Valor Unitario:</label>
+                        <input type="text" class="form-control clr" id="txt_valorUnitario_upd" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Descripción:</label>
+                        <input type="text" class="form-control clr" id="txt_descripcion_upd" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>No. Identificación:</label>
+                        <input type="text" class="form-control clr" id="txt_noIdentificacion_upd" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Unidad:</label>
+                        <input type="text" class="form-control clr" id="txt_unidad_upd" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label>Cantidad:</label>
+                        <input type="text" class="form-control clr" id="txt_cantidad_upd" />
+                    </div>
+
                 </div>
+
             </div>
+
             <div class="modal-footer">
                 <div align="center">
-                    <button type="button" class="btn btn-primary" id="btn_upd_concepto">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="btn_upd_Concepto">Guardar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

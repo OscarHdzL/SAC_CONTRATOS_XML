@@ -124,6 +124,8 @@ function muestraModalEditar(item) {
     getedit(item);
     $('#title').html('Editar factura');
     $('.Clean').prop("disabled", false);
+    $('#txted_Contratoid').prop("disabled", true);
+    $('#txted_Facturaid').prop("disabled", true);
     $('#EditarFactura').show(true);
     $('#ModalEditarFactura').modal('show');
 
@@ -171,8 +173,6 @@ function getedit(item) {
                 $("#txted_CadenaXML").val(data[i].cadenaXml);
 
             }
-            //getRolesFactura(id_Factura);
-            //getDependenciasAsignadasFactura(id_Factura);
         }
 
     });
@@ -221,7 +221,7 @@ $("#GuardarFactura").click(function () {
     AddFactura();
 });
 $("#EditarFactura").click(function () {
-    EditFactura();
+    UpdateFactura();
 });
 
 function AddFactura() {
@@ -235,7 +235,7 @@ function AddFactura() {
         OBJ_Form.id = "string";
         OBJ_Form.folio = "string";
         OBJ_Form.serie = "string";
-        OBJ_Form.fecha = "string";
+        //OBJ_Form.fecha = "string";
         OBJ_Form.formaDePago = "string";
         OBJ_Form.condicionesDePago = "string";
         OBJ_Form.total = 0;
@@ -278,7 +278,7 @@ function AddFactura() {
                 var objresponse = JSON.parse(data);
                 if (!objresponse.Bit) {
                     SuccessSA("Operación exitosa", data_b[0].msg);
-                    getFacturas();
+                    getFacturasF();
                     $('#ModalAgregarFactura').modal('hide');
                 }
                 else {
@@ -295,40 +295,125 @@ function AddFactura() {
     }
 }
 
+function UpdateFactura() {
+    var Validacion = false;
+    if (Validacion.Bit) {
+        ErrorSA('Error en los datos de entrada', Validacion.Texto);
+    }
+    else {
+        var OBJ_Form = tbl_Factura_class;
+        OBJ_Form.tbl_contrato_id = $('#txted_Contratoid').val();
+        OBJ_Form.id = $('#txted_Facturaid').val();
+        OBJ_Form.folio = "string";
+        OBJ_Form.serie = "string";
+        OBJ_Form.fecha = $('#txted_Fecha_Emision').val();
+        OBJ_Form.formaDePago = "string";
+        OBJ_Form.condicionesDePago = "string";
+        OBJ_Form.total = 0;
+        OBJ_Form.moneda = "string";
+        OBJ_Form.subTotal = 0;
+        OBJ_Form.metodoDePago = "string";
+        OBJ_Form.tipoDeComprobante = "string";
+        OBJ_Form.lugarExpedicion = $('#txted_Lugar_Expedicion').val();
+        OBJ_Form.rfcEmisor = "string";
+        OBJ_Form.nombreEmisor = "string";
+        OBJ_Form.calleEmisor = "string";
+        OBJ_Form.noInteriorEmisor = "string";
+        OBJ_Form.noExteriorEmisor = "string";
+        OBJ_Form.coloniaEmisor = "string";
+        OBJ_Form.municipioEmisor = "string";
+        OBJ_Form.estadoEmisor = "string";
+        OBJ_Form.paisEmisor = "string";
+        OBJ_Form.codigoPostalEmisor = "string";
+        OBJ_Form.regimenEmisor = "string";
+        OBJ_Form.rfcReceptor = "string";
+        OBJ_Form.nombreReceptor = "string";
+        OBJ_Form.calleReceptor = "string";
+        OBJ_Form.noInteriorReceptor = "string";
+        OBJ_Form.noExteriorReceptor = "string";
+        OBJ_Form.coloniaReceptor = "string";
+        OBJ_Form.municipioReceptor = "string";
+        OBJ_Form.estadoReceptor = "string";
+        OBJ_Form.paisReceptor = "string";
+        OBJ_Form.codigoPostalReceptor = "string";
+        $.ajax({
+            dataType: 'text',
+            cache: false,
+            contentType: 'application/json',
+            processData: false,
+            data: JSON.stringify(OBJ_Form),
+            type: 'put',
+
+            success: function (data) {
+                var data_b = $.parseJSON(data);
+                var objresponse = JSON.parse(data);
+                if (!objresponse.Bit) {
+                    SuccessSA("Operación exitosa", data_b[0].msg);
+                    getFacturasF();
+                    $('#ModalEditarFactura').modal('hide');
+                }
+                else {
+                    ErrorSA("", objresponse.Descripcion);
+                }
+            },
+            error: function () {
+                var objresponse = JSON.parse(data);
+                ErrorSA('', objresponse.Descripcion)
+            },
+            url: (con + "GeneracionXMLController/Actualizar")
+
+        })
+    }
+}
+
+
+
 
 var tbl_Factura_class = {
-    tbl_contrato_id: null,
-    id: null,
-    folio: null,
-    serie: null,
-    fecha: null,
-    formaDePago: null,
-    condicionesDePago: null,
+    tbl_contrato_id: "string",
+    id: "00000000-0000-0000-0000-000000000000",
+    folio: "string",
+    serie: "string",
+    fecha: "2023-08-08T14:04:36.755Z",
+    formaDePago: "string",
+    condicionesDePago: "string",
     total: 0,
-    moneda: null,
+    moneda: "string",
     subTotal: 0,
-    metodoDePago: null,
-    tipoDeComprobante: null,
-    lugarExpedicion: null,
-    rfcEmisor: null,
-    nombreEmisor: null,
-    calleEmisor: null,
-    noInteriorEmisor: null,
-    noExteriorEmisor: null,
-    coloniaEmisor: null,
-    municipioEmisor: null,
-    estadoEmisor: null,
-    paisEmisor: null,
-    codigoPostalEmisor: null,
-    regimenEmisor: null,
-    rfcReceptor: null,
-    nombreReceptor: null,
-    calleReceptor: null,
-    noInteriorReceptor: null,
-    noExteriorReceptor: null,
-    coloniaReceptor: null,
-    municipioReceptor: null,
-    estadoReceptor: null,
-    paisReceptor: null,
-    codigoPostalReceptor: null
+    metodoDePago: "string",
+    tipoDeComprobante: "string",
+    lugarExpedicion: "string",
+    rfcEmisor: "string",
+    nombreEmisor: "string",
+    calleEmisor: "string",
+    noInteriorEmisor: "string",
+    noExteriorEmisor: "string",
+    coloniaEmisor: "string",
+    municipioEmisor: "string",
+    estadoEmisor: "string",
+    paisEmisor: "string",
+    codigoPostalEmisor: "string",
+    regimenEmisor: "string",
+    rfcReceptor: "string",
+    nombreReceptor: "string",
+    calleReceptor: "string",
+    noInteriorReceptor: "string",
+    noExteriorReceptor: "string",
+    coloniaReceptor: "string",
+    municipioReceptor: "string",
+    estadoReceptor: "string",
+    paisReceptor: "string",
+    codigoPostalReceptor: "string",
+    xml_cadena: "string",
+    conceptos_cadena: "string",
+    traslados_cadena: "string",
+    retenciones_cadena: "string",
+    conceptos: [{
+        importe: 0,
+        valorUnitario: 0,
+        descripcion: "string",
+        noIdentificacion: "string",
+        unidad: "string",
+        "cantidad": 0
+    }]
 }

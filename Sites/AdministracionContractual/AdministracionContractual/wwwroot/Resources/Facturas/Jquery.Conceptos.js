@@ -39,7 +39,7 @@ function get_Conceptos() {
             fila.push(arr[i].cantidad);
 
 
-            fila.push("<button class='btn btn-primary' title='Modificar concepto' onclick=\"Editar_Concepto('" + data[i].Concepto + "','" + data[i].id + "');\"><i class='fa fa-edit'></i></button> <button class='btn btn-danger' title='Eliminar concepto' onclick=\"Delete_Concepto('" + data[i].id + "');\"><i class='fa fa-trash'></i></button>");
+            fila.push("<button class='btn btn-primary' title='Modificar concepto' onclick=\"Editar_Concepto('" + arr[i].importe + "','" + arr[i].valorUnitario + "','" + arr[i].descripcion + "','" + arr[i].noIdentificacion + "','" + arr[i].unidad + "','" + arr[i].cantidad + "','" + data[i].id + "');\"><i class='fa fa-edit'></i></button> <button class='btn btn-danger' title='Eliminar concepto' onclick=\"Delete_Concepto('" + data[i].id + "');\"><i class='fa fa-trash'></i></button>");
             Arreglo_arreglos.push(fila);
         }
         var table = $('#tbl_concepto').DataTable();
@@ -66,13 +66,7 @@ function get_Conceptos() {
         LaunchLoader(false);
     });
 }
-function Areas_sub(item, id) {
-    var route = '/Areas/Subordinados/' + item;
-    $.get("/Areas/NombreConcepto/" + id, function (data, status) {
-        return window.location.replace(route);
-    });
-}
-    
+
 
 function Validar_sub() {
     var Response = { Texto: '', Bit: true, objeto: null };
@@ -92,6 +86,10 @@ function Validar_sub() {
     return Response;
 }
 function Add_Concepto() {
+
+
+
+
     var Validacion = Validar_sub();
 
     if (Validacion.Bit) {
@@ -133,9 +131,15 @@ $('#btn_add_Concepto').click(function () {
 })
 
 
-function Editar_Concepto(sub, id) {
-    $('#id_Concepto_upd').val(id);
-    $('#txt_Concepto_upd').val(sub);
+function Editar_Concepto(importe, valorUnitario, descripcion, noIdentificacion, unidad, cantidad, id) {
+
+    $('#txt_importe_upd').val(importe);
+    $('#txt_valorUnitario_upd').val(valorUnitario);
+    $('#txt_descripcion_upd').val(descripcion);
+    $('#txt_noIdentificacion_upd').val(noIdentificacion);
+    $('#txt_unidad_upd').val(unidad);
+    $('#txt_cantidad_upd').val(cantidad);
+    //$('#id_Concepto_upd').val(id);
     $('#Modal_Upd_Concepto').modal({ backdrop: 'static', keyboard: false });
     $('#Modal_Upd_Concepto').modal('show');
 }
